@@ -1,0 +1,6 @@
+{
+    "resources":
+    [
+        {"pattern":"META-INF/native-image/qpid-broker-core/MANIFEST.MF"}
+    ]
+}

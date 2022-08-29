@@ -21,6 +21,7 @@
 package org.apache.qpid.server;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,9 +65,11 @@ import org.apache.qpid.server.util.urlstreamhandler.classpath.Handler;
 
 public class SystemLauncher
 {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SystemLauncher.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger (SystemLauncher.class);
     private static final String DEFAULT_INITIAL_PROPERTIES_LOCATION = "classpath:system.properties";
+    
+    // Added for native image support
+    private static final String DEFAULT_INITIAL_PROPERTIES_FILE_LOCATION = "system.properties";
 
     private static final SystemLauncherListener.DefaultSystemLauncherListener DEFAULT_SYSTEM_LAUNCHER_LISTENER =
             new SystemLauncherListener.DefaultSystemLauncherListener();
@@ -75,7 +78,6 @@ public class SystemLauncher
     {
         Handler.register();
     }
-
 
     private EventLogger _eventLogger;
     private final TaskExecutor _taskExecutor = new TaskExecutorImpl();
@@ -87,68 +89,149 @@ public class SystemLauncher
     private final Principal _systemPrincipal = new SystemPrincipal();
     private final Subject _brokerTaskSubject;
 
-
-    public SystemLauncher(SystemLauncherListener listener)
+    public SystemLauncher (SystemLauncherListener listener)
     {
         _listener = listener;
-        _brokerTaskSubject = new Subject(true,
-                                         new HashSet<>(Arrays.asList(_systemPrincipal, new TaskPrincipal("Broker"))),
-                                         Collections.emptySet(),
-                                         Collections.emptySet());
-
+        _brokerTaskSubject = new Subject (true,
+                                          new HashSet<> (Arrays.asList (_systemPrincipal, new TaskPrincipal ("Broker"))),
+                                          Collections.emptySet(),
+                                          Collections.emptySet()
+                                         );
     }
 
-    public SystemLauncher(SystemLauncherListener... listeners)
+    public SystemLauncher (SystemLauncherListener... listeners)
     {
-        this(new SystemLauncherListener.ChainedSystemLauncherListener(listeners));
+        this(new SystemLauncherListener.ChainedSystemLauncherListener (listeners));
     }
-
-
 
     public SystemLauncher()
     {
-        this(DEFAULT_SYSTEM_LAUNCHER_LISTENER);
+        this (DEFAULT_SYSTEM_LAUNCHER_LISTENER);
     }
 
-    public static void populateSystemPropertiesFromDefaults(final String initialProperties) throws IOException
+    /**
+     * Loads the application properties into a Properties object.
+     * Loads the initial properties from the specified path. If the path is null,
+     * then load a default set of system properties. In the case of no system
+     * properties, just load the application properties file.
+     * 
+     * For native images, a file search is used in place of a URL search for the
+     * properties file locations as GraalVM does not (yet) support classpath URL
+     * protocol.
+     * 
+     * @param initialProperties Location of the initial properties file
+     * @throws IOException
+     */
+    public static void populateSystemPropertiesFromDefaults (final String initialProperties) throws IOException
     {
-        URL initialPropertiesLocation;
-        if(initialProperties == null)
+        URL initialPropertiesLocation = null;
+        Properties props = new Properties (CommonProperties.asProperties());
+        boolean useFile = false;
+        File propertiesFile = null;
+        InputStream inStream = null;
+        
+        System.out.println ("Loading Properties");
+        
+        // Test if classpath URL is supported
+        try
         {
-            initialPropertiesLocation = new URL(DEFAULT_INITIAL_PROPERTIES_LOCATION);
+            initialPropertiesLocation = new URL (DEFAULT_INITIAL_PROPERTIES_LOCATION);
+        }
+        catch (MalformedURLException e)
+        {
+            System.out.println ("URL classpath not supported");
+            useFile = true;
+        }
+        
+        if (!useFile)
+        {
+            // Use classpath URL for images that support it
+            if (initialProperties == null)
+            {
+                try
+                {
+                    System.out.println ("URL classpath supported, NULL path provided");
+                    initialPropertiesLocation = new URL (DEFAULT_INITIAL_PROPERTIES_LOCATION);
+                    System.out.println ("URL loaded: " + initialPropertiesLocation.getPath());
+                }
+                // No support
+                catch (MalformedURLException e)
+                {
+                    useFile = true;
+                }
+            }
+            else
+            {
+                try
+                {
+                    System.out.println ("URL classpath supported with " + initialProperties);
+                    initialPropertiesLocation = new URL (initialProperties);
+                }
+                catch (MalformedURLException e)
+                {
+                    propertiesFile = new File (initialProperties);
+                    System.out.println ("URL classpath supported from File" + propertiesFile.getPath());
+                    initialPropertiesLocation = propertiesFile.toURI().toURL();
+                }
+            }
+            
+            try
+            {
+                inStream = initialPropertiesLocation.openStream();
+            }
+            catch (FileNotFoundException e)
+            {
+                System.out.println ("No file found");
+                
+                if (initialProperties != null)
+                {
+                    throw e;
+                }
+            }
         }
         else
         {
+            // Use file path for all other images
+            if (initialProperties == null)
+            {
+                System.out.println ("File path in use, NULL path provided");
+                propertiesFile = new File (DEFAULT_INITIAL_PROPERTIES_FILE_LOCATION);
+                System.out.println ("File loaded: " + propertiesFile.getPath());
+            }
+            else
+            {
+                System.out.println ("File path supported with " + initialProperties);
+                propertiesFile = new File (initialProperties);
+                System.out.println ("File loaded: " + propertiesFile.getPath());
+            }
+            
             try
             {
-                initialPropertiesLocation = new URL(initialProperties);
+                inStream = new FileInputStream (propertiesFile);
             }
-            catch (MalformedURLException e)
+            catch (FileNotFoundException e)
             {
-                initialPropertiesLocation = new File(initialProperties).toURI().toURL();
-
+                System.out.println ("No file found");
+                
+                if (initialProperties != null)
+                {
+                    throw e;
+                }
             }
         }
-
-        Properties props = new Properties(CommonProperties.asProperties());
-
-        try(InputStream inStream = initialPropertiesLocation.openStream())
+        
+        if (inStream != null)
         {
-            props.load(inStream);
+            props.load (inStream);
         }
-        catch (FileNotFoundException e)
-        {
-            if(initialProperties != null)
-            {
-                throw e;
-            }
-        }
+        // else do nothing
 
-        Set<String> propertyNames = new HashSet<>(props.stringPropertyNames());
-        propertyNames.removeAll(System.getProperties().stringPropertyNames());
+        Set<String> propertyNames = new HashSet<> (props.stringPropertyNames());
+        propertyNames.removeAll (System.getProperties().stringPropertyNames());
+        
         for (String propName : propertyNames)
         {
-            System.setProperty(propName, props.getProperty(propName));
+            System.setProperty (propName, props.getProperty (propName));
         }
     }
 
@@ -159,134 +242,132 @@ public class SystemLauncher
 
     public void shutdown()
     {
-        shutdown(0);
+        shutdown (0);
     }
 
-    public void shutdown(int exitStatusCode)
+    public void shutdown (int exitStatusCode)
     {
         try
         {
-            if(_systemConfig != null)
+            if (_systemConfig != null)
             {
                 ListenableFuture<Void> closeResult = _systemConfig.closeAsync();
-                closeResult.get(30000l, TimeUnit.MILLISECONDS);
+                closeResult.get (30000l, TimeUnit.MILLISECONDS);
             }
+            // else do nothing
 
         }
         catch (TimeoutException | InterruptedException | ExecutionException e)
         {
-            LOGGER.warn("Attempting to cleanly shutdown took too long, exiting immediately");
-            _listener.exceptionOnShutdown(e);
-
+            LOGGER.warn ("Attempting to cleanly shutdown took too long, exiting immediately");
+            _listener.exceptionOnShutdown (e);
         }
-        catch(RuntimeException e)
+        catch (RuntimeException e)
         {
-            _listener.exceptionOnShutdown(e);
+            _listener.exceptionOnShutdown (e);
             throw e;
         }
         finally
         {
-            cleanUp(exitStatusCode);
+            cleanUp (exitStatusCode);
         }
     }
 
-    private void cleanUp(int exitStatusCode)
+    private void cleanUp (int exitStatusCode)
     {
         _taskExecutor.stop();
-
-        _listener.onShutdown(exitStatusCode);
-
+        _listener.onShutdown (exitStatusCode);
         _systemConfig = null;
     }
 
 
-    public void startup(final Map<String,Object> systemConfigAttributes) throws Exception
+    public void startup (final Map<String,Object> systemConfigAttributes) throws Exception
     {
         final SystemOutMessageLogger systemOutMessageLogger = new SystemOutMessageLogger();
-
-        _eventLogger = new EventLogger(systemOutMessageLogger);
-        Subject.doAs(_brokerTaskSubject, new PrivilegedExceptionAction<Object>()
-        {
-            @Override
-            public Object run() throws Exception
-            {
-                _listener.beforeStartup();
-
-                try
-                {
-                    startupImpl(systemConfigAttributes);
-                }
-                catch (RuntimeException e)
-                {
-                    systemOutMessageLogger.message(new SystemStartupMessage(e));
-                    LOGGER.error("Exception during startup", e);
-                    _listener.errorOnStartup(e);
-                    closeSystemConfigAndCleanUp();
-                }
-                finally
-                {
-                    _listener.afterStartup();
-                }
-                return null;
-            }
-        });
-
+        _eventLogger = new EventLogger (systemOutMessageLogger);
+        
+        Subject.doAs (_brokerTaskSubject, new PrivilegedExceptionAction<Object>()
+                        {
+                            @Override
+                            public Object run() throws Exception
+                            {
+                                _listener.beforeStartup();
+                
+                                try
+                                {
+                                    startupImpl (systemConfigAttributes);
+                                }
+                                catch (RuntimeException e)
+                                {
+                                    systemOutMessageLogger.message (new SystemStartupMessage (e));
+                                    LOGGER.error ("Exception during startup", e);
+                                    _listener.errorOnStartup (e);
+                                    closeSystemConfigAndCleanUp();
+                                }
+                                finally
+                                {
+                                    _listener.afterStartup();
+                                }
+                                return null;
+                            }
+                        }
+                    );
     }
 
-    private void startupImpl(Map<String,Object> systemConfigAttributes) throws Exception
+    private void startupImpl (Map<String,Object> systemConfigAttributes) throws Exception
     {
-        populateSystemPropertiesFromDefaults((String) systemConfigAttributes.get(SystemConfig.INITIAL_SYSTEM_PROPERTIES_LOCATION));
+        populateSystemPropertiesFromDefaults ((String) systemConfigAttributes.get (SystemConfig.INITIAL_SYSTEM_PROPERTIES_LOCATION));
 
-        String storeType = (String) systemConfigAttributes.get(SystemConfig.TYPE);
+        String storeType = (String) systemConfigAttributes.get (SystemConfig.TYPE);
 
         // Create the RootLogger to be used during broker operation
-        boolean statusUpdatesEnabled = Boolean.parseBoolean(System.getProperty(SystemConfig.PROPERTY_STATUS_UPDATES, "true"));
-        MessageLogger messageLogger = new LoggingMessageLogger(statusUpdatesEnabled);
-        _eventLogger.setMessageLogger(messageLogger);
+        boolean statusUpdatesEnabled = Boolean.parseBoolean (System.getProperty (SystemConfig.PROPERTY_STATUS_UPDATES, "true"));
+        MessageLogger messageLogger = new LoggingMessageLogger (statusUpdatesEnabled);
+        _eventLogger.setMessageLogger (messageLogger);
 
-
-        PluggableFactoryLoader<SystemConfigFactory> configFactoryLoader = new PluggableFactoryLoader<>(SystemConfigFactory.class);
-        SystemConfigFactory configFactory = configFactoryLoader.get(storeType);
-        if(configFactory == null)
+        PluggableFactoryLoader<SystemConfigFactory> configFactoryLoader = new PluggableFactoryLoader<> (SystemConfigFactory.class);
+        SystemConfigFactory configFactory = configFactoryLoader.get (storeType);
+        
+        if (configFactory == null)
         {
-            LOGGER.error("Unknown config store type '" + storeType + "', only the following types are supported: " + configFactoryLoader.getSupportedTypes());
-            throw new IllegalArgumentException("Unknown config store type '"+storeType+"', only the following types are supported: " + configFactoryLoader.getSupportedTypes());
+            LOGGER.error ("Unknown config store type '" + storeType + "', only the following types are supported: " + configFactoryLoader.getSupportedTypes());
+            throw new IllegalArgumentException ("Unknown config store type '"+storeType+"', only the following types are supported: " + configFactoryLoader.getSupportedTypes());
         }
-
 
         _taskExecutor.start();
-        _systemConfig = configFactory.newInstance(_taskExecutor,
-                                                  _eventLogger,
-                                                  _systemPrincipal,
-                                                  systemConfigAttributes);
+        _systemConfig = configFactory.newInstance (_taskExecutor,
+                                                   _eventLogger,
+                                                   _systemPrincipal,
+                                                   systemConfigAttributes
+                                                  );
 
-        _systemConfig.setOnContainerResolveTask(
-                new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        _listener.onContainerResolve(_systemConfig);
-                    }
-                });
+        _systemConfig.setOnContainerResolveTask (new Runnable()
+                                                 {
+                                                     @Override
+                                                     public void run()
+                                                     {
+                                                         _listener.onContainerResolve(_systemConfig);
+                                                     }
+                                                 }
+                                                );
 
-        _systemConfig.setOnContainerCloseTask(
-                new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        _listener.onContainerClose(_systemConfig);
-
-                    }
-                });
-
-
+        _systemConfig.setOnContainerCloseTask (new Runnable()
+                                                {
+                                                    @Override
+                                                    public void run()
+                                                    {
+                                                        _listener.onContainerClose(_systemConfig);
+                                
+                                                    }
+                                                }
+                                              );
         _systemConfig.open();
+        
         if (_systemConfig.getContainer().getState() == State.ERRORED)
         {
-            throw new RuntimeException("Closing due to errors");
+            throw new RuntimeException ("Closing due to errors");
         }
+        // else do nothing
     }
 
     private void closeSystemConfigAndCleanUp()
@@ -301,13 +382,13 @@ public class SystemLauncher
                 }
                 catch (Exception ce)
                 {
-                    LOGGER.debug("An error occurred when closing the system config following initialization failure", ce);
+                    LOGGER.debug ("An error occurred when closing the system config following initialization failure", ce);
                 }
             }
         }
         finally
         {
-            cleanUp(1);
+            cleanUp (1);
         }
     }
 
@@ -330,7 +411,7 @@ public class SystemLauncher
     {
         private final RuntimeException _exception;
 
-        public SystemStartupMessage(final RuntimeException exception)
+        public SystemStartupMessage (final RuntimeException exception)
         {
             _exception = exception;
         }
@@ -345,7 +426,7 @@ public class SystemLauncher
         public String toString()
         {
             StringWriter writer = new StringWriter();
-            _exception.printStackTrace(new PrintWriter(writer));
+            _exception.printStackTrace (new PrintWriter (writer));
             return "Exception during startup: \n" + writer.toString();
         }
     }

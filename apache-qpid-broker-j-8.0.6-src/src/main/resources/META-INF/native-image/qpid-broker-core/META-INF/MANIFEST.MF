@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven 3.8.6
+Built-By: pgallen
+Build-Jdk: 11.0.16
+Specification-Title: Apache Qpid Broker-J Core
+Specification-Version: 8.0
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: Apache Qpid Broker-J Core
+Implementation-Version: 8.0.6
+Implementation-Vendor-Id: org.apache.qpid
+Implementation-Vendor: The Apache Software Foundation
+Implementation-URL: http://qpid.apache.org/components/qpid-broker-core
+Implementation-Build: 857183ed65c3b95a37618f90f8ccc78e02a50ccd
+Main-Class: org.apache.qpid.server.Main
+

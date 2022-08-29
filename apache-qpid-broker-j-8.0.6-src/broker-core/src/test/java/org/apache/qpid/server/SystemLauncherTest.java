@@ -58,20 +58,19 @@ public class SystemLauncherTest extends UnitTestBase
     @Before
     public void setUp() throws Exception
     {
-
         // create empty initial configuration
         Map<String,Object> initialConfig = new HashMap<>();
-        initialConfig.put(ConfiguredObject.NAME, "test");
-        initialConfig.put(org.apache.qpid.server.model.Broker.MODEL_VERSION, BrokerModel.MODEL_VERSION);
+        initialConfig.put (ConfiguredObject.NAME, "test");
+        initialConfig.put (org.apache.qpid.server.model.Broker.MODEL_VERSION, BrokerModel.MODEL_VERSION);
 
         ObjectMapper mapper = new ObjectMapper();
-        String config = mapper.writeValueAsString(initialConfig);
-        _initialConfiguration = TestFileUtils.createTempFile(this, ".initial-config.json", config);
-        _brokerWork = TestFileUtils.createTestDirectory("qpid-work", true);
-        _initialSystemProperties = TestFileUtils.createTempFile(this, ".initial-system.properties",
+        String config = mapper.writeValueAsString (initialConfig);
+        _initialConfiguration = TestFileUtils.createTempFile (this, ".initial-config.json", config);
+        _brokerWork = TestFileUtils.createTestDirectory ("qpid-work", true);
+        _initialSystemProperties = TestFileUtils.createTempFile (this, ".initial-system.properties",
                 INITIAL_SYSTEM_PROPERTY + "=" + INITIAL_SYSTEM_PROPERTY_VALUE
                 + "\nQPID_WORK=" +  _brokerWork.getAbsolutePath() + "_test");
-        setTestSystemProperty("QPID_WORK", _brokerWork.getAbsolutePath());
+        setTestSystemProperty ("QPID_WORK", _brokerWork.getAbsolutePath());
     }
 
     @After
@@ -86,10 +85,11 @@ public class SystemLauncherTest extends UnitTestBase
             {
                 _systemLauncher.shutdown();
             }
-            System.clearProperty(INITIAL_SYSTEM_PROPERTY);
-            FileUtils.delete(_brokerWork, true);
-            FileUtils.delete(_initialSystemProperties, false);
-            FileUtils.delete(_initialConfiguration, false);
+            
+            System.clearProperty (INITIAL_SYSTEM_PROPERTY);
+            FileUtils.delete (_brokerWork, true);
+            FileUtils.delete (_initialSystemProperties, false);
+            FileUtils.delete (_initialConfiguration, false);
         }
     }
 
@@ -97,33 +97,36 @@ public class SystemLauncherTest extends UnitTestBase
     public void testInitialSystemPropertiesAreSetOnBrokerStartup() throws Exception
     {
         Map<String,Object> attributes = new HashMap<>();
-        attributes.put(SystemConfig.INITIAL_SYSTEM_PROPERTIES_LOCATION, _initialSystemProperties.getAbsolutePath());
-        attributes.put(SystemConfig.INITIAL_CONFIGURATION_LOCATION, _initialConfiguration.getAbsolutePath());
-        attributes.put(SystemConfig.TYPE, JsonSystemConfigImpl.SYSTEM_CONFIG_TYPE);
-        attributes.put(SystemConfig.STARTUP_LOGGED_TO_SYSTEM_OUT, Boolean.TRUE);
+        attributes.put (SystemConfig.INITIAL_SYSTEM_PROPERTIES_LOCATION, _initialSystemProperties.getAbsolutePath());
+        attributes.put (SystemConfig.INITIAL_CONFIGURATION_LOCATION, _initialConfiguration.getAbsolutePath());
+        attributes.put (SystemConfig.TYPE, JsonSystemConfigImpl.SYSTEM_CONFIG_TYPE);
+        attributes.put (SystemConfig.STARTUP_LOGGED_TO_SYSTEM_OUT, Boolean.TRUE);
         _systemLauncher = new SystemLauncher();
-        _systemLauncher.startup(attributes);
+        _systemLauncher.startup (attributes);
 
         // test JVM system property should be set from initial system config file
-        assertEquals("Unexpected JVM system property",
-                            INITIAL_SYSTEM_PROPERTY_VALUE,
-                            System.getProperty(INITIAL_SYSTEM_PROPERTY));
+        assertEquals ("Unexpected JVM system property",
+                      INITIAL_SYSTEM_PROPERTY_VALUE,
+                      System.getProperty (INITIAL_SYSTEM_PROPERTY)
+                     );
 
 
         // existing system property should not be overridden
-        assertEquals("Unexpected QPID_WORK system property",
-                            _brokerWork.getAbsolutePath(),
-                            System.getProperty("QPID_WORK"));
+        assertEquals ("Unexpected QPID_WORK system property",
+                      _brokerWork.getAbsolutePath(),
+                      System.getProperty ("QPID_WORK")
+                     );
     }
 
     @Test
     public void testConsoleLogsOnSuccessfulStartup() throws Exception
     {
         byte[] outputBytes = startBrokerAndCollectSystemOutput();
-        String output = new String(outputBytes);
-        assertFalse("Detected unexpected Exception: " + output, output.contains("Exception"));
-        assertTrue("Output does not contain Broker Ready Message",
-                          output.contains(BrokerMessages.READY().toString()));
+        String output = new String (outputBytes);
+        assertFalse ("Detected unexpected Exception: " + output, output.contains ("Exception"));
+        assertTrue ("Output does not contain Broker Ready Message",
+                    output.contains (BrokerMessages.READY().toString())
+                   );
     }
 
     @Test
@@ -132,39 +135,37 @@ public class SystemLauncherTest extends UnitTestBase
         Map<String,Object> initialConfig = new HashMap<>();
 
         ObjectMapper mapper = new ObjectMapper();
-        String config = mapper.writeValueAsString(initialConfig);
-        TestFileUtils.saveTextContentInFile(config, _initialConfiguration);
+        String config = mapper.writeValueAsString (initialConfig);
+        TestFileUtils.saveTextContentInFile (config, _initialConfiguration);
 
         byte[] outputBytes = startBrokerAndCollectSystemOutput();
         String output = new String(outputBytes);
-        assertTrue("No Exception detected in output: " + output, output.contains("Exception"));
-        assertFalse("Output contains Broker Ready Message", output.contains(BrokerMessages.READY().toString()));
+        assertTrue ("No Exception detected in output: " + output, output.contains ("Exception"));
+        assertFalse ("Output contains Broker Ready Message", output.contains (BrokerMessages.READY().toString()));
     }
 
     private byte[] startBrokerAndCollectSystemOutput() throws Exception
     {
         try(ByteArrayOutputStream out = new ByteArrayOutputStream())
         {
-
             PrintStream originalOutput = System.out;
             try
             {
-                System.setOut(new PrintStream(out));
+                System.setOut (new PrintStream (out));
 
                 Map<String,Object> attributes = new HashMap<>();
-                attributes.put(SystemConfig.INITIAL_CONFIGURATION_LOCATION, _initialConfiguration.getAbsolutePath());
-                attributes.put(SystemConfig.TYPE, JsonSystemConfigImpl.SYSTEM_CONFIG_TYPE);
+                attributes.put (SystemConfig.INITIAL_CONFIGURATION_LOCATION, _initialConfiguration.getAbsolutePath());
+                attributes.put (SystemConfig.TYPE, JsonSystemConfigImpl.SYSTEM_CONFIG_TYPE);
 
                 _systemLauncher = new SystemLauncher();
-                _systemLauncher.startup(attributes);
+                _systemLauncher.startup (attributes);
             }
             finally
             {
-                System.setOut(originalOutput);
+                System.setOut (originalOutput);
             }
 
             return out.toByteArray();
         }
-
     }
 }

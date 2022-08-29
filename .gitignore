@@ -1,4 +1,50 @@
 
+### Eclipse ###
+
+.metadata
+#bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+#Java development tooling
+**/.project
+**/.classpath
+**/.settings
+
+
+### Project specific ###
+
 apache-qpid-broker-j-8.0.6-src.tar.gz
 
 apache-qpid-broker-j-8.0.6-src/apache-qpid-broker-j/target/
@@ -100,3 +146,7 @@ apache-qpid-broker-j-8.0.6-src/broker-codegen/target/
 apache-qpid-broker-j-8.0.6-src/broker/target/
 
 apache-qpid-broker-j-8.0.6-src/bdbstore/systests/target/
+
+native/apache-qpid-broker-j-8.0.6-bin.tar.gz
+
+native/

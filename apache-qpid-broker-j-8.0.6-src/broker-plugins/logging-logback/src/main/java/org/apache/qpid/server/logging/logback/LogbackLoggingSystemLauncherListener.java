@@ -37,25 +37,27 @@ public class LogbackLoggingSystemLauncherListener implements SystemLauncherListe
     @Override
     public void beforeStartup()
     {
-        _logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        _logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger (Logger.ROOT_LOGGER_NAME);
+        
         if (!_logger.iteratorForAppenders().hasNext())
         {
-            _logger.setLevel(Level.ALL);
-            _logger.setAdditive(true);
+            _logger.setLevel (Level.ALL);
+            _logger.setAdditive (true);
         }
+        // else do nothing
 
         final LoggerContext loggerContext = _logger.getLoggerContext();
         _logback1027WorkaroundTurboFilter = new Logback1027WorkaroundTurboFilter();
-        loggerContext.addTurboFilter(_logback1027WorkaroundTurboFilter);
+        loggerContext.addTurboFilter (_logback1027WorkaroundTurboFilter);
 
         _startupAppender = new StartupAppender();
-        _startupAppender.setContext(loggerContext);
+        _startupAppender.setContext (loggerContext);
         _startupAppender.start();
-        _logger.addAppender(_startupAppender);
+        _logger.addAppender (_startupAppender);
     }
 
     @Override
-    public void errorOnStartup(final RuntimeException e)
+    public void errorOnStartup (final RuntimeException e)
     {
         _startupAppender.logToConsole();
     }
@@ -63,39 +65,41 @@ public class LogbackLoggingSystemLauncherListener implements SystemLauncherListe
     @Override
     public void afterStartup()
     {
-        _logger.detachAppender(_startupAppender);
+        _logger.detachAppender (_startupAppender);
         _startupAppender.stop();
     }
 
     @Override
-    public void onContainerResolve(SystemConfig<?> systemConfig)
+    public void onContainerResolve (SystemConfig<?> systemConfig)
     {
         ch.qos.logback.classic.Logger rootLogger =
-                (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+                (ch.qos.logback.classic.Logger) LoggerFactory.getLogger (Logger.ROOT_LOGGER_NAME);
 
-        StartupAppender startupAppender = (StartupAppender) rootLogger.getAppender(StartupAppender.class.getName());
+        StartupAppender startupAppender = (StartupAppender) rootLogger.getAppender (StartupAppender.class.getName());
+        
         if (startupAppender != null)
         {
-            rootLogger.detachAppender(startupAppender);
+            rootLogger.detachAppender (startupAppender);
             startupAppender.stop();
         }
+        // else do nothing
     }
 
     @Override
-    public void onContainerClose(final SystemConfig<?> systemConfig)
+    public void onContainerClose (final SystemConfig<?> systemConfig)
     {
         QpidLoggerTurboFilter.uninstallFromRootContext();
-        _logger.getLoggerContext().getTurboFilterList().remove(_logback1027WorkaroundTurboFilter);
+        _logger.getLoggerContext().getTurboFilterList().remove (_logback1027WorkaroundTurboFilter);
     }
 
 
     @Override
-    public void onShutdown(final int exitCode)
+    public void onShutdown (final int exitCode)
     {
     }
 
     @Override
-    public void exceptionOnShutdown(final Exception e)
+    public void exceptionOnShutdown (final Exception e)
     {
     }
 }

@@ -22,6 +22,7 @@ package org.apache.qpid.server.configuration;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -46,7 +47,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CommonProperties
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommonProperties.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger (CommonProperties.class);
 
     /**
      * The timeout used by the IO layer for timeouts such as send timeout in IoSender, and the close timeout for IoSender and IoReceiver
@@ -89,50 +90,54 @@ public class CommonProperties
     private static final Properties properties = new Properties();
 
     private static final String QPID_VERSION = "qpid.version";
+    
+    private static final String GRAAL_MANIFEST_PATH = "META-INF/native-image/qpid-broker-core";
 
     static
     {
-        Manifest jarManifest = getJarManifestFor(CommonProperties.class);
+        Manifest jarManifest = getJarManifestFor (CommonProperties.class);
         Attributes mainAttributes = jarManifest.getMainAttributes();
 
         Package p = CommonProperties.class.getPackage();
 
-        buildVersion = mainAttributes.getValue(MANIFEST_HEADER_IMPLEMENTATION_BUILD) != null ? mainAttributes.getValue(MANIFEST_HEADER_IMPLEMENTATION_BUILD) : DEFAULT;
+        buildVersion = mainAttributes.getValue (MANIFEST_HEADER_IMPLEMENTATION_BUILD) != null ? mainAttributes.getValue (MANIFEST_HEADER_IMPLEMENTATION_BUILD) : DEFAULT;
         productName = p.getImplementationTitle() != null ? p.getImplementationTitle() : DEFAULT;
 
-        String version = getImplementationVersion(p);
-        System.setProperty(QPID_VERSION, version);
+        String version = getImplementationVersion (p);
+        System.setProperty (QPID_VERSION, version);
 
         boolean loadFromFile = true;
-        String initialProperties = System.getProperty("qpid.common_properties_file");
+        String initialProperties = System.getProperty ("qpid.common_properties_file");
+        
         if (initialProperties == null)
         {
             initialProperties = "qpid-common.properties";
             loadFromFile = false;
         }
+        // else do nothing
 
-        loadProperties(properties, initialProperties, loadFromFile);
+        loadProperties (properties, initialProperties, loadFromFile);
 
-        String versionSuffix = properties.getProperty(RELEASE_VERSION_SUFFIX);
-        releaseVersion = versionSuffix == null || "".equals(versionSuffix) ? version : version + ";" + versionSuffix;
+        String versionSuffix = properties.getProperty (RELEASE_VERSION_SUFFIX);
+        releaseVersion = versionSuffix == null || "".equals (versionSuffix) ? version : version + ";" + versionSuffix;
 
-        Set<String> propertyNames = new HashSet<>(properties.stringPropertyNames());
-        propertyNames.removeAll(System.getProperties().stringPropertyNames());
+        Set<String> propertyNames = new HashSet<> (properties.stringPropertyNames());
+        propertyNames.removeAll (System.getProperties().stringPropertyNames());
+        
         for (String propName : propertyNames)
         {
-            System.setProperty(propName, properties.getProperty(propName));
+            System.setProperty (propName, properties.getProperty (propName));
         }
-
     }
 
     public static void ensureIsLoaded()
     {
-        //noop; to call from static initialization blocks of other classes to provoke CommonProperties class initialization
+        LOGGER.info ("Properties loaded");
     }
 
     public static Properties asProperties()
     {
-        return new Properties(properties);
+        return new Properties (properties);
     }
 
     /**
@@ -180,18 +185,19 @@ public class CommonProperties
         //no instances
     }
 
-    private static void loadProperties(Properties properties, String resourceLocation, boolean loadFromFile)
+    private static void loadProperties (Properties properties, String resourceLocation, boolean loadFromFile)
     {
         try
         {
             URL propertiesResource;
+            
             if (loadFromFile)
             {
-                propertiesResource = (new File(resourceLocation)).toURI().toURL();
+                propertiesResource = (new File (resourceLocation)).toURI().toURL();
             }
             else
             {
-                propertiesResource = CommonProperties.class.getClassLoader().getResource(resourceLocation);
+                propertiesResource = CommonProperties.class.getClassLoader().getResource (resourceLocation);
             }
 
             if (propertiesResource != null)
@@ -200,65 +206,119 @@ public class CommonProperties
                 {
                     if (propertyStream != null)
                     {
-                        properties.load(propertyStream);
+                        properties.load (propertyStream);
                     }
+                    // else do nothing
                 }
                 catch (IOException e)
                 {
-                    LOGGER.warn("Could not load properties file '{}'.", resourceLocation, e);
+                    LOGGER.warn ("Could not load properties file '{}'.", resourceLocation, e);
                 }
             }
         }
         catch (MalformedURLException e)
         {
-            LOGGER.warn("Could not open properties file '{}'.", resourceLocation, e);
+            LOGGER.warn ("Could not open properties file '{}'.", resourceLocation, e);
         }
     }
 
-    private static String getImplementationVersion(final Package p)
+    private static String getImplementationVersion (final Package p)
     {
         String version = p.getImplementationVersion();
+        
         if (version == null)
         {
             version = DEFAULT;
-            final String path = CommonProperties.class.getPackage().getName().replace(".", "/");
+            final String path = CommonProperties.class.getPackage().getName().replace (".", "/");
             final String fallbackPath = "/" + path + "/fallback-version.txt";
-            final InputStream in = CommonProperties.class.getResourceAsStream(fallbackPath);
+            final InputStream in = CommonProperties.class.getResourceAsStream (fallbackPath);
+            
             if (in != null)
             {
-                try(BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.US_ASCII)))
+                try (BufferedReader reader = new BufferedReader (new InputStreamReader (in, StandardCharsets.US_ASCII)))
                 {
                     version = reader.readLine();
                 }
                 catch (Exception e)
                 {
-                    LOGGER.trace("Problem reading version from fallback resource : {} ", fallbackPath, e);
+                    LOGGER.trace ("Problem reading version from fallback resource : {} ", fallbackPath, e);
                 }
             }
+            // else do nothing
         }
+        // else do nothing
+        
         return version;
     }
 
-    private static Manifest getJarManifestFor(final Class<?> clazz)
+    private static Manifest getJarManifestFor (final Class<?> clazz)
     {
-        final Manifest emptyManifest = new Manifest();
+        Manifest emptyManifest = new Manifest();
         String className = clazz.getSimpleName() + ".class";
-        String classPath = clazz.getResource(className).toString();
-        if (!classPath.startsWith("jar"))
+        String classPath = null;
+        String manifestPath = null;
+        URL filePath = null;
+        InputStream is = null;
+        
+        System.out.println ("Class Name: " + className + " Parameter: " + clazz.toString());
+        
+        filePath = clazz.getResource (className);
+        
+        // The JVM should have a MANIFEST.MF loaded
+        if (filePath != null)
         {
-            return emptyManifest;
-        }
+            System.out.println ("Loading MANIFEST.MF from JAR");
+            
+            classPath = filePath.toString();
 
-        String manifestPath = classPath.substring(0, classPath.lastIndexOf("!") + 1) +
-                              "/META-INF/MANIFEST.MF";
-        try (InputStream is = new URL(manifestPath).openStream())
-        {
-            return new Manifest(is);
+            if (!classPath.startsWith ("jar"))
+            {
+                return emptyManifest;
+            }
+            else
+            {
+                manifestPath = classPath.substring (0, classPath.lastIndexOf ("!") + 1) +
+                                                "/META-INF/MANIFEST.MF";
+            
+                try
+                {
+                    is = new URL (manifestPath).openStream();
+                    emptyManifest = new Manifest (is);
+                }
+                catch (IOException e)
+                {
+                    // Ignore
+                }
+            }
         }
-        catch (IOException e)
+        // A native image may not have a MANIFEST.MF loaded
+        else
         {
-            // Ignore
+            System.out.println ("Loading MANIFEST.MF from native image");
+            
+            try
+            {
+                File manFile = new File (GRAAL_MANIFEST_PATH + "/META-INF/MANIFEST.MF");
+                
+                System.out.println ("File path: " + manFile.getPath());
+                
+                if (manFile.exists())
+                {
+                    System.out.println ("Reading file");
+                    is = new FileInputStream (manFile);
+                    emptyManifest = new Manifest (is);
+                }
+                else
+                {
+                    System.out.println ("Manifest file not found at " + manFile.getPath());
+                }
+            }
+            catch (IOException e)
+            {
+                System.out.println ("Manifest file not found");
+            }
         }
+        
         return emptyManifest;
     }
 }

@@ -1,0 +1,30 @@
+java -agentlib:native-image-agent=config-output-dir=META-INF/native-image/ -jar qpid-broker-8.0.6.jar
+
+Working:
+native-image --no-fallback -H:EnableURLProtocols=http,https -cp jar:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/* --verbose -J-Xmx16g -J-XX:+HeapDumpOnOutOfMemoryError -J-XX:MaxDirectMemorySize=1536m -J-server -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork -jar qpid-broker-8.0.6.jar qpid
+
+Experimental:
+native-image --initialize-at-build-time=org.apache.qpid.server.configuration.CommonProperties --no-fallback -H:EnableURLProtocols=http,https -cp jar:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/* --verbose -J-Xmx16g -jar qpid-broker-8.0.6.jar qpid     (logback not initialized)
+
+native-image --initialize-at-build-time=org.apache.qpid.server.configuration.CommonProperties --no-fallback -H:EnableURLProtocols=http,https -cp jar:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/* --verbose -J-Xmx16g -J-XX:+HeapDumpOnOutOfMemoryError -J-XX:MaxDirectMemorySize=1536m -J-server -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork -jar qpid-broker-8.0.6.jar qpid    (logback not initialized)
+
+
+native-image --no-fallback -H:EnableURLProtocols=http,https -H:ReflectionConfigurationFiles=META-INF/native-image/reflect-config.json -H:ResourceConfigurationFiles=META-INF/native-image/resource-config.json -cp jar:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/* --verbose -J-Xmx16g -J-XX:+HeapDumpOnOutOfMemoryError -J-XX:MaxDirectMemorySize=1536m -J-server -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork -jar qpid-broker-8.0.6.jar qpid
+
+
+
+
+Init at build time:
+org.apache.qpid.server.configuration.CommonProperties
+
+
+Qpid Java command line:
+java -server -DPNAME=QPBRKR -XX:+UseConcMarkSweepGC -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxDirectMemorySize=1536m -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork org.apache.qpid.server.Main
+
+qpid-server -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork
+
+
+Specifying Configuration Files as Native Image Arguments
+
+A directory containing configuration files that is not part of the class path can be specified to native-image via -H:ConfigurationFileDirectories=/path/to/config-dir/. This directory must directly contain all four files: jni-config.json, reflect-config.json, proxy-config.json and resource-config.json. A directory with the same four configuration files that is on the class path, but not in META-INF/native-image/, can be provided via -H:ConfigurationResourceRoots=path/to/resources/. Both -H:ConfigurationFileDirectories and -H:ConfigurationResourceRoots can also take a comma-separated list of directories.
+

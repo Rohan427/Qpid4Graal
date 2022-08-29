@@ -33,7 +33,7 @@ import ch.qos.logback.core.Context;
 import ch.qos.logback.core.filter.Filter;
 import ch.qos.logback.core.spi.FilterReply;
 
-public class StartupAppender  extends AppenderBase<ILoggingEvent>
+public class StartupAppender extends AppenderBase<ILoggingEvent>
 {
     public static final String PROPERTY_STARTUP_FAILOVER_CONSOLE_LOG_LEVEL = "qpid.startup_failover_console_log_level";
     private List<ILoggingEvent> _accumulatedLoggingEvents = new ArrayList<>();
