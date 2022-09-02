@@ -42,7 +42,7 @@ public class AbstractRunner
 
     private Map<String,String> _cliOptions = new HashMap<String, String>();
     {
-        getCliOptions().put(JNDI_CONFIG_PROP, JNDI_CONFIG_DEFAULT);
+        getCliOptions().put (JNDI_CONFIG_PROP, JNDI_CONFIG_DEFAULT);
     }
 
     protected Context getContext()
@@ -52,22 +52,23 @@ public class AbstractRunner
         try
         {
             Properties properties = new Properties();
-            properties.put(Context.PROVIDER_URL, jndiConfig);
-            try(InputStream is = getJndiConfigurationInputStream(jndiConfig))
+            properties.put (Context.PROVIDER_URL, jndiConfig);
+            
+            try(InputStream is = getJndiConfigurationInputStream (jndiConfig))
             {
                 properties.load(is);
             }
 
-            return  new InitialContext(properties);
+            return  new InitialContext (properties);
         }
         catch (IOException | NamingException e)
         {
-            throw new DistributedTestException("Exception whilst creating InitialContext from URL '"
-                                               + jndiConfig + "'", e);
+            throw new DistributedTestException ("Exception whilst creating InitialContext from URL '"
+                                                + jndiConfig + "'", e);
         }
     }
 
-    public void parseArgumentsIntoConfig(String[] args)
+    public void parseArgumentsIntoConfig (String[] args)
     {
         ArgumentParser argumentParser = new ArgumentParser();
         argumentParser.parseArgumentsIntoConfig(getCliOptions(), args);
@@ -75,7 +76,7 @@ public class AbstractRunner
 
     protected String getJndiConfig()
     {
-        return getCliOptions().get(AbstractRunner.JNDI_CONFIG_PROP);
+        return getCliOptions().get (AbstractRunner.JNDI_CONFIG_PROP);
     }
 
     protected Map<String,String> getCliOptions()
@@ -83,16 +84,17 @@ public class AbstractRunner
         return _cliOptions;
     }
 
-    private InputStream getJndiConfigurationInputStream(final String providerUrl) throws IOException
+    private InputStream getJndiConfigurationInputStream (final String providerUrl) throws IOException
     {
         try
         {
-            URL url = new URL(providerUrl);
+            URL url = new URL (providerUrl);
+            
             return url.openStream();
         }
         catch (MalformedURLException mue)
         {
-            return new FileInputStream(new File(providerUrl));
+            return new FileInputStream (new File (providerUrl));
         }
     }
 }

@@ -42,7 +42,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import javax.security.auth.Subject;
+// import javax.security.auth.Subject;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.slf4j.Logger;
@@ -91,17 +91,76 @@ public class SystemLauncher
 
     public SystemLauncher (SystemLauncherListener listener)
     {
-        _listener = listener;
+        Set<? extends Principal> principals = null;
+        Set<?> pubCredentials = Collections.emptySet();
+        Set<?> privCredentials = Collections.emptySet();
+        TaskPrincipal broker = new TaskPrincipal ("Broker");
+        
+        System.out.println ("Broker:           " + broker.getName());
+        System.out.println ("pubCredentials:   " + pubCredentials.toString());
+        System.out.println ("privCredentials:  " + privCredentials.toString());
+        System.out.println ("_systemPrincipal: " + _systemPrincipal.getName());
+        
+        if (pubCredentials != null)
+        {
+            if (privCredentials != null)
+            {
+                _listener = listener;
+                    
+                principals = new HashSet<> (Arrays.asList (_systemPrincipal, broker));
+                System.out.println ("principals:       " + principals.toString());
+                
+                /* Test for locale resource for native image support.
+                 * This should throw and exception causing a resource request for
+                 * a language bundle. The native image agent should pick this up
+                 * and add a configuration option for the proper locate resource.
+                 * 
+                 * Necessary for currently broken GrallVM native image locale
+                 * resource support.
+                 */
+                try
+                {
+                    javax.security.auth.Subject test = new javax.security.auth.Subject (true, null, null, null);
+                }
+                catch (Exception e)
+                {
+                    
+                }
+                
+                _brokerTaskSubject = new Subject (true, principals, pubCredentials, privCredentials);
+                // new Subject(boolean readOnly, Set<? extends Principal> principals,
+                // Set<?> pubCredentials, Set<?> privCredentials);
+            }
+            else
+            {
+                throw new NullPointerException ("invalid privCredentials");
+            }
+        }
+        else
+        {
+            throw new NullPointerException ("invalid pubCredentials");
+        }
+        
+        System.out.println ("principals:      " + _brokerTaskSubject.getPrincipals().toString());
+        System.out.println ("pubCredentials:  " + _brokerTaskSubject.getPublicCredentials().toString());
+        System.out.println ("privCredentials: " + _brokerTaskSubject.getPrivateCredentials().toString());
+        
+        
+/*          
         _brokerTaskSubject = new Subject (true,
-                                          new HashSet<> (Arrays.asList (_systemPrincipal, new TaskPrincipal ("Broker"))),
+                                          new HashSet<> (Arrays.asList (_systemPrincipal,
+                                                                        new TaskPrincipal ("Broker")
+                                                                       )
+                                                        ),
                                           Collections.emptySet(),
                                           Collections.emptySet()
                                          );
+*/
     }
 
     public SystemLauncher (SystemLauncherListener... listeners)
     {
-        this(new SystemLauncherListener.ChainedSystemLauncherListener (listeners));
+        this (new SystemLauncherListener.ChainedSystemLauncherListener (listeners));
     }
 
     public SystemLauncher()
@@ -152,7 +211,7 @@ public class SystemLauncher
                 {
                     System.out.println ("URL classpath supported, NULL path provided");
                     initialPropertiesLocation = new URL (DEFAULT_INITIAL_PROPERTIES_LOCATION);
-                    System.out.println ("URL loaded: " + initialPropertiesLocation.getPath());
+                    System.out.println ("URL to load " + initialPropertiesLocation.getPath());
                 }
                 // No support
                 catch (MalformedURLException e)
@@ -187,6 +246,7 @@ public class SystemLauncher
                 {
                     throw e;
                 }
+                // else do nothing
             }
         }
         else
@@ -196,13 +256,13 @@ public class SystemLauncher
             {
                 System.out.println ("File path in use, NULL path provided");
                 propertiesFile = new File (DEFAULT_INITIAL_PROPERTIES_FILE_LOCATION);
-                System.out.println ("File loaded: " + propertiesFile.getPath());
+                System.out.println ("Defauilt File linitialized: " + propertiesFile.getPath());
             }
             else
-            {
+            {                
                 System.out.println ("File path supported with " + initialProperties);
-                propertiesFile = new File (initialProperties);
-                System.out.println ("File loaded: " + propertiesFile.getPath());
+                propertiesFile = new File ((new File (initialProperties).getPath()));
+                System.out.println ("File initialized: " + propertiesFile.getPath());
             }
             
             try
@@ -217,6 +277,7 @@ public class SystemLauncher
                 {
                     throw e;
                 }
+                // else do nothing
             }
         }
         
@@ -308,6 +369,7 @@ public class SystemLauncher
                                 {
                                     _listener.afterStartup();
                                 }
+                                
                                 return null;
                             }
                         }

@@ -29,20 +29,22 @@ import java.util.Set;
 
 public abstract class Model
 {
-
     <X extends ConfiguredObject<X>> Collection<X> getReachableObjects(final ConfiguredObject<?> object,
                                                                       final Class<X> clazz)
     {
         Class<? extends ConfiguredObject> category = ConfiguredObjectTypeRegistry.getCategory(object.getClass());
         Class<? extends ConfiguredObject> ancestorClass = getAncestorClassWithGivenDescendant(category, clazz);
+        
         if(ancestorClass != null)
         {
             ConfiguredObject ancestor = getAncestor(ancestorClass, category, object);
+            
             if(ancestor != null)
             {
                 return getAllDescendants(ancestor, ancestorClass, clazz);
             }
         }
+        
         return null;
     }
 
@@ -51,6 +53,7 @@ public abstract class Model
                                                                     final Class<X> clazz)
     {
         Set<X> descendants = new HashSet<X>();
+        
         for(Class<? extends ConfiguredObject> childClass : getChildTypes(ancestorClass))
         {
             Collection<? extends ConfiguredObject> children = ancestor.getChildren(childClass);
@@ -73,6 +76,7 @@ public abstract class Model
                 }
             }
         }
+        
         return descendants;
     }
 
@@ -92,16 +96,19 @@ public abstract class Model
         else
         {
             Class<? extends ConfiguredObject> parentClass = getParentType(category);
+            
             if(parentClass != null)
             {
                 ConfiguredObject<?> parent = object.getParent();
                 C ancestor = getAncestor(ancestorClass, parentClass, parent);
+                
                 if (ancestor != null)
                 {
                     return ancestor;
                 }
             }
         }
+        
         return null;
     }
 
@@ -111,6 +118,7 @@ public abstract class Model
     {
         Collection<Class<? extends ConfiguredObject>> candidateClasses =
                 Collections.<Class<? extends ConfiguredObject>>singleton(category);
+        
         while(!candidateClasses.isEmpty())
         {
             for(Class<? extends ConfiguredObject> candidate : candidateClasses)
@@ -120,17 +128,21 @@ public abstract class Model
                     return candidate;
                 }
             }
+            
             Set<Class<? extends ConfiguredObject>> previous = new HashSet<>(candidateClasses);
             candidateClasses = new HashSet<>();
+            
             for(Class<? extends ConfiguredObject> prev : previous)
             {
                 final Class<? extends ConfiguredObject> parentType = getParentType(prev);
+                
                 if(parentType != null)
                 {
                     candidateClasses.add(parentType);
                 }
             }
         }
+        
         return null;
     }
 
@@ -140,25 +152,30 @@ public abstract class Model
         int oldSize = 0;
 
         Set<Class<? extends ConfiguredObject>> allDescendants = new HashSet<>(getChildTypes(candidate));
+        
         while(allDescendants.size() > oldSize)
         {
             oldSize = allDescendants.size();
             Set<Class<? extends ConfiguredObject>> prev = new HashSet<>(allDescendants);
+            
             for(Class<? extends ConfiguredObject> clazz : prev)
             {
                 allDescendants.addAll(getChildTypes(clazz));
             }
+            
             if(allDescendants.contains(descendantClass))
             {
                 break;
             }
         }
+        
         return allDescendants.contains(descendantClass);
     }
 
     public final Collection<Class<? extends ConfiguredObject>> getDescendantCategories(Class<? extends ConfiguredObject> parent)
     {
         Set<Class<? extends ConfiguredObject>> allDescendants = new HashSet<>();
+        
         for(Class<? extends ConfiguredObject> clazz : getChildTypes(parent))
         {
             if(allDescendants.add(clazz))
@@ -174,6 +191,7 @@ public abstract class Model
     {
         Set<Class<? extends ConfiguredObject>> allAncestors = new HashSet<>();
         Class<? extends ConfiguredObject> clazz = getParentType(category);
+        
         if(clazz != null)
         {
             if(allAncestors.add(clazz))
@@ -209,6 +227,7 @@ public abstract class Model
         {
             final Collection<Class<? extends ConfiguredObject>> modelSupportedCategories = new ArrayList<>(model.getSupportedCategories());
             modelSupportedCategories.remove(specializationPoint);
+            
             for(Class<? extends ConfiguredObject> category : modelSupportedCategories)
             {
                 if(!model.getChildTypes(category).equals(specialization.getChildTypes(category)))
@@ -216,6 +235,7 @@ public abstract class Model
                     return false;
                 }
             }
+            
             return true;
         }
         else

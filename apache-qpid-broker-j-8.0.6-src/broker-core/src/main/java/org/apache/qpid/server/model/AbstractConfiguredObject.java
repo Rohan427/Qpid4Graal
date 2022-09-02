@@ -2901,79 +2901,90 @@ public abstract class AbstractConfiguredObject<X extends ConfiguredObject<X>> im
         return doAfterAlways(getTaskExecutor(), future, after);
     }
 
-    protected static <V> ChainedListenableFuture<Void> doAfterAlways(Executor executor,
-                                                                     ListenableFuture<V> future,
-                                                                     final Runnable after)
+    protected static <V> ChainedListenableFuture<Void> doAfterAlways (Executor executor,
+                                                                      ListenableFuture<V> future,
+                                                                      final Runnable after
+                                                                     )
     {
-        final ChainedSettableFuture<Void> returnVal = new ChainedSettableFuture<Void>(executor);
-        addFutureCallback(future, new FutureCallback<V>()
-        {
-            @Override
-            public void onSuccess(final V result)
-            {
-                try
-                {
-                    after.run();
-                    returnVal.set(null);
-                }
-                catch (Throwable e)
-                {
-                    returnVal.setException(e);
-                }
-            }
-
-            @Override
-            public void onFailure(final Throwable t)
-            {
-                try
-                {
-                    after.run();
-                }
-                finally
-                {
-                    returnVal.setException(t);
-                }
-            }
-        }, executor);
+        final ChainedSettableFuture<Void> returnVal = new ChainedSettableFuture<Void> (executor);
+        
+            addFutureCallback (future, new FutureCallback<V>()
+                                {
+                                    @Override
+                                    public void onSuccess (final V result)
+                                    {
+                                        try
+                                        {
+                                            after.run();
+                                            returnVal.set(null);
+                                        }
+                                        catch (Throwable e)
+                                        {
+                                            returnVal.setException(e);
+                                        }
+                                    }
+                        
+                                    @Override
+                                    public void onFailure (final Throwable t)
+                                    {
+                                        try
+                                        {
+                                            after.run();
+                                        }
+                                        finally
+                                        {
+                                            returnVal.setException (t);
+                                        }
+                                    }
+                                },
+                                executor
+                          );
 
         return returnVal;
     }
 
-    public static <V> void addFutureCallback(ListenableFuture<V> future, final FutureCallback<V> callback,
-                                             Executor taskExecutor)
+    public static <V> void addFutureCallback (ListenableFuture<V> future, 
+                                              final FutureCallback<V> callback,
+                                              Executor taskExecutor
+                                             )
     {
-        final Subject subject = Subject.getSubject(AccessController.getContext());
+        final Subject subject = Subject.getSubject (AccessController.getContext());
 
-        Futures.addCallback(future, new FutureCallback<V>()
-        {
-            @Override
-            public void onSuccess(final V result)
-            {
-                Subject.doAs(subject, new PrivilegedAction<Void>()
-                {
-                    @Override
-                    public Void run()
-                    {
-                        callback.onSuccess(result);
-                        return null;
-                    }
-                });
-            }
+        Futures.addCallback (future, 
+                             new FutureCallback<V>()
+                             {
+                                 @Override
+                                 public void onSuccess (final V result)
+                                 {
+                                     Subject.doAs (subject, new PrivilegedAction<Void>()
+                                     {
+                                         @Override
+                                         public Void run()
+                                         {
+                                             callback.onSuccess (result);
+                                             return null;
+                                         }
+                                     });
+                                 }
 
-            @Override
-            public void onFailure(final Throwable t)
-            {
-                Subject.doAs(subject, new PrivilegedAction<Void>()
-                {
-                    @Override
-                    public Void run()
-                    {
-                        callback.onFailure(t);
-                        return null;
-                    }
-                });
-            }
-        }, taskExecutor);
+                                 @Override
+                                 public void onFailure (final Throwable t)
+                                 {
+                                     Subject.doAs (subject,
+                                                   new PrivilegedAction<Void>()
+                                                     {
+                                                         @Override
+                                                         public Void run()
+                                                         {
+                                                             callback.onFailure (t);
+                                                             return null;
+                                                         }
+                                                     }
+                                                  );
+                                 }
+                             },
+                             taskExecutor
+                            ); // END: Futures.addCallback
     }
 
     @Override

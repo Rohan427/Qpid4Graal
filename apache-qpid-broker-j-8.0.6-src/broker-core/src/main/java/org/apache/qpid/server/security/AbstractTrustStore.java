@@ -424,42 +424,47 @@ public abstract class AbstractTrustStore<X extends AbstractTrustStore<X>>
 
     private Collection<? extends CRL> getCRLs()
     {
-        return getCRLs(_certificateRevocationListUrl);
+        return getCRLs (_certificateRevocationListUrl);
     }
 
     /**
      * Load the collection of CRLs.
      */
-    private Collection<? extends CRL> getCRLs(String crlUrl)
+    private Collection<? extends CRL> getCRLs (String crlUrl)
     {
         Collection<? extends CRL> crls = Collections.emptyList();
+        
         if (crlUrl != null)
         {
-            try (InputStream is = getUrlFromString(crlUrl).openStream())
+            try (InputStream is = getUrlFromString (crlUrl).openStream())
             {
                 crls = SSLUtil.getCertificateFactory().generateCRLs(is);
             }
             catch (IOException | CRLException e)
             {
-                throw new IllegalConfigurationException("Unable to load certificate revocation list '" + crlUrl +
+                throw new IllegalConfigurationException ("Unable to load certificate revocation list '" + crlUrl +
                         "' for truststore '" + getName() + "' :" + e, e);
             }
         }
+        // else do nothing
+        
         return crls;
     }
 
-    protected static URL getUrlFromString(String urlString) throws MalformedURLException
+    protected static URL getUrlFromString (String urlString) throws MalformedURLException
     {
         URL url;
+        
         try
         {
-            url = new URL(urlString);
+            url = new URL (urlString);
         }
         catch (MalformedURLException e)
         {
-            final File file = new File(urlString);
+            final File file = new File (urlString);
             url = file.toURI().toURL();
         }
+        
         return url;
     }
 
@@ -472,7 +477,7 @@ public abstract class AbstractTrustStore<X extends AbstractTrustStore<X>>
         }
         catch (NullPointerException | IllegalArgumentException e)
         {
-            LOGGER.warn("The value of the context variable '{}' for truststore {} cannot be converted to an integer. The value {} will be used as a default", CERTIFICATE_EXPIRY_WARN_PERIOD, getName(), DEFAULT_CERTIFICATE_EXPIRY_WARN_PERIOD);
+            LOGGER.warn ("The value of the context variable '{}' for truststore {} cannot be converted to an integer. The value {} will be used as a default", CERTIFICATE_EXPIRY_WARN_PERIOD, getName(), DEFAULT_CERTIFICATE_EXPIRY_WARN_PERIOD);
             return DEFAULT_CERTIFICATE_EXPIRY_WARN_PERIOD;
         }
     }
@@ -483,13 +488,14 @@ public abstract class AbstractTrustStore<X extends AbstractTrustStore<X>>
         int checkFrequency;
         try
         {
-            checkFrequency = getContextValue(Integer.class, CERTIFICATE_EXPIRY_CHECK_FREQUENCY);
+            checkFrequency = getContextValue (Integer.class, CERTIFICATE_EXPIRY_CHECK_FREQUENCY);
         }
         catch (IllegalArgumentException | NullPointerException e)
         {
-            LOGGER.warn("Cannot parse the context variable {} ", CERTIFICATE_EXPIRY_CHECK_FREQUENCY, e);
+            LOGGER.warn ("Cannot parse the context variable {} ", CERTIFICATE_EXPIRY_CHECK_FREQUENCY, e);
             checkFrequency = DEFAULT_CERTIFICATE_EXPIRY_CHECK_FREQUENCY;
         }
+        
         return checkFrequency;
     }
 

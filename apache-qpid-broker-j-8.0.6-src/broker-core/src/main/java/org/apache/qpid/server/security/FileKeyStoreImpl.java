@@ -329,26 +329,28 @@ public class FileKeyStoreImpl extends AbstractKeyStore<FileKeyStoreImpl> impleme
         }
     }
 
-    private static URL getUrlFromString(String urlString) throws MalformedURLException
+    private static URL getUrlFromString (String urlString) throws MalformedURLException
     {
         URL url;
+        
         try
         {
-            url = new URL(urlString);
+            url = new URL (urlString);
         }
         catch (MalformedURLException e)
         {
-            File file = new File(urlString);
+            File file = new File (urlString);
             url = file.toURI().toURL();
 
         }
+        
         return url;
     }
 
-    @SuppressWarnings(value = "unused")
+    @SuppressWarnings (value = "unused")
     private void postSetStoreUrl()
     {
-        if (_storeUrl != null && !_storeUrl.startsWith("data:"))
+        if (_storeUrl != null && !_storeUrl.startsWith ("data:"))
         {
             _path = _storeUrl;
         }

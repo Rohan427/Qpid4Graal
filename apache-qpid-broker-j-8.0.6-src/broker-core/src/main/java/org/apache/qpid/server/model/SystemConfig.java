@@ -32,7 +32,6 @@ public interface SystemConfig<X extends SystemConfig<X>> extends ConfiguredObjec
                                                                  PreferencesRoot,
                                                                  EventLoggerProvider
 {
-
     String MANAGEMENT_MODE = "managementMode";
     
     String MANAGEMENT_MODE_QUIESCE_VIRTUAL_HOSTS = "managementModeQuiesceVirtualHosts";
@@ -44,7 +43,7 @@ public interface SystemConfig<X extends SystemConfig<X>> extends ConfiguredObjec
 
 
     String PROPERTY_QPID_WORK = "QPID_WORK";
-    @ManagedContextDefault(name= SystemConfig.PROPERTY_QPID_WORK)
+    @ManagedContextDefault (name= SystemConfig.PROPERTY_QPID_WORK)
     String DEFAULT_QPID_WORK = "${user.dir}${file.separator}work";
 
     /**
@@ -56,14 +55,14 @@ public interface SystemConfig<X extends SystemConfig<X>> extends ConfiguredObjec
      */
     String QPID_WORK_DIR  = "qpid.work_dir";
 
-    @ManagedContextDefault(name= SystemConfig.QPID_WORK_DIR)
+    @ManagedContextDefault (name= SystemConfig.QPID_WORK_DIR)
     String DEFAULT_QPID_WORK_DIR = "${QPID_WORK}";
 
-    @ManagedContextDefault(name="qpid.broker.defaultPreferenceStoreAttributes")
+    @ManagedContextDefault (name="qpid.broker.defaultPreferenceStoreAttributes")
     String DEFAULT_PREFERENCE_STORE_ATTRIBUTES = "{\"type\": \"JSON\", \"attributes\":{\"path\": \"${json:qpid.work_dir}${json:file.separator}preferences.json\"}}";
 
     String POSIX_FILE_PERMISSIONS = "qpid.default_posix_file_permissions";
-    @ManagedContextDefault(name = SystemConfig.POSIX_FILE_PERMISSIONS)
+    @ManagedContextDefault (name = SystemConfig.POSIX_FILE_PERMISSIONS)
     String DEFAULT_POSIX_FILE_PERMISSIONS = "rw-r-----";
 
 
@@ -71,36 +70,44 @@ public interface SystemConfig<X extends SystemConfig<X>> extends ConfiguredObjec
 
     String PROPERTY_STATUS_UPDATES = "qpid.broker_status_updates";
 
-    @ManagedAttribute(immutable = true, defaultValue = Broker.BROKER_TYPE)
+    @ManagedAttribute (immutable = true, defaultValue = Broker.BROKER_TYPE)
     String getDefaultContainerType();
 
-    @ManagedAttribute(defaultValue = "false")
+    @ManagedAttribute (defaultValue = "false")
     boolean isManagementMode();
 
-    @ManagedAttribute(defaultValue = "0")
+    @ManagedAttribute (defaultValue = "0")
     int getManagementModeHttpPortOverride();
 
-    @ManagedAttribute(defaultValue = "false")
+    @ManagedAttribute (defaultValue = "false")
     boolean isManagementModeQuiesceVirtualHosts();
 
-    @ManagedAttribute(secure = true)
+    @ManagedAttribute (secure = true)
     String getManagementModePassword();
 
     String DEFAULT_INITIAL_CONFIG_NAME = "initial-config.json";
+    
+    String DEFAULT_CONFIG_PATH = "config/";
+    
+    @ManagedContextDefault (name = "qpid.altInitialConfigurationLocation")
+    String ALT_INITIAL_CONFIG_LOCATION = DEFAULT_CONFIG_PATH + DEFAULT_INITIAL_CONFIG_NAME;
 
-    @ManagedContextDefault(name="qpid.initialConfigurationLocation")
-    String DEFAULT_INITIAL_CONFIG_LOCATION = "classpath:"+DEFAULT_INITIAL_CONFIG_NAME;
+    @ManagedContextDefault (name = "qpid.initialConfigurationLocation")
+    String DEFAULT_INITIAL_CONFIG_LOCATION = "classpath:" + DEFAULT_INITIAL_CONFIG_NAME;
 
-    @ManagedAttribute(defaultValue = "${qpid.initialConfigurationLocation}")
+    @ManagedAttribute (defaultValue = "${qpid.initialConfigurationLocation}")
     String getInitialConfigurationLocation();
+    
+    @ManagedAttribute (defaultValue = "${qpid.altInitialConfigurationLocation}")
+    String getAltInitialConfigurationLocation();
 
     @ManagedAttribute
     String getInitialSystemPropertiesLocation();
 
-    @ManagedAttribute(defaultValue = "true")
+    @ManagedAttribute (defaultValue = "true")
     boolean isStartupLoggedToSystemOut();
 
-    @ManagedAttribute( description = "Configuration for the preference store, e.g. type, path, etc.",
+    @ManagedAttribute (description = "Configuration for the preference store, e.g. type, path, etc.",
             defaultValue = "${qpid.broker.defaultPreferenceStoreAttributes}")
     PreferenceStoreAttributes getPreferenceStoreAttributes();
 

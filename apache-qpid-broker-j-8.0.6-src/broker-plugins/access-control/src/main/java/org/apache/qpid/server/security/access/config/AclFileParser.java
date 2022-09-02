@@ -74,7 +74,7 @@ public final class AclFileParser
     {
     }
 
-    private static Reader getReaderFromURLString(String urlString)
+    private static Reader getReaderFromURLString (String urlString)
     {
         try
         {
@@ -82,22 +82,23 @@ public final class AclFileParser
 
             try
             {
-                url = new URL(urlString);
+                url = new URL (urlString);
             }
             catch (MalformedURLException e)
             {
-                File file = new File(urlString);
+                File file = new File (urlString);
+                
                 try
                 {
                     url = file.toURI().toURL();
                 }
                 catch (MalformedURLException notAFile)
                 {
-                    throw new IllegalConfigurationException("Cannot convert " + urlString + " to a readable resource", notAFile);
+                    throw new IllegalConfigurationException ("Cannot convert " + urlString + " to a readable resource", notAFile);
                 }
-
             }
-            return new InputStreamReader(url.openStream());
+            
+            return new InputStreamReader (url.openStream());
         }
         catch (IOException e)
         {

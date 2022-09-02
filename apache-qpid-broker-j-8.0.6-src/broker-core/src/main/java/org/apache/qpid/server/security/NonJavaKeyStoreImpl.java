@@ -299,20 +299,21 @@ public class NonJavaKeyStoreImpl extends AbstractKeyStore<NonJavaKeyStoreImpl> i
         }
     }
 
-    private URL getUrlFromString(String urlString) throws MalformedURLException
+    private URL getUrlFromString (String urlString) throws MalformedURLException
     {
         URL url;
 
         try
         {
-            url = new URL(urlString);
+            url = new URL (urlString);
         }
         catch (MalformedURLException e)
         {
-            File file = new File(urlString);
+            File file = new File (urlString);
             url = file.toURI().toURL();
 
         }
+        
         return url;
     }
 

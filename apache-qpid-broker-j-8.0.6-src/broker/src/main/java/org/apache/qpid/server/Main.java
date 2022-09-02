@@ -21,6 +21,7 @@
 package org.apache.qpid.server;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -198,7 +199,7 @@ public class Main
             {
                 System.err.println ("Exception during startup: " + e);
                 e.printStackTrace();
-                shutdown(1);
+                shutdown (1);
             }
         }
         // else do nothing
@@ -229,8 +230,6 @@ public class Main
         Map<String,Object> attributes = new HashMap<>();
 
         String initialProperties = _commandLine.getOptionValue (OPTION_INITIAL_SYSTEM_PROPERTIES.getOpt());
-        
-        System.out.println ("Main: initialProperties " + initialProperties + "\n");
         
         SystemLauncher.populateSystemPropertiesFromDefaults (initialProperties);
 
@@ -416,41 +415,79 @@ public class Main
             destinationFile = new File (System.getProperty ("user.dir"), SystemConfig.DEFAULT_INITIAL_CONFIG_NAME);
         }
 
-        if(initialConfigLocation == null)
+        if (initialConfigLocation == null)
         {
             initialConfigLocation = AbstractSystemConfig.getDefaultValue (SystemConfig.INITIAL_CONFIGURATION_LOCATION);
         }
-        copyInitialConfigFile(initialConfigLocation, destinationFile);
+        // else do nothing
+        
+        copyInitialConfigFile (initialConfigLocation, destinationFile);
 
         System.out.println ("Initial config written to: " + destinationFile.getAbsolutePath());
     }
 
+    /**
+     * Copy the initial configuration file (initial-config.json) to the destination
+     * file given. IF the system does not support a URL protocol, fall back to using
+     * the File protocol for the input file.
+     * 
+     * @param initialConfigLocation
+     * @param destinationFile
+     */
     private void copyInitialConfigFile (final String initialConfigLocation, final File destinationFile)
     {
         URL url = null;
+        boolean useFile = false;
+        File locationFile = null;
+        InputStream in =  null;
         
         try
         {
-            url = new URL(initialConfigLocation);
+            url = new URL (initialConfigLocation);
         }
         catch (MalformedURLException e)
         {
-            File locationFile = new File (initialConfigLocation);
+            locationFile = new File (initialConfigLocation);
+            
             try
             {
                 url = locationFile.toURI().toURL();
             }
             catch (MalformedURLException e1)
             {
-                throw new IllegalConfigurationException ("Cannot create URL for file " + locationFile, e1);
+                if (initialConfigLocation.contains ("classpah:"))
+                {
+                    String filePath = (new File (initialConfigLocation)).getPath();
+                    
+                    locationFile = new File (filePath);
+                    
+                    if (locationFile.exists())
+                    {
+                        useFile = true;
+                    }
+                    else
+                    {
+                        throw new IllegalConfigurationException ("Cannot locate file " + filePath, e1);
+                    }
+                }
+                else
+                {
+                    throw new IllegalConfigurationException ("Cannot create URL for file " + locationFile, e1);
+                }
             }
         }
         
-        InputStream in =  null;
-        
         try
         {
-            in = url.openStream();
+            if (!useFile)
+            {
+                in = url.openStream();
+            }
+            else
+            {
+                in = new FileInputStream (locationFile);
+            }
+            
             FileUtils.copy (in, destinationFile);
         }
         catch (IOException e)

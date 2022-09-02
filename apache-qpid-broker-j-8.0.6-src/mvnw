@@ -1,17 +1,40 @@
 #!/bin/bash
 
+# TODO: Add directory checks for dirs not in SCM -
+#         ./native
+#       Make this script more generic if possible.
+#       Add -H:IncludeResourceBundles for missing bundles
+#       Add native-image agent to build if possible.
+
+EXIT=0
+WORKDIR=$PWD
 
 mvn clean install
 
-rm -f native/apache-qpid-broker-j-8.0.6-bin.tar.gz
+$EXIT=$?
 
-cp -f apache-qpid-broker-j/target/apache-qpid-broker-j-8.0.6-bin.tar.gz ../native/
-cd ../native
+if [[ $EXIT == 0 ]];
+then
+    rm -f native/apache-qpid-broker-j-8.0.6-bin.tar.gz
 
-rm -Rf qpid-broker
-tar -xzf apache-qpid-broker-j-8.0.6-bin.tar.gz
+    cp -f apache-qpid-broker-j/target/apache-qpid-broker-j-8.0.6-bin.tar.gz ../native/
+    cd ../native
 
-cp -Rf ../apache-qpid-broker-j-8.0.6-src/src/main/resources/META-INF qpid-broker/8.0.6/lib/
+# CURDIR: native
+    rm -Rf qpid-broker
+    tar -xzf apache-qpid-broker-j-8.0.6-bin.tar.gz
 
-cd qpid-broker/8.0.6/lib
-native-image --no-fallback --enable-url-protocols=file -H:EnableURLProtocols=http,https -H:ReflectionConfigurationFiles=META-INF/native-image/reflect-config.json -H:ResourceConfigurationFiles=META-INF/native-image/resource-config.json -cp jar:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/* --verbose -J-Xmx16g -J-XX:+HeapDumpOnOutOfMemoryError -J-XX:MaxDirectMemorySize=1536m -J-server -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork -jar qpid-broker-8.0.6.jar qpid
+    cp -Rf ${WORKDIR}/src/main/resources/META-INF qpid-broker/8.0.6/lib/
+
+    cd qpid-broker/8.0.6/lib
+
+# CURDIR: native/qpid-broker/8.0.6/lib
+    java -agentlib:native-image-agent=config-merge-dir=${WORKDIR}/src/main/resources/META-INF/native-image -server -classpath /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/plugins/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/opt/* -DPNAME=QPBRKR -XX:+UseConcMarkSweepGC -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxDirectMemorySize=1536m -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork org.apache.qpid.server.Main
+
+    cp -Rf ${WORKDIR}/src/main/resources/META-INF ./
+
+    native-image --no-fallback --enable-url-protocols=file -H:+IncludeAllLocales -H:EnableURLProtocols=http,https -H:ConfigurationResourceRoots=META-INF/native-image/ -cp jar:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/* --verbose -J-Xmx16g -J-XX:+HeapDumpOnOutOfMemoryError -J-XX:MaxDirectMemorySize=1536m -J-server -Duser.country=US -Duser.language=en -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork -jar qpid-broker-8.0.6.jar qpid
+
+else
+    echo "Maven build failed"
+fi

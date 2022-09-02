@@ -29,7 +29,7 @@ public class TaskPrincipal implements Principal, Serializable
 
     private final String _name;
 
-    public TaskPrincipal(final String name)
+    public TaskPrincipal (final String name)
     {
         _name = name;
     }

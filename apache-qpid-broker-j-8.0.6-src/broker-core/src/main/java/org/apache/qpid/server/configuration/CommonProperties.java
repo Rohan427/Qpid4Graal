@@ -260,15 +260,11 @@ public class CommonProperties
         URL filePath = null;
         InputStream is = null;
         
-        System.out.println ("Class Name: " + className + " Parameter: " + clazz.toString());
-        
         filePath = clazz.getResource (className);
         
         // The JVM should have a MANIFEST.MF loaded
         if (filePath != null)
-        {
-            System.out.println ("Loading MANIFEST.MF from JAR");
-            
+        {            
             classPath = filePath.toString();
 
             if (!classPath.startsWith ("jar"))
@@ -293,29 +289,21 @@ public class CommonProperties
         }
         // A native image may not have a MANIFEST.MF loaded
         else
-        {
-            System.out.println ("Loading MANIFEST.MF from native image");
-            
+        {            
             try
             {
                 File manFile = new File (GRAAL_MANIFEST_PATH + "/META-INF/MANIFEST.MF");
-                
-                System.out.println ("File path: " + manFile.getPath());
-                
+                                
                 if (manFile.exists())
                 {
-                    System.out.println ("Reading file");
                     is = new FileInputStream (manFile);
                     emptyManifest = new Manifest (is);
                 }
-                else
-                {
-                    System.out.println ("Manifest file not found at " + manFile.getPath());
-                }
+                // else do nothing
             }
             catch (IOException e)
             {
-                System.out.println ("Manifest file not found");
+                LOGGER.error ("MANIFEST.MF  file not found:", e);
             }
         }
         

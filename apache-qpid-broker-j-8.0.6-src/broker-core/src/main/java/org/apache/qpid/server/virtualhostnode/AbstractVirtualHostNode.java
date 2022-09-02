@@ -537,28 +537,29 @@ public abstract class AbstractVirtualHostNode<X extends AbstractVirtualHostNode<
     protected final Reader getInitialConfigReader() throws IOException
     {
         Reader initialConfigReader;
+        
         if(getVirtualHostInitialConfiguration() != null)
         {
             String initialContextString = getVirtualHostInitialConfiguration();
 
-
             try
             {
-                URL url = new URL(initialContextString);
+                URL url = new URL (initialContextString);
 
-                initialConfigReader =new InputStreamReader(url.openStream());
+                initialConfigReader = new InputStreamReader (url.openStream());
             }
             catch (MalformedURLException e)
             {
-                initialConfigReader = new StringReader(initialContextString);
+                initialConfigReader = new StringReader (initialContextString);
             }
 
         }
         else
         {
-            LOGGER.warn("No initial configuration found for the virtual host");
+            LOGGER.warn ("No initial configuration found for the virtual host");
             initialConfigReader = new StringReader("{}");
         }
+        
         return initialConfigReader;
     }
 

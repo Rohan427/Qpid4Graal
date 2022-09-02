@@ -1,0 +1,11 @@
+[
+  {
+    "interfaces":["com.sun.management.HotSpotDiagnosticMXBean"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.store.preferences.PreferenceStoreAttributes"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.virtualhostnode.JsonVirtualHostNode"]}
+  
+]

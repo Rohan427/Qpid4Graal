@@ -1125,101 +1125,118 @@ public abstract class AbstractVirtualHost<X extends AbstractVirtualHost<X>> exte
 
         if(!handler.isEmpty())
         {
-            throw new IllegalArgumentException("The message store is not empty");
+            throw new IllegalArgumentException ("The message store is not empty");
         }
     }
 
-    private static URL convertStringToURL(final String source)
+    private static URL convertStringToURL (final String source)
     {
         URL url;
+        
         try
         {
-            url = new URL(source);
+            url = new URL (source);
         }
         catch (MalformedURLException e)
         {
-            File file = new File(source);
+            File file = new File (source);
+            
             try
             {
                 url = file.toURI().toURL();
             }
             catch (MalformedURLException notAFile)
             {
-                throw new IllegalConfigurationException("Cannot convert " + source + " to a readable resource",
-                                                        notAFile);
+                throw new IllegalConfigurationException ("Cannot convert " + source + " to a readable resource",
+                                                         notAFile);
             }
         }
+        
         return url;
     }
 
     @Override
-    public boolean authoriseCreateConnection(final AMQPConnection<?> connection)
+    public boolean authoriseCreateConnection (final AMQPConnection<?> connection)
     {
-        authorise(Operation.PERFORM_ACTION("connect"));
+        authorise (Operation.PERFORM_ACTION("connect"));
+        
         for(ConnectionValidator validator : _connectionValidators)
         {
-            if(!validator.validateConnectionCreation(connection, this))
+            if(!validator.validateConnectionCreation (connection, this))
             {
                 return false;
             }
+            // else do nothing
         }
+        
         return true;
     }
 
     private void initialiseStatisticsReporting()
     {
         long report = getStatisticsReportingPeriod() * 1000L;
-
         ScheduledFuture<?> previousStatisticsReportingFuture = _statisticsReportingFuture;
+        
         if (previousStatisticsReportingFuture != null)
         {
             previousStatisticsReportingFuture.cancel(false);
         }
+        // else do nothing
+        
         if (report > 0L)
         {
-            _statisticsReportingFuture = _houseKeepingTaskExecutor.scheduleAtFixedRate(new StatisticsReportingTask(this,
-                                                                                                                   getSystemTaskSubject(
-                                                                                                                           "Statistics", _principal)),
-                                                                                       report,
-                                                                                       report,
-                                                                                       TimeUnit.MILLISECONDS);
+            _statisticsReportingFuture = 
+                _houseKeepingTaskExecutor.scheduleAtFixedRate (new StatisticsReportingTask (this,
+                                                                                            getSystemTaskSubject ("Statistics",
+                                                                                                                   _principal
+                                                                                                                 )
+                                                                                           ),
+                                                               report,
+                                                               report,
+                                                               TimeUnit.MILLISECONDS
+                                                              );
         }
     }
 
     private void initialiseHouseKeeping()
     {
         final long period = getHousekeepingCheckPeriod();
+        
         if (period > 0L)
         {
             scheduleHouseKeepingTask(period, new VirtualHostHouseKeepingTask());
         }
+        // else do nothing
     }
 
     private void initialiseFlowToDiskChecking()
     {
         final long period = getFlowToDiskCheckPeriod();
+        
         if (period > 0L)
         {
-            scheduleHouseKeepingTask(period, new FlowToDiskCheckingTask());
+            scheduleHouseKeepingTask (period, new FlowToDiskCheckingTask());
         }
+        // else do nothing
     }
 
     private void shutdownHouseKeeping()
     {
-        if(_houseKeepingTaskExecutor != null)
+        if (_houseKeepingTaskExecutor != null)
         {
             _houseKeepingTaskExecutor.shutdown();
 
             try
             {
-                if (!_houseKeepingTaskExecutor.awaitTermination(HOUSEKEEPING_SHUTDOWN_TIMEOUT, TimeUnit.SECONDS))
+                if (!_houseKeepingTaskExecutor.awaitTermination (HOUSEKEEPING_SHUTDOWN_TIMEOUT, TimeUnit.SECONDS))
                 {
                     _houseKeepingTaskExecutor.shutdownNow();
                 }
+                //else do nothing
             }
             catch (InterruptedException e)
             {
-                LOGGER.warn("Interrupted during Housekeeping shutdown:", e);
+                LOGGER.warn ("Interrupted during Housekeeping shutdown:", e);
                 Thread.currentThread().interrupt();
             }
             finally
@@ -1231,11 +1248,12 @@ public abstract class AbstractVirtualHost<X extends AbstractVirtualHost<X>> exte
 
     private void closeNetworkConnectionScheduler()
     {
-        if(_networkConnectionScheduler != null)
+        if (_networkConnectionScheduler != null)
         {
             _networkConnectionScheduler.close();
             _networkConnectionScheduler = null;
         }
+        // else do nothing
     }
 
     /**

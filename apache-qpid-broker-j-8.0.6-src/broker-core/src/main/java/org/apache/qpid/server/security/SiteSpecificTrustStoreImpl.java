@@ -119,16 +119,16 @@ public class SiteSpecificTrustStoreImpl
 
         try
         {
-            URL url = new URL(_siteUrl);
+            URL url = new URL (_siteUrl);
 
             if (url.getHost() == null || (url.getPort() == -1 && url.getDefaultPort() == -1))
             {
-                throw new IllegalConfigurationException(String.format("URL '%s' does not provide a hostname and port number", _siteUrl));
+                throw new IllegalConfigurationException (String.format ("URL '%s' does not provide a hostname and port number", _siteUrl));
             }
         }
         catch (MalformedURLException e)
         {
-            throw new IllegalConfigurationException(String.format("'%s' is not a valid URL", _siteUrl));
+            throw new IllegalConfigurationException (String.format ("'%s' is not a valid URL", _siteUrl));
         }
     }
 
@@ -232,50 +232,54 @@ public class SiteSpecificTrustStoreImpl
                 getThreadFactory("download-certificate-worker-" + getName())));
         try
         {
-            return workerService.submit(new Callable<X509Certificate>()
-            {
-
-                @Override
-                public X509Certificate call()
-                {
-                    try
+            return workerService.submit (new Callable<X509Certificate>()
                     {
-                        final URL siteUrl = new URL(url);
-                        final int port = siteUrl.getPort() == -1 ? siteUrl.getDefaultPort() : siteUrl.getPort();
-                        SSLContext sslContext = SSLUtil.tryGetSSLContext();
-                        sslContext.init(new KeyManager[0], new TrustManager[]{new AlwaysTrustManager()}, null);
-                        try (SSLSocket socket = (SSLSocket) sslContext.getSocketFactory().createSocket())
+                        @Override
+                        public X509Certificate call()
                         {
-                            socket.setSoTimeout(_readTimeout);
-                            socket.connect(new InetSocketAddress(siteUrl.getHost(), port), _connectTimeout);
-                            socket.startHandshake();
-                            final Certificate[] certificateChain = socket.getSession().getPeerCertificates();
-                            if (certificateChain != null
-                                && certificateChain.length != 0
-                                && certificateChain[0] instanceof X509Certificate)
+                            try
                             {
-                                final X509Certificate x509Certificate = (X509Certificate) certificateChain[0];
-                                LOGGER.debug("Successfully downloaded X509Certificate with DN {} certificate from {}",
-                                             x509Certificate.getSubjectDN(), url);
-                                return x509Certificate;
+                                final URL siteUrl = new URL (url);
+                                final int port = siteUrl.getPort() == -1 ? siteUrl.getDefaultPort() : siteUrl.getPort();
+                                SSLContext sslContext = SSLUtil.tryGetSSLContext();
+                                sslContext.init (new KeyManager[0], new TrustManager[] {new AlwaysTrustManager()}, null);
+                                
+                                try (SSLSocket socket = (SSLSocket) sslContext.getSocketFactory().createSocket())
+                                {
+                                    socket.setSoTimeout (_readTimeout);
+                                    socket.connect(new InetSocketAddress(siteUrl.getHost(), port), _connectTimeout);
+                                    socket.startHandshake();
+                                    final Certificate[] certificateChain = socket.getSession().getPeerCertificates();
+                                    
+                                    if (certificateChain != null
+                                        && certificateChain.length != 0
+                                        && certificateChain[0] instanceof X509Certificate)
+                                    {
+                                        final X509Certificate x509Certificate = (X509Certificate) certificateChain[0];
+                                        LOGGER.debug ("Successfully downloaded X509Certificate with DN {} certificate from {}",
+                                                      x509Certificate.getSubjectDN(), url);
+                                        return x509Certificate;
+                                    }
+                                    else
+                                    {
+                                        throw new IllegalConfigurationException (String.format("TLS handshake for '%s' from '%s' "
+                                                                                              + "did not provide a X509Certificate",
+                                                                                             getName(),
+                                                                                             url));
+                                    }
+                                }
                             }
-                            else
+                            catch (IOException | GeneralSecurityException e)
                             {
-                                throw new IllegalConfigurationException(String.format("TLS handshake for '%s' from '%s' "
-                                                                                      + "did not provide a X509Certificate",
-                                                                                     getName(),
-                                                                                     url));
+                                throw new IllegalConfigurationException (String.format ("Unable to get certificate for '%s' from '%s'",
+                                                                                        getName(),
+                                                                                        url
+                                                                                       ),
+                                                                         e);
                             }
-                        }
+                        } // END: public X509Certificate call()
                     }
-                    catch (IOException | GeneralSecurityException e)
-                    {
-                        throw new IllegalConfigurationException(String.format("Unable to get certificate for '%s' from '%s'",
-                                                                              getName(),
-                                                                              url), e);
-                    }
-                }
-            });
+            ); // END: return workerService.submit
         }
         finally
         {

@@ -191,49 +191,52 @@ public class CloudFoundryDashboardManagementGroupProviderImpl extends AbstractCo
         return groupPrincipals;
     }
 
-    private boolean mayManageServiceInstance(final String serviceInstanceId, final String accessToken)
+    private boolean mayManageServiceInstance (final String serviceInstanceId, final String accessToken)
     {
         HttpURLConnection connection;
-        String cloudFoundryEndpoint = String.format("%s/v2/service_instances/%s/permissions",
+        String cloudFoundryEndpoint = String.format ("%s/v2/service_instances/%s/permissions",
                                                     getCloudFoundryEndpointURI().toString(), serviceInstanceId);
         try
         {
-            ConnectionBuilder connectionBuilder = new ConnectionBuilder(new URL(cloudFoundryEndpoint));
-            connectionBuilder.setConnectTimeout(_connectTimeout).setReadTimeout(_readTimeout);
+            ConnectionBuilder connectionBuilder = new ConnectionBuilder (new URL (cloudFoundryEndpoint));
+            connectionBuilder.setConnectTimeout (_connectTimeout).setReadTimeout (_readTimeout);
+            
             if (_trustStore != null)
             {
                 try
                 {
-                    connectionBuilder.setTrustMangers(_trustStore.getTrustManagers());
+                    connectionBuilder.setTrustMangers (_trustStore.getTrustManagers());
                 }
                 catch (GeneralSecurityException e)
                 {
-                    throw new ServerScopedRuntimeException("Cannot initialise TLS", e);
+                    throw new ServerScopedRuntimeException ("Cannot initialise TLS", e);
                 }
             }
-            connectionBuilder.setTlsProtocolWhiteList(_tlsProtocolWhiteList)
-                             .setTlsProtocolBlackList(_tlsProtocolBlackList)
-                             .setTlsCipherSuiteWhiteList(_tlsCipherSuiteWhiteList)
-                             .setTlsCipherSuiteBlackList(_tlsCipherSuiteBlackList);
+            // else do nothing
+            
+            connectionBuilder.setTlsProtocolWhiteList (_tlsProtocolWhiteList)
+                             .setTlsProtocolBlackList (_tlsProtocolBlackList)
+                             .setTlsCipherSuiteWhiteList (_tlsCipherSuiteWhiteList)
+                             .setTlsCipherSuiteBlackList (_tlsCipherSuiteBlackList);
 
-            LOGGER.debug("About to call CloudFoundryDashboardManagementEndpoint '{}'", cloudFoundryEndpoint);
+            LOGGER.debug ("About to call CloudFoundryDashboardManagementEndpoint '{}'", cloudFoundryEndpoint);
             connection = connectionBuilder.build();
 
-            connection.setRequestProperty("Accept-Charset", UTF8);
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setRequestProperty("Authorization", "Bearer " + accessToken);
+            connection.setRequestProperty ("Accept-Charset", UTF8);
+            connection.setRequestProperty ("Accept", "application/json");
+            connection.setRequestProperty ("Authorization", "Bearer " + accessToken);
 
             connection.connect();
         }
         catch (SocketTimeoutException e)
         {
-            throw new ExternalServiceTimeoutException(String.format("Timed out trying to connect to CloudFoundryDashboardManagementEndpoint '%s'.",
-                                                             cloudFoundryEndpoint), e);
+            throw new ExternalServiceTimeoutException (String.format ("Timed out trying to connect to CloudFoundryDashboardManagementEndpoint '%s'.",
+                                                                      cloudFoundryEndpoint), e);
         }
         catch (IOException e)
         {
-            throw new ExternalServiceException(String.format("Could not connect to CloudFoundryDashboardManagementEndpoint '%s'.",
-                                                             cloudFoundryEndpoint), e);
+            throw new ExternalServiceException (String.format ("Could not connect to CloudFoundryDashboardManagementEndpoint '%s'.",
+                                                               cloudFoundryEndpoint), e);
         }
 
         try (InputStream input = connection.getInputStream())
@@ -241,36 +244,39 @@ public class CloudFoundryDashboardManagementGroupProviderImpl extends AbstractCo
             final int responseCode = connection.getResponseCode();
             LOGGER.debug("Call to CloudFoundryDashboardManagementEndpoint '{}' complete, response code : {}", cloudFoundryEndpoint, responseCode);
 
-            Map<String, Object> responseMap = _objectMapper.readValue(input, Map.class);
-            Object mayManageObject = responseMap.get("manage");
+            Map<String, Object> responseMap = _objectMapper.readValue (input, Map.class);
+            Object mayManageObject = responseMap.get ("manage");
+            
             if (mayManageObject == null || !(mayManageObject instanceof Boolean))
             {
-                throw new ExternalServiceException("CloudFoundryDashboardManagementEndpoint response did not contain \"manage\" entry.");
+                throw new ExternalServiceException ("CloudFoundryDashboardManagementEndpoint response did not contain \"manage\" entry.");
             }
+            // else do nothing
+            
             return (boolean) mayManageObject;
         }
         catch (JsonProcessingException e)
         {
-            throw new ExternalServiceException(String.format("CloudFoundryDashboardManagementEndpoint '%s' did not return json.",
-                                                                     cloudFoundryEndpoint), e);
+            throw new ExternalServiceException(String.format ("CloudFoundryDashboardManagementEndpoint '%s' did not return json.",
+                                                              cloudFoundryEndpoint), e);
         }
         catch (SocketTimeoutException e)
         {
-            throw new ExternalServiceTimeoutException(String.format("Timed out reading from CloudFoundryDashboardManagementEndpoint '%s'.",
-                                    cloudFoundryEndpoint), e);
+            throw new ExternalServiceTimeoutException(String.format ("Timed out reading from CloudFoundryDashboardManagementEndpoint '%s'.",
+                                                                     cloudFoundryEndpoint), e);
         }
         catch (IOException e)
         {
-            throw new ExternalServiceException(String.format("Connection to CloudFoundryDashboardManagementEndpoint '%s' failed.",
-                                                                     cloudFoundryEndpoint), e);
+            throw new ExternalServiceException (String.format ("Connection to CloudFoundryDashboardManagementEndpoint '%s' failed.",
+                                                                cloudFoundryEndpoint), e);
         }
     }
 
-    @StateTransition( currentState = { State.UNINITIALIZED, State.QUIESCED, State.ERRORED }, desiredState = State.ACTIVE )
+    @StateTransition (currentState = {State.UNINITIALIZED, State.QUIESCED, State.ERRORED}, desiredState = State.ACTIVE)
     private ListenableFuture<Void> activate()
     {
         setState(State.ACTIVE);
-        return Futures.immediateFuture(null);
+        return Futures.immediateFuture (null);
     }
 
     @Override

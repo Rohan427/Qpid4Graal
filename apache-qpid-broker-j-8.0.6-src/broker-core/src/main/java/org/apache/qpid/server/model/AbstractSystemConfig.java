@@ -87,6 +87,12 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
 
     @ManagedAttributeField
     private String _initialConfigurationLocation;
+    
+    @ManagedAttributeField
+    private String _altInitialConfigurationLocation;
+    
+    @ManagedAttributeField
+    private String _altConfigurationLocation;
 
     @ManagedAttributeField
     private String _initialSystemPropertiesLocation;
@@ -105,31 +111,35 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
         Handler.register();
     }
 
-    public AbstractSystemConfig(final TaskExecutor taskExecutor,
-                                final EventLogger eventLogger,
-                                final Principal systemPrincipal,
-                                final Map<String, Object> attributes)
+    public AbstractSystemConfig (final TaskExecutor taskExecutor,
+                                 final EventLogger eventLogger,
+                                 final Principal systemPrincipal,
+                                 final Map<String, Object> attributes
+                                )
     {
-        super(null,
-              updateAttributes(attributes),
-              taskExecutor, SystemConfigBootstrapModel.getInstance());
+        super (null,
+               updateAttributes(attributes),
+               taskExecutor,
+               SystemConfigBootstrapModel.getInstance()
+              );
         _eventLogger = eventLogger;
         _systemPrincipal = systemPrincipal;
         getTaskExecutor().start();
     }
 
-    private static Map<String, Object> updateAttributes(Map<String, Object> attributes)
+    private static Map<String, Object> updateAttributes (Map<String, Object> attributes)
     {
-        attributes = new HashMap<>(attributes);
-        attributes.put(ConfiguredObject.NAME, "System");
-        attributes.put(ID, SYSTEM_ID);
+        attributes = new HashMap<> (attributes);
+        attributes.put (ConfiguredObject.NAME, "System");
+        attributes.put (ID, SYSTEM_ID);
+        
         return attributes;
     }
 
     @Override
-    protected void setState(final State desiredState)
+    protected void setState (final State desiredState)
     {
-        throw new IllegalArgumentException("Cannot change the state of the SystemContext object");
+        throw new IllegalArgumentException ("Cannot change the state of the SystemContext object");
     }
 
     @Override
@@ -154,7 +164,6 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
             {
                 _configurationStore.closeConfigurationStore();
             }
-
         }
         finally
         {
@@ -163,53 +172,55 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
                 taskExecutor.stopImmediately();
             }
         }
-        return Futures.immediateFuture(null);
+        
+        return Futures.immediateFuture (null);
     }
 
     @Override
     public final <T extends Container<? extends T>> T getContainer(Class<T> clazz)
     {
-        Collection<? extends T> children = getChildren(clazz);
-        if(children == null || children.isEmpty())
+        Collection<? extends T> children = getChildren (clazz);
+        
+        if (children == null || children.isEmpty())
         {
             return null;
         }
-        else if(children.size() != 1)
+        else if (children.size() != 1)
         {
-            throw new IllegalConfigurationException("More than one " + clazz.getSimpleName() + " has been registered in a single context");
+            throw new IllegalConfigurationException ("More than one " + clazz.getSimpleName() + " has been registered in a single context");
         }
 
         return children.iterator().next();
-
     }
 
     @Override
     public final Container<?> getContainer()
     {
         final Collection<Class<? extends ConfiguredObject>> containerTypes =
-                getModel().getChildTypes(SystemConfig.class);
+                getModel().getChildTypes (SystemConfig.class);
         Class containerClass = null;
-        for(Class<? extends ConfiguredObject> clazz : containerTypes)
+        
+        for (Class<? extends ConfiguredObject> clazz : containerTypes)
         {
-            if(Container.class.isAssignableFrom(clazz))
+            if (Container.class.isAssignableFrom(clazz))
             {
-                if(containerClass == null)
+                if (containerClass == null)
                 {
                     containerClass = clazz;
                 }
                 else
                 {
-                    throw new IllegalArgumentException("Model has more than one child Container class beneath SystemConfig");
+                    throw new IllegalArgumentException ("Model has more than one child Container class beneath SystemConfig");
                 }
             }
         }
 
         if(containerClass == null)
         {
-            throw new IllegalArgumentException("Model has no child Container class beneath SystemConfig");
+            throw new IllegalArgumentException ("Model has no child Container class beneath SystemConfig");
         }
 
-        return getContainer(containerClass);
+        return getContainer (containerClass);
     }
 
     @Override
@@ -219,24 +230,23 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
 
         if (isManagementMode())
         {
-            _configurationStore = new ManagementModeStoreHandler(_configurationStore, this);
+            _configurationStore = new ManagementModeStoreHandler (_configurationStore, this);
         }
     }
 
 
-    @StateTransition(currentState = State.ACTIVE, desiredState = State.STOPPED)
+    @StateTransition (currentState = State.ACTIVE, desiredState = State.STOPPED)
     protected ListenableFuture<Void> doStop()
     {
-        return doAfter(getContainer().closeAsync(), new Runnable()
+        return doAfter (getContainer().closeAsync(), new Runnable()
         {
             @Override
             public void run()
             {
                 _configurationStore.closeConfigurationStore();
-                AbstractSystemConfig.super.setState(State.STOPPED);
+                AbstractSystemConfig.super.setState (State.STOPPED);
             }
         });
-
     }
 
 
@@ -256,42 +266,44 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
 
     protected ListenableFuture<Void> makeActive()
     {
-
         final EventLogger eventLogger = _eventLogger;
         final EventLogger startupLogger = initiateStartupLogging();
-
 
         try
         {
             final Container<?> container = initiateStoreAndRecovery();
 
-            container.setEventLogger(startupLogger);
+            container.setEventLogger (startupLogger);
             final SettableFuture<Void> returnVal = SettableFuture.create();
-            addFutureCallback(container.openAsync(), new FutureCallback()
-                                {
-                                    @Override
-                                    public void onSuccess(final Object result)
-                                    {
-                                        State state = container.getState();
-                                        if (state == State.ACTIVE)
-                                        {
-                                            startupLogger.message(BrokerMessages.READY());
-                                            container.setEventLogger(eventLogger);
-                                            returnVal.set(null);
-                                        }
-                                        else
-                                        {
-                                            returnVal.setException(new ServerScopedRuntimeException("Broker failed reach ACTIVE state (state is " + state + ")"));
-                                        }
-                                    }
+            
+            addFutureCallback (container.openAsync(),
+                               new FutureCallback()
+                               {
+                                   @Override
+                                   public void onSuccess (final Object result)
+                                   {
+                                       State state = container.getState();
+                                       
+                                       if (state == State.ACTIVE)
+                                       {
+                                           startupLogger.message (BrokerMessages.READY());
+                                           container.setEventLogger (eventLogger);
+                                           returnVal.set (null);
+                                       }
+                                       else
+                                       {
+                                           returnVal.setException (new ServerScopedRuntimeException ("Broker failed reach ACTIVE state (state is " + state + ")"));
+                                       }
+                                   }
 
-                                    @Override
-                                    public void onFailure(final Throwable t)
-                                    {
-                                        returnVal.setException(t);
-                                    }
-                                }, getTaskExecutor()
-                               );
+                                   @Override
+                                   public void onFailure (final Throwable t)
+                                   {
+                                       returnVal.setException (t);
+                                   }
+                               },
+                               getTaskExecutor()
+                              ); // END: addFutureCallback
 
             return returnVal;
         }
@@ -299,56 +311,70 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
         {
             throw new IllegalArgumentException(e);
         }
-
-
     }
 
 
     private Container<?> initiateStoreAndRecovery() throws IOException
     {
-        ConfiguredObjectRecord[] initialRecords = convertToConfigurationRecords(getInitialConfigurationLocation());
+        ConfiguredObjectRecord[] initialRecords = null;
         final DurableConfigurationStore store = getConfigurationStore();
         store.init(AbstractSystemConfig.this);
         store.upgradeStoreStructure();
         final List<ConfiguredObjectRecord> records = new ArrayList<>();
-
-        boolean isNew = store.openConfigurationStore(new ConfiguredObjectRecordHandler()
+        
+        try
         {
-            @Override
-            public void handle(final ConfiguredObjectRecord record)
-            {
-                records.add(record);
-            }
-        }, initialRecords);
+            initialRecords = convertToConfigurationRecords (getInitialConfigurationLocation());
+        }
+        catch (IOException e)
+        {
+            initialRecords = convertToConfigurationRecords (getAltInitialConfigurationLocation());
+        }
+
+        boolean isNew = store.openConfigurationStore (new ConfiguredObjectRecordHandler()
+                                                        {
+                                                            @Override
+                                                            public void handle (final ConfiguredObjectRecord record)
+                                                            {
+                                                                records.add(record);
+                                                            }
+                                                        },
+                                                        initialRecords
+                                                     );
 
         String containerTypeName = getDefaultContainerType();
-        for(ConfiguredObjectRecord record : records)
+        
+        for (ConfiguredObjectRecord record : records)
         {
-            if(record.getParents() != null && record.getParents().size() == 1 && getId().equals(record.getParents().get(SystemConfig.class.getSimpleName())))
+            if (record.getParents() != null && record.getParents().size() == 1 && getId().equals (record.getParents().get(SystemConfig.class.getSimpleName())))
             {
                 containerTypeName = record.getType();
                 break;
             }
+            // else do nothing
         }
+        
         QpidServiceLoader loader = new QpidServiceLoader();
-        final ContainerType<?> containerType = loader.getInstancesByType(ContainerType.class).get(containerTypeName);
+        final ContainerType<?> containerType = loader.getInstancesByType (ContainerType.class).get(containerTypeName);
 
-        if(containerType != null)
+        if (containerType != null)
         {
-            if(containerType.getModel() != getModel())
+            if (containerType.getModel() != getModel())
             {
-                updateModel(containerType.getModel());
+                updateModel (containerType.getModel());
             }
-            containerType.getRecoverer(this).upgradeAndRecover(records);
-
+            // else do nothing
+            
+            containerType.getRecoverer (this).upgradeAndRecover (records);
         }
         else
         {
-            throw new IllegalConfigurationException("Unknown container type '" + containerTypeName + "'");
+            throw new IllegalConfigurationException ("Unknown container type '" + containerTypeName + "'");
         }
 
         final Class categoryClass = containerType.getCategoryClass();
-        return (Container<?>) getContainer(categoryClass);
+        
+        return (Container<?>) getContainer (categoryClass);
     }
 
 
@@ -361,34 +387,33 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
         {
             final Container<?> container = initiateStoreAndRecovery();
 
-            container.setEventLogger(startupLogger);
-            return Futures.immediateFuture(null);
+            container.setEventLogger (startupLogger);
+            return Futures.immediateFuture (null);
         }
         catch (IOException e)
         {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException (e);
         }
-
-
     }
 
     private EventLogger initiateStartupLogging()
     {
         final EventLogger eventLogger = _eventLogger;
-
         final EventLogger startupLogger;
+        
         if (isStartupLoggedToSystemOut())
         {
             //Create the composite (logging+SystemOut MessageLogger to be used during startup
             MessageLogger[] messageLoggers = {new SystemOutMessageLogger(), eventLogger.getMessageLogger()};
 
-            CompositeStartupMessageLogger startupMessageLogger = new CompositeStartupMessageLogger(messageLoggers);
-            startupLogger = new EventLogger(startupMessageLogger);
+            CompositeStartupMessageLogger startupMessageLogger = new CompositeStartupMessageLogger (messageLoggers);
+            startupLogger = new EventLogger (startupMessageLogger);
         }
         else
         {
             startupLogger = eventLogger;
         }
+        
         return startupLogger;
     }
 
@@ -407,34 +432,31 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
         return _configurationStore;
     }
 
-    private ConfiguredObjectRecord[] convertToConfigurationRecords(final String initialConfigurationLocation) throws IOException
+    private ConfiguredObjectRecord[] convertToConfigurationRecords (final String initialConfigurationLocation) throws IOException
     {
-        ConfiguredObjectRecordConverter converter = new ConfiguredObjectRecordConverter(getModel());
-
+        ConfiguredObjectRecordConverter converter = new ConfiguredObjectRecordConverter (getModel());
         Reader reader;
 
         try
         {
-            URL url = new URL(initialConfigurationLocation);
-            reader = new InputStreamReader(url.openStream());
+            URL url = new URL (initialConfigurationLocation);
+            reader = new InputStreamReader (url.openStream());
         }
         catch (MalformedURLException e)
         {
-            reader = new FileReader(initialConfigurationLocation);
+            reader = new FileReader (initialConfigurationLocation);
         }
 
         try
         {
             Collection<ConfiguredObjectRecord> records =
-                    converter.readFromJson(null, this, reader);
-            return records.toArray(new ConfiguredObjectRecord[records.size()]);
+                    converter.readFromJson (null, this, reader);
+            return records.toArray (new ConfiguredObjectRecord[records.size()]);
         }
         finally
         {
             reader.close();
         }
-
-
     }
 
     @Override
@@ -471,6 +493,12 @@ public abstract class AbstractSystemConfig<X extends SystemConfig<X>>
     public String getInitialConfigurationLocation()
     {
         return _initialConfigurationLocation;
+    }
+    
+    @Override
+    public String getAltInitialConfigurationLocation()
+    {
+        return _altInitialConfigurationLocation;
     }
 
     @Override

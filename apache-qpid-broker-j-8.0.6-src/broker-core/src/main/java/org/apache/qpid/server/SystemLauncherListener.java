@@ -25,13 +25,13 @@ import org.apache.qpid.server.model.SystemConfig;
 public interface SystemLauncherListener
 {
     void beforeStartup();
-    void errorOnStartup(RuntimeException e);
+    void errorOnStartup (RuntimeException e);
     void afterStartup();
-    void onContainerResolve(SystemConfig<?> systemConfig);
-    void onContainerClose(SystemConfig<?> systemConfig);
-    void onShutdown(int exitCode);
+    void onContainerResolve (SystemConfig<?> systemConfig);
+    void onContainerClose (SystemConfig<?> systemConfig);
+    void onShutdown (int exitCode);
 
-    void exceptionOnShutdown(Exception e);
+    void exceptionOnShutdown (Exception e);
 
     class DefaultSystemLauncherListener implements SystemLauncherListener
     {
@@ -42,7 +42,7 @@ public interface SystemLauncherListener
         }
 
         @Override
-        public void errorOnStartup(final RuntimeException e)
+        public void errorOnStartup (final RuntimeException e)
         {
 
         }
@@ -54,25 +54,25 @@ public interface SystemLauncherListener
         }
 
         @Override
-        public void onContainerResolve(final SystemConfig<?> systemConfig)
+        public void onContainerResolve (final SystemConfig<?> systemConfig)
         {
 
         }
 
         @Override
-        public void onContainerClose(final SystemConfig<?> systemConfig)
+        public void onContainerClose (final SystemConfig<?> systemConfig)
         {
 
         }
 
         @Override
-        public void onShutdown(final int exitCode)
+        public void onShutdown (final int exitCode)
         {
 
         }
 
         @Override
-        public void exceptionOnShutdown(final Exception e)
+        public void exceptionOnShutdown (final Exception e)
         {
         }
     }
@@ -82,7 +82,7 @@ public interface SystemLauncherListener
     {
         private final SystemLauncherListener[] _listeners;
 
-        public ChainedSystemLauncherListener(SystemLauncherListener... chain)
+        public ChainedSystemLauncherListener (SystemLauncherListener... chain)
         {
             _listeners = chain;
         }
@@ -97,11 +97,11 @@ public interface SystemLauncherListener
         }
 
         @Override
-        public void errorOnStartup(final RuntimeException e)
+        public void errorOnStartup (final RuntimeException e)
         {
             for (SystemLauncherListener listener : _listeners)
             {
-                listener.errorOnStartup(e);
+                listener.errorOnStartup (e);
             }
         }
 
@@ -115,38 +115,38 @@ public interface SystemLauncherListener
         }
 
         @Override
-        public void onContainerResolve(final SystemConfig<?> systemConfig)
+        public void onContainerResolve (final SystemConfig<?> systemConfig)
         {
             for (SystemLauncherListener listener : _listeners)
             {
-                listener.onContainerResolve(systemConfig);
+                listener.onContainerResolve (systemConfig);
             }
         }
 
         @Override
-        public void onContainerClose(final SystemConfig<?> systemConfig)
+        public void onContainerClose (final SystemConfig<?> systemConfig)
         {
             for (SystemLauncherListener listener : _listeners)
             {
-                listener.onContainerClose(systemConfig);
+                listener.onContainerClose (systemConfig);
             }
         }
 
         @Override
-        public void onShutdown(final int exitCode)
+        public void onShutdown (final int exitCode)
         {
             for(SystemLauncherListener listener : _listeners)
             {
-                listener.onShutdown(exitCode);
+                listener.onShutdown (exitCode);
             }
         }
 
         @Override
-        public void exceptionOnShutdown(final Exception e)
+        public void exceptionOnShutdown (final Exception e)
         {
             for(SystemLauncherListener listener : _listeners)
             {
-                listener.exceptionOnShutdown(e);
+                listener.exceptionOnShutdown (e);
             }
         }
     }
