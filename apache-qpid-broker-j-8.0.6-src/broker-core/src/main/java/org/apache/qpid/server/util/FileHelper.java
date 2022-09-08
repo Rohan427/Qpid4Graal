@@ -84,22 +84,24 @@ public class FileHelper
 
     public Path createNewFile(Path newFile, Set<PosixFilePermission> permissions) throws IOException
     {
-        if (!Files.exists(newFile))
+        if (!Files.exists (newFile))
         {
-            newFile = Files.createFile(newFile);
+            newFile = Files.createFile (newFile);
         }
+        // else do nothing
 
-        if (permissions != null && isPosixFileSystem(newFile))
+        if (permissions != null && isPosixFileSystem (newFile))
         {
-            Files.setPosixFilePermissions(newFile, permissions);
+            Files.setPosixFilePermissions (newFile, permissions);
         }
+        // else do nothing
 
         return newFile;
     }
 
-    public boolean isPosixFileSystem(Path path) throws IOException
+    public boolean isPosixFileSystem (Path path) throws IOException
     {
-        while (!Files.exists(path))
+        while (!Files.exists (path))
         {
             path = path.getParent();
 
@@ -107,52 +109,59 @@ public class FileHelper
             {
                 return false;
             }
+            // else do nothing
         }
-        return Files.getFileAttributeView(path, PosixFileAttributeView.class) != null;
+        
+        return Files.getFileAttributeView (path, PosixFileAttributeView.class) != null;
     }
 
-    public Path atomicFileMoveOrReplace(Path sourceFile, Path targetFile) throws IOException
+    public Path atomicFileMoveOrReplace (Path sourceFile, Path targetFile) throws IOException
     {
         try
         {
-            return Files.move(sourceFile, targetFile, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+            return Files.move (sourceFile, targetFile, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
         }
-        catch(AtomicMoveNotSupportedException e)
+        catch (AtomicMoveNotSupportedException e)
         {
-            if (sourceFile.toFile().renameTo(targetFile.toFile()))
+            if (sourceFile.toFile().renameTo (targetFile.toFile()))
             {
                 return targetFile;
             }
             else
             {
-                throw new RuntimeException("Atomic move is unsupported and rename from : '"
-                + sourceFile + "' to: '" + targetFile + "' failed.");
+                throw new RuntimeException ("Atomic move is unsupported and rename from : '"
+                                            + sourceFile + "' to: '" + targetFile + "' failed."
+                                           );
             }
         }
     }
 
-    public boolean isWritableDirectory(String path)
+    public boolean isWritableDirectory (String path)
     {
-        File storePath = new File(path).getAbsoluteFile();
+        File storePath = new File (path).getAbsoluteFile();
+        
         if (storePath.exists())
         {
             if (!storePath.isDirectory())
             {
                 return false;
             }
+            // else do nothing
         }
         else
         {
             do
             {
                 storePath = storePath.getParentFile();
+                
                 if (storePath == null)
                 {
                     return false;
                 }
-            }
-            while (!storePath.exists());
+                // else do nothing
+            } while (!storePath.exists());
         }
+        
         return storePath.canWrite();
     }
 

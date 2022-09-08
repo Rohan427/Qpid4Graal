@@ -57,38 +57,42 @@ public abstract class AbstractJsonFileStore
     abstract protected ObjectMapper getSerialisationObjectMapper();
 //    abstract protected ObjectMapper getDeserialisationObjectMapper();
 
-    protected void setup(String name,
-                         String storePath,
-                         String posixFileAttributes,
-                         Object initialData)
+    protected void setup (String name,
+                          String storePath,
+                          String posixFileAttributes,
+                          Object initialData
+                         )
     {
-        if(storePath == null)
+        if (storePath == null)
         {
-            throw new StoreException("Cannot determine path for configuration storage");
+            throw new StoreException ("Cannot determine path for configuration storage");
         }
-        File fileFromSettings = new File(storePath);
+        // else do nothing
+        
+        File fileFromSettings = new File (storePath);
         File parentFromSettings = fileFromSettings.getAbsoluteFile().getParentFile();
         boolean isFile = fileFromSettings.exists() && fileFromSettings.isFile();
-        if(!isFile)
+        
+        if (!isFile)
         {
-            if(fileFromSettings.exists())
+            if (fileFromSettings.exists())
             {
                 isFile = false;
             }
-            else if(fileFromSettings.getName().endsWith(File.separator))
+            else if (fileFromSettings.getName().endsWith (File.separator))
             {
                 isFile = false;
             }
-            else if(fileFromSettings.getName().endsWith(".json"))
+            else if (fileFromSettings.getName().endsWith (".json"))
             {
                 isFile = true;
             }
-            else if(parentFromSettings.isDirectory() && fileFromSettings.getName().contains("."))
+            else if (parentFromSettings.isDirectory() && fileFromSettings.getName().contains ("."))
             {
                 isFile = true;
             }
         }
-        if(isFile)
+        if (isFile)
         {
             _directoryName = parentFromSettings.getAbsolutePath();
             _configFileName = fileFromSettings.getName();
@@ -108,45 +112,46 @@ public abstract class AbstractJsonFileStore
         }
 
 
-        checkDirectoryIsWritable(_directoryName);
+        checkDirectoryIsWritable (_directoryName);
         getFileLock();
 
-        Path storeFile = new File(_directoryName, _configFileName).toPath();
-        Path backupFile = new File(_directoryName, _backupFileName).toPath();
-        if(!Files.exists(storeFile))
+        Path storeFile = new File (_directoryName, _configFileName).toPath();
+        Path backupFile = new File (_directoryName, _backupFileName).toPath();
+        
+        if (!Files.exists (storeFile))
         {
-            if(!Files.exists(backupFile))
+            if (!Files.exists (backupFile))
             {
                 try
                 {
-                    storeFile = _fileHelper.createNewFile(storeFile, posixFileAttributes);
-                    getSerialisationObjectMapper().writeValue(storeFile.toFile(), initialData);
+                    storeFile = _fileHelper.createNewFile (storeFile, posixFileAttributes);
+                    getSerialisationObjectMapper().writeValue (storeFile.toFile(), initialData);
                 }
                 catch (IOException e)
                 {
-                    throw new StoreException("Could not write configuration file " + storeFile, e);
+                    throw new StoreException ("Could not write configuration file " + storeFile, e);
                 }
             }
             else
             {
                 try
                 {
-                    _fileHelper.atomicFileMoveOrReplace(backupFile, storeFile);
+                    _fileHelper.atomicFileMoveOrReplace (backupFile, storeFile);
                 }
                 catch (IOException e)
                 {
-                    throw new StoreException("Could not move backup to configuration file " + storeFile, e);
+                    throw new StoreException ("Could not move backup to configuration file " + storeFile, e);
                 }
             }
         }
 
         try
         {
-            Files.deleteIfExists(backupFile);
+            Files.deleteIfExists (backupFile);
         }
         catch (IOException e)
         {
-            throw new StoreException("Could not delete backup file " + backupFile, e);
+            throw new StoreException ("Could not delete backup file " + backupFile, e);
         }
     }
 
@@ -157,7 +162,8 @@ public abstract class AbstractJsonFileStore
 
     private void getFileLock()
     {
-        File lockFile = new File(_directoryName, _lockFileName);
+        File lockFile = new File (_directoryName, _lockFileName);
+        
         try
         {
             lockFile.createNewFile();
@@ -170,7 +176,7 @@ public abstract class AbstractJsonFileStore
         }
         catch (IOException ioe)
         {
-            throw new StoreException("Cannot create the lock file " + lockFile.getName(), ioe);
+            throw new StoreException ("Cannot create the lock file " + lockFile.getName(), ioe);
         }
         catch(OverlappingFileLockException e)
         {
@@ -179,54 +185,57 @@ public abstract class AbstractJsonFileStore
 
         if(_fileLock == null)
         {
-            throw new StoreException("Cannot get lock on file " + lockFile.getAbsolutePath() + ". Is another instance running?");
+            throw new StoreException ("Cannot get lock on file " + lockFile.getAbsolutePath() + ". Is another instance running?");
         }
+        // else do nothing
     }
 
-    private void checkDirectoryIsWritable(String directoryName)
+    private void checkDirectoryIsWritable (String directoryName)
     {
-        File dir = new File(directoryName);
+        File dir = new File (directoryName);
+        
         if(dir.exists())
         {
-            if(dir.isDirectory())
+            if (dir.isDirectory())
             {
-                if(!dir.canWrite())
+                if (!dir.canWrite())
                 {
-                    throw new StoreException("Configuration path " + directoryName + " exists, but is not writable");
+                    throw new StoreException ("Configuration path " + directoryName + " exists, but is not writable");
                 }
-
+                // else do nothing
             }
             else
             {
-                throw new StoreException("Configuration path " + directoryName + " exists, but is not a directory");
+                throw new StoreException ("Configuration path " + directoryName + " exists, but is not a directory");
             }
         }
-        else if(!dir.mkdirs())
+        else if (!dir.mkdirs())
         {
-            throw new StoreException("Cannot create directory " + directoryName);
+            throw new StoreException ("Cannot create directory " + directoryName);
         }
     }
 
-    protected void save(final Object data)
+    protected void save (final Object data)
     {
         try
         {
-            Path tmpFile = new File(_directoryName, _tempFileName).toPath();
-            _fileHelper.writeFileSafely( new File(_directoryName, _configFileName).toPath(),
-                                         new File(_directoryName, _backupFileName).toPath(),
+            Path tmpFile = new File (_directoryName, _tempFileName).toPath();
+            _fileHelper.writeFileSafely (new File (_directoryName, _configFileName).toPath(),
+                                         new File (_directoryName, _backupFileName).toPath(),
                                          tmpFile,
                                          new BaseAction<File, IOException>()
-                                         {
-                                             @Override
-                                             public void performAction(File file) throws IOException
                                              {
-                                                 getSerialisationObjectMapper().writeValue(file, data);
+                                                 @Override
+                                                 public void performAction (File file) throws IOException
+                                                 {
+                                                     getSerialisationObjectMapper().writeValue (file, data);
+                                                 }
                                              }
-                                         });
+                                        );
         }
         catch (IOException e)
         {
-            throw new StoreException("Cannot save to store", e);
+            throw new StoreException ("Cannot save to store", e);
         }
     }
 
@@ -241,7 +250,7 @@ public abstract class AbstractJsonFileStore
             }
             catch (IOException e)
             {
-                throw new StoreException("Failed to release lock " + _fileLock, e);
+                throw new StoreException ("Failed to release lock " + _fileLock, e);
             }
             finally
             {
@@ -252,24 +261,26 @@ public abstract class AbstractJsonFileStore
 
     protected File getConfigFile()
     {
-        return new File(_directoryName, _configFileName);
+        return new File (_directoryName, _configFileName);
     }
 
-    protected void delete(final String storePath)
+    protected void delete (final String storePath)
     {
         if (storePath != null)
         {
             if (LOGGER.isDebugEnabled())
             {
-                LOGGER.debug("Deleting store " + storePath);
+                LOGGER.debug ("Deleting store " + storePath);
             }
 
             File configFile = new File(storePath);
-            if (!FileUtils.delete(configFile, true))
+            
+            if (!FileUtils.delete (configFile, true))
             {
-                LOGGER.info("Failed to delete the store at location " + storePath);
+                LOGGER.info ("Failed to delete the store at location " + storePath);
             }
         }
+        // else do 
 
         _configFileName = null;
         _directoryName = null;

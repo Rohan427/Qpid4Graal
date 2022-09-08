@@ -24,18 +24,18 @@ import org.apache.qpid.server.util.ServerScopedRuntimeException;
 
 public class StoreException extends ServerScopedRuntimeException
 {
-    public StoreException(final String message)
+    public StoreException (final String message)
     {
-        super(message);
+        super (message);
     }
 
-    public StoreException(final String message, final Throwable cause)
+    public StoreException (final String message, final Throwable cause)
     {
-        super(message, cause);
+        super (message, cause);
     }
 
-    public StoreException(final Throwable cause)
+    public StoreException (final Throwable cause)
     {
-        super(cause);
+        super (cause);
     }
 }

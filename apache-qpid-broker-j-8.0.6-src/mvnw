@@ -6,35 +6,461 @@
 #       Add -H:IncludeResourceBundles for missing bundles
 #       Add native-image agent to build if possible.
 
-EXIT=0
-WORKDIR=$PWD
+# Required so SdkMan works within a shell script
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-mvn clean install
+# Build author
+AUTHOR="\"com.randomlogic.perftest.author\"=\"Paul Allen <pgallen@randomlogic.net>\""
 
-$EXIT=$?
+# Java versions to use
+JVMJAVA="11.0.12-open"
+GRAALJAVA="22.2.r11-grl"
 
-if [[ $EXIT == 0 ]];
-then
-    rm -f native/apache-qpid-broker-j-8.0.6-bin.tar.gz
+# Base paths and references
+BASEPATH="/usr/local/src/qpid/Qpid4Graal/"
+BUILDPATH="${BASEPATH}apache-qpid-broker-j-8.0.6-src/"
+QPIDWORK="/var/qpidwork/"
+IMAGEPATH="images/"
+LINUXIMAGE="qpid/java-11"
+IMAGEBASE="qpid"
+VERSION="0.9.0"
 
-    cp -f apache-qpid-broker-j/target/apache-qpid-broker-j-8.0.6-bin.tar.gz ../native/
-    cd ../native
+# Native build folder references
+NATIVEBASE="${BASEPATH}native/"
+NATIVELIB="${NATIVEBASE}qpid-broker/8.0.6/lib/"
+
+# Build JAR names
+GRAALTINY="graal-tiny"
+GRAALFULL="graal-full"
+JVMTINY="jvm-tiny"
+JVMFULL="jvm-full"
+
+# Build time report file name
+BUILDTIME="buildtime.txt"
+
+# Image paths
+LINUXPATH="${BASEPATH}${IMAGEPATH}amzlinux/"
+GRAALTINYPATH="${BASEPATH}${IMAGEPATH}graaltiny/"
+GRAALFULLPATH="${NATIVEBASE}"
+JVMTINYPATH="${BASEPATH}${IMAGEPATH}jvmtiny/"
+JVMFULLPATH="${BASEPATH}${IMAGEPATH}jvmfull/"
+
+# Used for calculating build times
+BEGINTIME=0
+ENDTIME=0
+DIFFERENCE=0
+
+# Exit status code
+EXITNUM=0
+
+# Docker image names (JVM Full image)
+LINUXNAME="qpid/java-11:${VERSION}"
+JVMFULLNAME="qpidjvmfull"
+
+# For future manual Docker build process
+JVMTINYNAME="qpidjvmtiny"
+GRAALFULLNAME="qpidgraalfull"
+GRAALTINYNAME="qpidgraaltiny"
+
+# Docker port to expose (should be the same as in the Spring application. properties file)
+DOCKERPORT="8000"
+DOCKERPORTLOCAL="5672"
+
+
+function timeDiff()
+{
+    echo >> $2
+    echo "$1 build time:" >> $2
+    echo "$(($ENDTIME-$BEGINTIME))ns" >> $2
+    echo "$(($(($ENDTIME-$BEGINTIME))/1000))us" >> $2
+    echo "$(($(($ENDTIME-$BEGINTIME))/1000000))ms" >> $2
+    echo "$(($(($ENDTIME-$BEGINTIME))/1000000000))s" >> $2
+    echo >> $2
+}
+
+
+function processHeader()
+{
+    echo
+    echo "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+    echo "P          $1"
+    echo "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+    echo
+}
+
+
+function _help()
+{
+    processHeader "mvnw commands"
+    echo "help        | List commands"
+    echo "------------------------------------------------------------"
+    echo "prune       | Stops all running Docker containers."
+    echo "            | Removes all Docker containers."
+    echo "            | Prunes all Docker images."
+    echo "            | WARNING: ALL Docker images will be deleted!"
+    echo "------------------------------------------------------------"
+    echo "clean       | Cleans generated files from the build folder."
+    echo "------------------------------------------------------------"
+    echo "buildall    | Builds all four (4) images."
+    echo "------------------------------------------------------------"
+    echo "install     | Runs prune, clean, buildall"
+    echo "------------------------------------------------------------"
+    echo "fulljvm     | Builds a Docker image using an Amazon Linux"
+    echo "            | Java 11 Docker image."
+    echo "------------------------------------------------------------"
+    echo "tinyjvm     | Builds a small Docker image using a Java 11"
+    echo "            | HotSpot compiler."
+    echo "------------------------------------------------------------"
+    echo "fullgraal   | Builds a Docker image using the full GraalVM"
+    echo "            | native image AOT compiler."
+    echo "------------------------------------------------------------"
+    echo "tinygraal   | Builds a Docker image using the tiny GraalVM"
+    echo "            | native image AOT compiler."
+    echo "------------------------------------------------------------"
+    echo "------------------------------------------------------------"
+    echo "agent       | Runs the native image agent. This step requires"
+    echo "            | human interaction to test qpid while it runs in"
+    echo "            | a JVM and the close the application to save the"
+    echo "            | results to the native build directory."
+    echo "------------------------------------------------------------"
+}
+
+
+function runAgent()
+{
+    processHeader "Running the native build agent"
+
+    sdk use java $GRAALJAVA
+    cd ${NATIVELIB}
+
+    java -agentlib:native-image-agent=config-merge-dir=${BUILDPATH}/src/main/resources/META-INF/native-image -server -classpath /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/plugins/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/opt/* -DPNAME=QPBRKR -XX:+UseConcMarkSweepGC -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxDirectMemorySize=1536m -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork org.apache.qpid.server.Main
+
+    processHeader "Native agent complete"
+}
+
+
+function cleanTinyGraal()
+{
+    rm -f ${GRAALTINYPATH}*
+    rm -f ${GRAALTINYPATH}${BUILDTIME}
+}
+
+
+function cleanFullGraal()
+{
+    rm -Rf ${GRAALFULLPATH}*
+}
+
+
+function cleanFullJvm()
+{
+    mvn clean
+}
+
+
+function cleanTinyJvm()
+{
+    rm -f ${JVMTINYPATH}*
+    rm -f ${JVMTINYPATH}${BUILDTIME}
+}
+
+
+function buildFullJVM()
+{
+    processHeader "Build full JVM JAR package..."
+    sdk use java $JVMJAVA
+    cleanFullJvm
+    BEGINTIME=$(date +%s%N)
+    mvn install
+    ENDTIME=$(date +%s%N)
+    EXITNUM=$?
+
+    if [[ $EXITNUM -eq 0 ]];
+    then
+##        rm -f ${JVMFULLPATH}${BUILDTIME}
+##        timeDiff "Full JAR" ${JVMFULLPATH}${BUILDTIME}
+##        mv -f "${BASEPATH}target/perftest-1.2.jar" "${JVMFULLPATH}${IMAGEBASE}-${JVMFULL}-${VERSION}.jar"
+##        cp "${EXTRAS}postgresql-42.4.0.jar" "${JVMFULLPATH}"
+
+# Build full Docker image
+##        processHeader "Build Linux Docker image..."
+##        cd "${LINUXPATH}"
+##        BEGINTIME=$(date +%s%N)
+##        docker build -f Dockerfile -t ${LINUXNAME} .
+##        ENDTIME=$(date +%s%N)
+##        EXITNUM=$?
+
+##        if [[ $EXITNUM -eq 0 ]];
+##        then
+##            timeDiff "Docker Linux image" ${JVMFULLPATH}${BUILDTIME}
+# Build Full JVM Docker image
+##            processHeader "Build Full JVM Docker image..."
+##            cd ${JVMFULLPATH}
+##            createJvmTestDockerfile
+
+##            BEGINTIME=$(date +%s%N)
+##            docker build -f Dockerfile -t ${IMAGEBASE}-${JVMFULLNAME}:${VERSION} .
+##            ENDTIME=$(date +%s%N)
+##            EXITNUM=$?
+
+##            if [[ $EXITNUM -eq 0 ]];
+##            then
+##                timeDiff "Docker ${IMAGEBASE}-${JVMFULLNAME} image" ${JVMFULLPATH}${BUILDTIME}
+##            else
+##                echo "Build of JVM full Docker image failed with $EXITNUM"
+##                EXITNUM=3
+##            fi
+##        else
+##            echo "Build Docker Linux image failed with $EXITNUM"
+##            EXITNUM=2
+##        fi
+
+        processHeader "Full JVM built"
+    else
+        echo "Build of JVM Full JAR failed with $EXITNUM"
+        EXITNUM=1
+    fi
+}
+
+
+function buildTinyJVM()
+{
+    processHeader "Build Tiny JVM image..."
+    sdk use java $JVMJAVA
+    cleanTinyJvm
+    BEGINTIME=$(date +%s%N)
+    mvn spring-boot:build-image -Ppg-jvm-image -DskipTests
+    ENDTIME=$(date +%s%N)
+    EXITNUM=$?
+
+    if [[ $EXITNUM -eq 0 ]];
+    then
+        rm -f ${JVMTINYPATH}${BUILDTIME}
+        timeDiff "Tiny JVM" ${JVMTINYPATH}${BUILDTIME}
+        mv -f "${BASEPATH}target/perftest-1.2.jar" "${JVMTINYPATH}${IMAGEBASE}-${JVMTINY}-${VERSION}.jar"
+    else
+        echo "Build of Tiny JVM failed with $EXITNUM"
+        EXITNUM=4
+    fi
+}
+
+
+function buildNative()
+{
+    processHeader "Build native image..."
+
+    sdk use java $GRAALJAVA
+    cp -Rf ${BUILDPATH}/src/main/resources/META-INF $NATIVELIB
+    mkdir ${NATIVELIB}config
+    cp -f ${BUILDPATH}/broker-core/src/main/resources/initial-config.json ${NATIVELIB}config/
+
+    cd $NATIVELIB
+
+    native-image --no-fallback --enable-url-protocols=file -H:+IncludeAllLocales -H:EnableURLProtocols=http,https -H:ConfigurationResourceRoots=META-INF/native-image/ -cp jar:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/* --verbose -J-Xmx16g -J-XX:+HeapDumpOnOutOfMemoryError -J-XX:MaxDirectMemorySize=1536m -J-server -Duser.country=US -Duser.language=en -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork -jar qpid-broker-8.0.6.jar qpid
+}
+
+
+function configNativeBuild()
+{
+    processHeader "Configure native build folders..."
+
+    rm -f ${NATIVEBASE}apache-qpid-broker-j-8.0.6-bin.tar.gz
+
+    cp -f ${BUILDPATH}apache-qpid-broker-j/target/apache-qpid-broker-j-8.0.6-bin.tar.gz ${NATIVEBASE}
+    cd ${NATIVEBASE}
 
 # CURDIR: native
     rm -Rf qpid-broker
     tar -xzf apache-qpid-broker-j-8.0.6-bin.tar.gz
 
-    cp -Rf ${WORKDIR}/src/main/resources/META-INF qpid-broker/8.0.6/lib/
+    cp -Rf ${BUILDPATH}/src/main/resources/META-INF ${NATIVEBASE}qpid-broker/8.0.6/lib/
+}
 
-    cd qpid-broker/8.0.6/lib
 
-# CURDIR: native/qpid-broker/8.0.6/lib
-    java -agentlib:native-image-agent=config-merge-dir=${WORKDIR}/src/main/resources/META-INF/native-image -server -classpath /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/plugins/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/opt/* -DPNAME=QPBRKR -XX:+UseConcMarkSweepGC -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxDirectMemorySize=1536m -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork org.apache.qpid.server.Main
+function buildfFullGraal()
+{
+    processHeader "Build Full GraalVM Native Image..."
+    sdk use java $GRAALJAVA
+    cleanFullGraal
+    BEGINTIME=$(date +%s%N)
+    configNativeBuild
+    buildNative
+    ENDTIME=$(date +%s%N)
+    EXITNUM=$?
 
-    cp -Rf ${WORKDIR}/src/main/resources/META-INF ./
+    if [[ $EXITNUM -eq 0 ]];
+    then
+##        rm -f ${GRAALFULLPATH}${BUILDTIME}
+##        timeDiff "Full Native" ${GRAALFULLPATH}${BUILDTIME}
+##        mv -f "${BASEPATH}target/perftest-1.2.jar" "${GRAALFULLPATH}${IMAGEBASE}-${GRAALFULL}-${VERSION}.jar"
+        processHeader "Full GraalVM native image built"
+    else
+        echo "Build of Full GraalVM Native failed with $EXITNUM"
+        EXITNUM=5
+    fi
+}
 
-    native-image --no-fallback --enable-url-protocols=file -H:+IncludeAllLocales -H:EnableURLProtocols=http,https -H:ConfigurationResourceRoots=META-INF/native-image/ -cp jar:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/* --verbose -J-Xmx16g -J-XX:+HeapDumpOnOutOfMemoryError -J-XX:MaxDirectMemorySize=1536m -J-server -Duser.country=US -Duser.language=en -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork -jar qpid-broker-8.0.6.jar qpid
 
-else
-    echo "Maven build failed"
+function buildTinyGraal()
+{
+    processHeader "Build Tiny GraalVM native image..."
+    sdk use java $GRAALJAVA
+    cleanTinyGraal
+    BEGINTIME=$(date +%s%N)
+    mvn spring-boot:build-image -Ppg-native-tiny -DskipTests
+    ENDTIME=$(date +%s%N)
+    EXITNUM=$?
+
+    if [[ $EXITNUM -eq 0 ]];
+    then
+        rm -f ${GRAALTINYPATH}${BUILDTIME}
+        timeDiff "Tiny Native" ${GRAALTINYPATH}${BUILDTIME}
+        mv -f "${BASEPATH}target/perftest-1.2.jar" "${GRAALTINYPATH}${IMAGEBASE}-${GRAALTINY}-${VERSION}.jar"
+    else
+        echo "Build of Tiny GraalVM Native failed with $EXITNUM"
+        EXITNUM=6
+    fi
+}
+
+
+function prune()
+{
+    processHeader "Prune Docker images..."
+    docker container stop $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
+    docker system prune -a
+}
+
+
+function clean()
+{
+    processHeader "Clean build folders..."
+    cleanFullJvm
+    EXITNUM=$?
+
+    if [[ $EXITNUM -eq 0 ]];
+    then
+        rm -f ${NATIVEBASE}apache-qpid-broker-j-8.0.6-bin.tar.gz
+        rm -Rf ${NATIVEBASE}qpid-broker
+##        cleanTinyGraal
+##        cleanFullGraal
+##        cleanFullJvm
+##        cleanTinyJvm
+    else
+        processHeader "Clean failed with $EXITNUM"
+        EXITNUM=7
+    fi
+}
+
+
+function cleanAll()
+{
+    clean
+    rm -Rf ${QPIDWORK}*
+}
+
+
+function buildAll()
+{
+    processHeader "Build all images..."
+
+    if [[ $EXITNUM -eq 0 ]];
+    then
+# Build Full JVM JAR
+        cd $BUILDPATH
+        buildFullJVM
+    fi
+
+    if [[ $EXITNUM -eq 0 ]];
+    then
+# Configure for native build
+        cd $BUILDPATH
+        configNativeBuild
+    fi
+
+
+    if [[ $EXITNUM -eq 0 ]];
+    then
+# Run the agent
+        cd $BUILDPATH
+        runAgent
+    fi
+
+# Build Tiny JVM Image
+##    if [[ $EXITNUM -eq 0 ]];
+##    then
+##        cd $BUILDPATH
+##        buildTinyJVM
+##    fi
+
+# Build Full Native Image
+    if [[ $EXITNUM -eq 0 ]];
+    then
+        cd $BUILDPATH
+        buildfFullGraal
+    fi
+
+# Build Tiny Native Image
+##    if [[ $EXITNUM -eq 0 ]];
+##    then
+##        cd $BUILDPATH
+##        buildTinyGraal
+##    fi
+}
+
+
+if [[ $# -eq 0 ]];
+then
+    _help
 fi
+
+if [[ $1 == "prune" ]];
+then
+    prune
+elif [[ $1 == "buildall" ]];
+then
+    buildAll
+elif [[ $1 == "fulljvm" ]];
+then
+    cd $BUILDPATH
+    buildFullJVM
+elif [[ $1 == "tinyjvm" ]];
+then
+    cd $BUILDPATH
+    buildTinyJVM
+elif [[ $1 == "fullgraal" ]];
+then
+    cd $BUILDPATH
+    buildfFullGraal
+elif [[ $1 == "tinygraal" ]];
+then
+    cd $BUILDPATH
+    buildTinyGraal
+elif [[ $1 == "clean" ]];
+then
+    clean
+elif [[ $1 == "install" ]];
+then
+    processHeader "Installing a fresh build. This may take several minutes."
+    cleanAll
+##    prune
+    buildAll
+elif [[ $1 == "agent" ]];
+then
+    runAgent
+elif [[ $1 == "help" ]];
+then
+    _help
+else
+    _help
+fi
+
+if [[ $EXITNUM -eq 0 ]];
+then
+    processHeader "Process complete"
+else
+    processHeader "Process FAILED with exit status ${EXITNUM}"
+fi
+exit $EXITNUM
+
