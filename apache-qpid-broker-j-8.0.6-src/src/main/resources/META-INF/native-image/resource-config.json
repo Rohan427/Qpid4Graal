@@ -1100,6 +1100,9 @@
       "pattern":"\\Qresources/groupprovider/managedgroupprovider/add.html\\E"
     }, 
     {
+      "pattern":"\\Qresources/images/minus.svg\\E"
+    }, 
+    {
       "pattern":"\\Qresources/images/notification.svg\\E"
     }, 
     {
@@ -1671,7 +1674,10 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Binding_logmessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Broker_logmessages",
@@ -1681,11 +1687,19 @@
       ]
     }, 
     {
+      "name":"org.apache.qpid.server.logging.messages.Channel_logmessages",
+      "locales":[""]
+    }, 
+    {
       "name":"org.apache.qpid.server.logging.messages.ConfigStore_logmessages",
       "locales":[
         "", 
         "und"
       ]
+    }, 
+    {
+      "name":"org.apache.qpid.server.logging.messages.Connection_logmessages",
+      "locales":[""]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Exchange_logmessages",
@@ -1721,7 +1735,10 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Queue_logmessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.TransactionLog_logmessages",

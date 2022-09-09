@@ -23,18 +23,26 @@ A directory containing configuration files that is not part of the class path ca
 
 
 
+Configuration storage types (using -st <type> option)
+JSON
+    the default one which persists content to disk in a JSON file
 
-/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_cs.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_de_DE.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_es.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_fr.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_hu.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_it.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_ja_JP.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_ko_KR.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_pl.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_pt_BR.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_ru.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_zh_CN.jar
-Warning: Invalid classpath entry: /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/derbyLocale_zh_TW.jar
+Memory
+    operates only in-memory and so does not retain changes across broker restarts and always relies on the current 'Initial Configuration' to provide the configuration to start the broker with.
+
+DERBY
+
+    stores configuration in embedded derby store
+BDB
+    stores configuration in Berkeley DB store
+
+JDBC
+    stores configuration in external RDBMS using JDBC
+
+
+
+Use JDBC for configuration store:
+./qpid-server -st JDBC \
+  -prop "systemConfig.connectionUrl=jdbc:derby://localhost:1527/path/to/store;create=true" \
+  -prop "systemConfig.username=test" -prop "systemConfig.password=password"
 
