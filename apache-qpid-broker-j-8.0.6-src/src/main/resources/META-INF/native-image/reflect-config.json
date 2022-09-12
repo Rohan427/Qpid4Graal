@@ -33,6 +33,9 @@
   "name":"[Ljavax.management.openmbean.CompositeData;"
 },
 {
+  "name":"[Lorg.apache.qpid.server.protocol.v1_0.type.Symbol;"
+},
+{
   "name":"[Lorg.apache.qpid.server.store.preferences.JsonFilePreferenceStore$StoredPreferenceRecord;"
 },
 {
@@ -1857,6 +1860,16 @@
 },
 {
   "name":"org.apache.qpid.server.queue.PriorityQueue",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.QueueConsumer",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.QueueConsumerImpl",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true
 },

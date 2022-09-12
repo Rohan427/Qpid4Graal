@@ -140,6 +140,9 @@
       "pattern":"\\QMETA-INF/services/org.apache.qpid.server.plugin.ContentFactory\\E"
     }, 
     {
+      "pattern":"\\QMETA-INF/services/org.apache.qpid.server.plugin.MessageFormat\\E"
+    }, 
+    {
       "pattern":"\\QMETA-INF/services/org.apache.qpid.server.plugin.ProtocolEngineCreator\\E"
     }, 
     {
@@ -1674,10 +1677,7 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Binding_logmessages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Broker_logmessages",
@@ -1688,7 +1688,7 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Channel_logmessages",
-      "locales":[""]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.ConfigStore_logmessages",
@@ -1699,7 +1699,7 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Connection_logmessages",
-      "locales":[""]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Exchange_logmessages",
@@ -1735,10 +1735,15 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Queue_logmessages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
+    }, 
+    {
+      "name":"org.apache.qpid.server.logging.messages.Sender_logmessages",
+      "locales":["und"]
+    }, 
+    {
+      "name":"org.apache.qpid.server.logging.messages.Subscription_logmessages",
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.TransactionLog_logmessages",

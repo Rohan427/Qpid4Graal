@@ -2,7 +2,8 @@ created new VH dashboard
 created new query
 created/deleted queue
 
-
+===: Open issue
+###: Closed issue
 
 
 
@@ -434,7 +435,6 @@ Creating a new VH Dashboard uses reflection
 
 
 ############################################################################################
-============================================================================================
 BDB is using com.sleepycat.je.txn.TxnCommit()
 
 	com.oracle.svm.core.jdk.UnsupportedFeatureError: Runtime reflection is not supported for public com.sleepycat.je.txn.TxnCommit()
@@ -485,8 +485,7 @@ BDB is using com.sleepycat.je.txn.TxnCommit()
 
 
 
-
-====================================================================================
+####################################################################################
 Null value when creating a new message:
 	2022-09-08T21:16:33,603Z INFO  [VirtualHostNode-default-Config] (q.m.q.created) - [mng:Xopz4MXm(guest@/127.0.0.1:36173)] [vh(/default)/qu(default)] QUE-1001 : Create : ID: dd6f0b83-16a0-4975-88be-5cb26d6dc8bc Durable
 	2022-09-08T21:17:19,103Z ERROR [IO-/0:0:0:0:0:0:0:1:47196] (o.a.q.s.Main) - Uncaught exception, shutting down.
@@ -558,6 +557,136 @@ Caused by: java.util.MissingResourceException: Can't find bundle for base name o
 	at java.util.ResourceBundle.getBundle(ResourceBundle.java:932)
 	at org.apache.qpid.server.logging.messages.ConnectionMessages.<clinit>(ConnectionMessages.java:93)
 	... 58 common frames omitted
+
+
+
+####################################################################################
+New connection uses reflection
+	org.apache.qpid.server.model.NamedAddressSpace org.apache.qpid.server.model.Connection.getAddressSpace()
+
+	at com.oracle.svm.core.util.VMError.unsupportedFeature(VMError.java:89)
+	at java.lang.reflect.Method.acquireMethodAccessor(Method.java:77)
+	at java.lang.reflect.Method.invoke(Method.java:564)
+	at org.apache.qpid.server.model.ConfiguredObjectMethodAttributeOrStatistic.getValue(ConfiguredObjectMethodAttributeOrStatistic.java:68)
+	at org.apache.qpid.server.model.ConfiguredObjectMethodAttribute.getValue(ConfiguredObjectMethodAttribute.java:26)
+	at org.apache.qpid.server.model.AbstractConfiguredObject.getAttribute(AbstractConfiguredObject.java:1868)
+	at org.apache.qpid.server.management.plugin.servlet.rest.ConfiguredObjectToMapConverter.incorporateAttributesIntoMap(ConfiguredObjectToMapConverter.java:86)
+	at org.apache.qpid.server.management.plugin.servlet.rest.ConfiguredObjectToMapConverter.convertObjectToMap(ConfiguredObjectToMapConverter.java:64)
+	at org.apache.qpid.server.management.plugin.servlet.rest.ConfiguredObjectToMapConverter.incorporateChildrenIntoMap(ConfiguredObjectToMapConverter.java:271)
+	at org.apache.qpid.server.management.plugin.servlet.rest.ConfiguredObjectToMapConverter.convertObjectToMap(ConfiguredObjectToMapConverter.java:69)
+	at org.apache.qpid.server.management.plugin.controller.latest.LatestManagementController.convertObject(LatestManagementController.java:590)
+	at org.apache.qpid.server.management.plugin.controller.latest.LatestManagementController.formatConfiguredObject(LatestManagementController.java:555)
+	at org.apache.qpid.server.management.plugin.servlet.rest.RestServlet.sendResponse(RestServlet.java:263)
+	at org.apache.qpid.server.management.plugin.servlet.rest.RestServlet.doGet(RestServlet.java:119)
+	at org.apache.qpid.server.management.plugin.servlet.rest.AbstractServlet.doGet(AbstractServlet.java:128)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:791)
+	at org.eclipse.jetty.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1626)
+	at org.apache.qpid.server.management.plugin.filter.AuthenticationCheckFilter$1.run(AuthenticationCheckFilter.java:161)
+	at org.apache.qpid.server.management.plugin.filter.AuthenticationCheckFilter$1.run(AuthenticationCheckFilter.java:157)
+	at java.security.AccessController.executePrivileged(AccessController.java:145)
+	at java.security.AccessController.doPrivileged(AccessController.java:106)
+	at javax.security.auth.Subject.doAs(Subject.java:423)
+	at org.apache.qpid.server.management.plugin.filter.AuthenticationCheckFilter.doFilterChainAs(AuthenticationCheckFilter.java:156)
+	at org.apache.qpid.server.management.plugin.filter.AuthenticationCheckFilter.doFilter(AuthenticationCheckFilter.java:126)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:193)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.qpid.server.management.plugin.filter.LoggingFilter.doFilter(LoggingFilter.java:63)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:193)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.qpid.server.management.plugin.filter.MethodFilter.doFilter(MethodFilter.java:67)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:193)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.servlets.CrossOriginFilter.handle(CrossOriginFilter.java:319)
+	at org.eclipse.jetty.servlets.CrossOriginFilter.doFilter(CrossOriginFilter.java:273)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:193)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.qpid.server.management.plugin.filter.ExceptionHandlingFilter.doFilter(ExceptionHandlingFilter.java:59)
+	at org.eclipse.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:193)
+	at org.eclipse.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:548)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:233)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:1624)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:233)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1435)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:188)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:501)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1594)
+	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:186)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1350)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127)
+	at org.eclipse.jetty.server.Server.handle(Server.java:516)
+	at org.eclipse.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:388)
+	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:633)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:380)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:273)
+	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:336)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:313)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:171)
+	at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:129)
+	at org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:375)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:773)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:905)
+	at org.apache.qpid.server.bytebuffer.QpidByteBufferFactory.lambda$createQpidByteBufferTrackingThreadFactory$0(QpidByteBufferFactory.java:464)
+	at java.lang.Thread.run(Thread.java:829)
+	at com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:705)
+	at com.oracle.svm.core.posix.thread.PosixPlatformThreads.pthreadStartRoutine(PosixPlatformThreads.java:202)
+
+
+
+
+####################################################################################
+Creating a message in the queue reults in ExceptionInInitializerError:
+
+	java.lang.ExceptionInInitializerError: null
+	at org.apache.qpid.server.queue.AbstractQueue.linkAdded(AbstractQueue.java:3825)
+	at org.apache.qpid.server.protocol.v1_0.StandardReceivingLinkEndpoint.setDestination(StandardReceivingLinkEndpoint.java:504)
+	at org.apache.qpid.server.protocol.v1_0.StandardReceivingLinkEndpoint.attachReceived(StandardReceivingLinkEndpoint.java:468)
+	at org.apache.qpid.server.protocol.v1_0.StandardReceivingLinkEndpoint.establishLink(StandardReceivingLinkEndpoint.java:573)
+	at org.apache.qpid.server.protocol.v1_0.AbstractLinkEndpoint.receiveAttach(AbstractLinkEndpoint.java:126)
+	at org.apache.qpid.server.protocol.v1_0.LinkImpl.attach(LinkImpl.java:109)
+	at org.apache.qpid.server.protocol.v1_0.Session_1_0.receiveAttach(Session_1_0.java:210)
+	at org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0Impl.receiveAttach(AMQPConnection_1_0Impl.java:435)
+	at org.apache.qpid.server.protocol.v1_0.type.transport.Attach.invoke(Attach.java:366)
+	at org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0Impl.received(AMQPConnection_1_0Impl.java:517)
+	at org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0Impl.lambda$receive$0(AMQPConnection_1_0Impl.java:469)
+	at java.security.AccessController.executePrivileged(AccessController.java:169)
+	at java.security.AccessController.doPrivileged(AccessController.java:91)
+	at org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0Impl.receive(AMQPConnection_1_0Impl.java:463)
+	at org.apache.qpid.server.protocol.v1_0.framing.FrameHandler.parse(FrameHandler.java:224)
+	at org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0Impl.onReceive(AMQPConnection_1_0Impl.java:1316)
+	at org.apache.qpid.server.transport.AbstractAMQPConnection.lambda$received$2(AbstractAMQPConnection.java:575)
+	at java.security.AccessController.executePrivileged(AccessController.java:169)
+	at java.security.AccessController.doPrivileged(AccessController.java:91)
+	at org.apache.qpid.server.transport.AbstractAMQPConnection.received(AbstractAMQPConnection.java:570)
+	at org.apache.qpid.server.transport.MultiVersionProtocolEngine.received(MultiVersionProtocolEngine.java:135)
+	at org.apache.qpid.server.transport.NonBlockingConnection.processAmqpData(NonBlockingConnection.java:611)
+	at org.apache.qpid.server.transport.NonBlockingConnectionPlainDelegate.processData(NonBlockingConnectionPlainDelegate.java:58)
+	at org.apache.qpid.server.transport.NonBlockingConnection.doRead(NonBlockingConnection.java:496)
+	at org.apache.qpid.server.transport.NonBlockingConnection.doWork(NonBlockingConnection.java:270)
+	at org.apache.qpid.server.transport.NetworkConnectionScheduler.processConnection(NetworkConnectionScheduler.java:134)
+	at org.apache.qpid.server.transport.SelectorThread$ConnectionProcessor.processConnection(SelectorThread.java:545)
+	at org.apache.qpid.server.transport.SelectorThread$SelectionTask.performSelect(SelectorThread.java:345)
+	at org.apache.qpid.server.transport.SelectorThread$SelectionTask.run(SelectorThread.java:95)
+	at org.apache.qpid.server.transport.SelectorThread.run(SelectorThread.java:503)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.qpid.server.bytebuffer.QpidByteBufferFactory.lambda$createQpidByteBufferTrackingThreadFactory$0(QpidByteBufferFactory.java:464)
+	at java.lang.Thread.run(Thread.java:829)
+	at com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:705)
+	at com.oracle.svm.core.posix.thread.PosixPlatformThreads.pthreadStartRoutine(PosixPlatformThreads.java:202)
+Caused by: java.util.MissingResourceException: Can't find bundle for base name org.apache.qpid.server.logging.messages.Sender_logmessages, locale en_US
+	at java.util.ResourceBundle.throwMissingResourceException(ResourceBundle.java:2055)
+	at java.util.ResourceBundle.getBundleImpl(ResourceBundle.java:1689)
+	at java.util.ResourceBundle.getBundleImpl(ResourceBundle.java:1593)
+	at java.util.ResourceBundle.getBundleImpl(ResourceBundle.java:1556)
+	at java.util.ResourceBundle.getBundle(ResourceBundle.java:932)
+	at org.apache.qpid.server.logging.messages.SenderMessages.<clinit>(SenderMessages.java:75)
 
 
 
