@@ -42,7 +42,7 @@ BUILDTIME="buildtime.txt"
 # Image paths
 LINUXPATH="${BASEPATH}${IMAGEPATH}amzlinux/"
 GRAALTINYPATH="${BASEPATH}${IMAGEPATH}graaltiny/"
-GRAALFULLPATH="${NATIVEBASE}"
+GRAALFULLPATH="${NATIVEBASE}${IMAGEPATH}graalfull/"
 JVMTINYPATH="${BASEPATH}${IMAGEPATH}jvmtiny/"
 JVMFULLPATH="${BASEPATH}${IMAGEPATH}jvmfull/"
 
@@ -64,7 +64,7 @@ GRAALFULLNAME="qpidgraalfull"
 GRAALTINYNAME="qpidgraaltiny"
 
 # Docker port to expose (should be the same as in the Spring application. properties file)
-DOCKERPORT="8000"
+DOCKERPORT="8080"
 DOCKERPORTLOCAL="5672"
 
 
@@ -136,6 +136,8 @@ function runAgent()
 
     java -agentlib:native-image-agent=config-merge-dir=${BUILDPATH}/src/main/resources/META-INF/native-image -server -classpath /usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/plugins/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/opt/* -DPNAME=QPBRKR -XX:+UseConcMarkSweepGC -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxDirectMemorySize=1536m -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork org.apache.qpid.server.Main
 
+    rm -Rf $QPIDWORK
+
     processHeader "Native agent complete"
 }
 
@@ -178,44 +180,6 @@ function buildFullJVM()
 
     if [[ $EXITNUM -eq 0 ]];
     then
-##        rm -f ${JVMFULLPATH}${BUILDTIME}
-##        timeDiff "Full JAR" ${JVMFULLPATH}${BUILDTIME}
-##        mv -f "${BASEPATH}target/perftest-1.2.jar" "${JVMFULLPATH}${IMAGEBASE}-${JVMFULL}-${VERSION}.jar"
-##        cp "${EXTRAS}postgresql-42.4.0.jar" "${JVMFULLPATH}"
-
-# Build full Docker image
-##        processHeader "Build Linux Docker image..."
-##        cd "${LINUXPATH}"
-##        BEGINTIME=$(date +%s%N)
-##        docker build -f Dockerfile -t ${LINUXNAME} .
-##        ENDTIME=$(date +%s%N)
-##        EXITNUM=$?
-
-##        if [[ $EXITNUM -eq 0 ]];
-##        then
-##            timeDiff "Docker Linux image" ${JVMFULLPATH}${BUILDTIME}
-# Build Full JVM Docker image
-##            processHeader "Build Full JVM Docker image..."
-##            cd ${JVMFULLPATH}
-##            createJvmTestDockerfile
-
-##            BEGINTIME=$(date +%s%N)
-##            docker build -f Dockerfile -t ${IMAGEBASE}-${JVMFULLNAME}:${VERSION} .
-##            ENDTIME=$(date +%s%N)
-##            EXITNUM=$?
-
-##            if [[ $EXITNUM -eq 0 ]];
-##            then
-##                timeDiff "Docker ${IMAGEBASE}-${JVMFULLNAME} image" ${JVMFULLPATH}${BUILDTIME}
-##            else
-##                echo "Build of JVM full Docker image failed with $EXITNUM"
-##                EXITNUM=3
-##            fi
-##        else
-##            echo "Build Docker Linux image failed with $EXITNUM"
-##            EXITNUM=2
-##        fi
-
         processHeader "Full JVM built"
     else
         echo "Build of JVM Full JAR failed with $EXITNUM"
@@ -320,6 +284,44 @@ function buildTinyGraal()
     else
         echo "Build of Tiny GraalVM Native failed with $EXITNUM"
         EXITNUM=6
+    fi
+}
+
+function buildFullNativeDocker()
+{
+    processHeader "Build full Native Docker image..."
+
+# Build full Docker image
+    processHeader "Build Linux Docker image..."
+    cd "${LINUXPATH}"
+    BEGINTIME=$(date +%s%N)
+    docker build -f build/Dockerfile -t ${LINUXNAME} .
+    ENDTIME=$(date +%s%N)
+    EXITNUM=$?
+
+    if [[ $EXITNUM -eq 0 ]];
+    then
+        timeDiff "Docker Linux image" ${JVMFULLPATH}${BUILDTIME}
+# Build Full JVM Docker image
+        processHeader "Build Full JVM Docker image..."
+        cd ${JVMFULLPATH}
+        createJvmTestDockerfile
+
+        BEGINTIME=$(date +%s%N)
+        docker build -f Dockerfile -t ${IMAGEBASE}-${JVMFULLNAME}:${VERSION} .
+        ENDTIME=$(date +%s%N)
+        EXITNUM=$?
+
+        if [[ $EXITNUM -eq 0 ]];
+        then
+	    timeDiff "Docker ${IMAGEBASE}-${JVMFULLNAME} image" ${JVMFULLPATH}${BUILDTIME}
+        else
+	    echo "Build of JVM full Docker image failed with $EXITNUM"
+	    EXITNUM=3
+        fi
+    else
+        echo "Build Docker Linux image failed with $EXITNUM"
+        EXITNUM=2
     fi
 }
 

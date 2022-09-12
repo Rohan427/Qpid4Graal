@@ -149,6 +149,7 @@ apache-qpid-broker-j-8.0.6-src/bdbstore/systests/target/
 
 native/apache-qpid-broker-j-8.0.6-bin.tar.gz
 
-native/
+native/qpid-broker
+native/apache*
 
 apache-qpid-broker-j-8.0.6-src/src/main/resources/META-INF/native-image/.lock
