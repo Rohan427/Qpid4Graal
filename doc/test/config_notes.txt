@@ -5,6 +5,19 @@ created/deleted queue
 ===: Open issue
 ###: Closed issue
 
+VMOC Qpid startup:
+
+qpid-server",
+"Args": [
+"--initial-config-path",
+"${QPID_HOME}/etc/initial-config.json",
+"-prop",
+"store.filesystem.maxUsagePercent=100",
+"-prop",
+"qpid.broker.networkBufferSize=2097152",
+"-prop",
+"qpid.initial_config_virtualhost_config=file://${QPID_HOME}/etc/vmoc-destinations.json"
+
 
 
 ___________________________________________________________________________________________

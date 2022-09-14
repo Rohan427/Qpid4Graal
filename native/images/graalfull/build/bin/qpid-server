@@ -19,7 +19,7 @@
 #
 WHEREAMI=`dirname "${0}"`
 
-echo "Path is ${WHEREAMI}"
+echo ""
 
 if [[ $1 == -graal ]];
 then

@@ -30,11 +30,11 @@ VERSION="0.9.0"
 NATIVEBASE="${BASEPATH}native/"
 NATIVELIB="${NATIVEBASE}qpid-broker/8.0.6/lib/"
 
-# Build JAR names
-GRAALTINY="graal-tiny"
-GRAALFULL="graal-full"
-JVMTINY="jvm-tiny"
-JVMFULL="jvm-full"
+# Build Native Image names
+GRAALTINY="${IMAGEBASE}-tiny/native"
+GRAALFULL="${IMAGEBASE}-full/native"
+JVMTINY="${IMAGEBASE}-tiny/jvm"
+JVMFULL="${IMAGEBASE}-full/jvm"
 
 # Build time report file name
 BUILDTIME="buildtime.txt"
@@ -242,7 +242,7 @@ function configNativeBuild()
 }
 
 
-function buildfFullGraal()
+function buildFullGraal()
 {
     processHeader "Build Full GraalVM Native Image..."
     sdk use java $GRAALJAVA
@@ -257,7 +257,9 @@ function buildfFullGraal()
     then
 ##        rm -f ${GRAALFULLPATH}${BUILDTIME}
 ##        timeDiff "Full Native" ${GRAALFULLPATH}${BUILDTIME}
-##        mv -f "${BASEPATH}target/perftest-1.2.jar" "${GRAALFULLPATH}${IMAGEBASE}-${GRAALFULL}-${VERSION}.jar"
+##        cp -f "${NATIVEBASE}/lib/qpid" "${GRAALFULLPATH}/lib/"
+##        cp -Rf "${NATIVEBASE}/lib/config" "${GRAALFULLPATH}/build/lib/"
+
         processHeader "Full GraalVM native image built"
     else
         echo "Build of Full GraalVM Native failed with $EXITNUM"
@@ -287,34 +289,57 @@ function buildTinyGraal()
     fi
 }
 
+
+function buildJVMBase()
+{
+    processHeader "Build Linux Docker image..."
+    cd "${LINUXPATH}target"
+    BEGINTIME=$(date +%s%N)
+    docker build -f Dockerfile -t ${LINUXNAME} .
+    ENDTIME=$(date +%s%N)
+    EXITNUM=$?
+    processheader "Linux Docker Image build complete"
+}
+
+function buildNativeBase()
+{
+
+}
+
+
 function buildFullNativeDocker()
 {
     processHeader "Build full Native Docker image..."
 
-# Build full Docker image
-    processHeader "Build Linux Docker image..."
-    cd "${LINUXPATH}"
-    BEGINTIME=$(date +%s%N)
-    docker build -f build/Dockerfile -t ${LINUXNAME} .
-    ENDTIME=$(date +%s%N)
-    EXITNUM=$?
+# Build full Docker image base
+    buildJVMBase
 
     if [[ $EXITNUM -eq 0 ]];
     then
-        timeDiff "Docker Linux image" ${JVMFULLPATH}${BUILDTIME}
-# Build Full JVM Docker image
-        processHeader "Build Full JVM Docker image..."
-        cd ${JVMFULLPATH}
-        createJvmTestDockerfile
+        timeDiff "Docker Linux image" ${LINUXPATH}${BUILDTIME}
+# Build Full GraalVM Docker image
+        processHeader "Build Full Native Docker image..."
+
+        cd ${GRAALFULLPATH}build
+        cp -f ${NATIVELIB}qpid lib/
+        cp -Rf ${NATIVELIB}config ./
+        cp -Rf ${NATIVEBASE}qpid-broker/8.0.6/bin ./
+        cp -f ${NATIVEBASE}qpid-broker/8.0.6/LICENSE ./
+        cp -f ${NATIVEBASE}qpid-broker/8.0.6/NOTICE ./
+        cp -f ${NATIVEBASE}qpid-broker/8.0.6/README.txt ./
+
+        tar -cvzf bin lib config LICENSE NOTICE README.txt qpid-start.sh
+        mv -f qpid.tar.gz ${GRAALFULLPATH}target/
+        cd ${GRAALFULLPATH}target
 
         BEGINTIME=$(date +%s%N)
-        docker build -f Dockerfile -t ${IMAGEBASE}-${JVMFULLNAME}:${VERSION} .
+        docker build -f Dockerfile -t ${GRAALFULL}:${VERSION} .
         ENDTIME=$(date +%s%N)
-        EXITNUM=$?
+        EXITNUM=$?        
 
         if [[ $EXITNUM -eq 0 ]];
         then
-	    timeDiff "Docker ${IMAGEBASE}-${JVMFULLNAME} image" ${JVMFULLPATH}${BUILDTIME}
+	    timeDiff "Docker ${GRAALFULL}:${VERSION} image" ${GRAALFULLPATH}${BUILDTIME}
         else
 	    echo "Build of JVM full Docker image failed with $EXITNUM"
 	    EXITNUM=3
@@ -400,7 +425,13 @@ function buildAll()
     if [[ $EXITNUM -eq 0 ]];
     then
         cd $BUILDPATH
-        buildfFullGraal
+        buildFullGraal
+    fi
+
+# Build Full Docker image
+    if [[ $EXITNUM -eq 0 ]];
+    then
+        buildFullNativeDocker
     fi
 
 # Build Tiny Native Image
@@ -434,7 +465,7 @@ then
 elif [[ $1 == "fullgraal" ]];
 then
     cd $BUILDPATH
-    buildfFullGraal
+    buildFullGraal
 elif [[ $1 == "tinygraal" ]];
 then
     cd $BUILDPATH
@@ -446,7 +477,7 @@ elif [[ $1 == "install" ]];
 then
     processHeader "Installing a fresh build. This may take several minutes."
     cleanAll
-##    prune
+    prune
     buildAll
 elif [[ $1 == "agent" ]];
 then
