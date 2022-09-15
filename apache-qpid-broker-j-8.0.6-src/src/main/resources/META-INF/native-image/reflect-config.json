@@ -361,7 +361,8 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "fields":[{"name":"TYPE"}]
+  "fields":[{"name":"TYPE"}],
+  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
   "name":"java.lang.Float",
@@ -1242,6 +1243,7 @@
   "methods":[
     {"name":"getArguments","parameterTypes":[] }, 
     {"name":"getBindingKey","parameterTypes":[] }, 
+    {"name":"getDestination","parameterTypes":[] }, 
     {"name":"getName","parameterTypes":[] }, 
     {"name":"getType","parameterTypes":[] }
   ]
@@ -2344,7 +2346,11 @@
 {
   "name":"org.apache.qpid.server.store.berkeleydb.BDBSystemConfig",
   "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getStoreOverfullSize","parameterTypes":[] }, 
+    {"name":"getStoreUnderfullSize","parameterTypes":[] }
+  ]
 },
 {
   "name":"org.apache.qpid.server.store.berkeleydb.BDBSystemConfigImpl",

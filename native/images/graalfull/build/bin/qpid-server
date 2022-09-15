@@ -19,8 +19,6 @@
 #
 WHEREAMI=`dirname "${0}"`
 
-echo ""
-
 if [[ $1 == -graal ]];
 then
     export QPID_BROKER="${WHEREAMI}/../lib/qpid"
