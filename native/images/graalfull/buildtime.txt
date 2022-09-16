@@ -33,3 +33,10 @@ Docker qpid-full/native:0.9.0 image build time:
 53341ms
 53s
 
+
+Docker qpid-full/native:0.9.0 image build time:
+60326814185ns
+60326814us
+60326ms
+60s
+

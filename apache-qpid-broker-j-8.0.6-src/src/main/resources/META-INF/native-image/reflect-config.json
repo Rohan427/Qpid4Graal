@@ -688,6 +688,39 @@
   "queryAllPublicMethods":true
 },
 {
+  "name":"oracle.jdbc.OracleDriver"
+},
+{
+  "name":"oracle.jdbc.driver.DiagnosabilityMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"oracle.jdbc.driver.Message11",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.driver.OracleDiagnosabilityMBean",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"oracle.jdbc.logging.annotations.Feature",
+  "methods":[{"name":"values","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.logging.annotations.Supports",
+  "queriedMethods":[{"name":"value","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.logging.runtime.TraceController",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"oracle.sql.AnyDataFactory"
+},
+{
+  "name":"oracle.sql.TypeDescriptorFactory"
+},
+{
   "name":"org.apache.derby.iapi.jdbc.AuthenticationService"
 },
 {
@@ -846,6 +879,9 @@
 },
 {
   "name":"org.apache.derby.impl.store.replication.slave.SlaveController"
+},
+{
+  "name":"org.apache.derby.jdbc.AutoloadedDriver"
 },
 {
   "name":"org.apache.derby.jdbc.Driver42",
@@ -2374,7 +2410,11 @@
 {
   "name":"org.apache.qpid.server.store.jdbc.JDBCSystemConfig",
   "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getConnectionUrl","parameterTypes":[] }, 
+    {"name":"getTableNamePrefix","parameterTypes":[] }
+  ]
 },
 {
   "name":"org.apache.qpid.server.store.jdbc.JDBCSystemConfigImpl",
@@ -2690,6 +2730,12 @@
 {
   "name":"org.eclipse.jetty.util.log.Slf4jLog",
   "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.h2.Driver"
+},
+{
+  "name":"org.postgresql.Driver"
 },
 {
   "name":"sun.management.ClassLoadingImpl",

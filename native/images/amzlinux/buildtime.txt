@@ -26,3 +26,10 @@ Docker Linux image build time:
 71826ms
 71s
 
+
+Docker Linux image build time:
+79375706987ns
+79375706us
+79375ms
+79s
+

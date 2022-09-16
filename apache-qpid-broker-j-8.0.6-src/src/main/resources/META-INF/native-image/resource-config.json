@@ -101,6 +101,9 @@
       "pattern":"\\QMETA-INF/services/ch.qos.logback.classic.spi.Configurator\\E"
     }, 
     {
+      "pattern":"\\QMETA-INF/services/java.sql.Driver\\E"
+    }, 
+    {
       "pattern":"\\QMETA-INF/services/org.apache.qpid.server.management.plugin.HttpRequestInteractiveAuthenticator\\E"
     }, 
     {
@@ -953,6 +956,12 @@
       "pattern":"\\Qinitial-config.json\\E"
     }, 
     {
+      "pattern":"\\Qoracle/jdbc/defaultConnectionProperties.properties\\E"
+    }, 
+    {
+      "pattern":"\\Qoracle/jdbc/driver/errorMap.xml\\E"
+    }, 
+    {
       "pattern":"\\Qorg/apache/derby/info/DBMS.properties\\E"
     }, 
     {
@@ -1665,6 +1674,13 @@
       ]
     }, 
     {
+      "name":"oracle.jdbc.driver.Messages",
+      "locales":[
+        "", 
+        "und"
+      ]
+    }, 
+    {
       "name":"org.apache.qpid.server.logging.messages.AccessControl_logmessages",
       "locales":["und"]
     }, 
@@ -1677,7 +1693,10 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Binding_logmessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Broker_logmessages",
