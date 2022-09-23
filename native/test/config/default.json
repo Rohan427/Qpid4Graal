@@ -1,0 +1,59 @@
+{
+  "id" : "04c88dd0-5703-49a5-a851-7372890667b4",
+  "type" : "BDB",
+  "name" : "default",
+  "modelVersion" : "8.0",
+  "lastUpdatedTime" : 1663341253051,
+  "createdTime" : 1663341253051,
+  "exchanges" : [ {
+    "id" : "ce693a61-ab2e-40af-890b-26c28993ba05",
+    "name" : "amq.direct",
+    "type" : "direct",
+    "lastUpdatedTime" : 1663341253051,
+    "createdTime" : 1663341253051
+  }, {
+    "id" : "e6d02b5b-f201-4005-8036-2de34f9af258",
+    "name" : "amq.fanout",
+    "type" : "fanout",
+    "lastUpdatedTime" : 1663341253051,
+    "createdTime" : 1663341253051
+  }, {
+    "id" : "344bc9a3-a780-4628-aaaa-88104189a6e9",
+    "name" : "amq.match",
+    "type" : "headers",
+    "lastUpdatedTime" : 1663341253051,
+    "createdTime" : 1663341253051
+  }, {
+    "id" : "b43f665d-58c8-4b45-83b5-afdd6c378d61",
+    "name" : "amq.topic",
+    "type" : "topic",
+    "durableBindings" : [ {
+      "bindingKey" : "#",
+      "arguments" : { },
+      "destination" : "queue"
+    } ],
+    "lastUpdatedBy" : "guest",
+    "lastUpdatedTime" : 1663341383008,
+    "createdBy" : null,
+    "createdTime" : 1663341253051
+  } ],
+  "queues" : [ {
+    "id" : "a922ff20-c70f-4c56-af18-966d432daf69",
+    "name" : "queue",
+    "type" : "standard",
+    "durable" : true,
+    "alertThresholdQueueDepthMessages" : "1",
+    "alternateBinding" : null,
+    "holdOnPublishEnabled" : false,
+    "maximumDeliveryAttempts" : "3",
+    "maximumMessageTtl" : "5000",
+    "messageDurability" : "ALWAYS",
+    "minimumMessageTtl" : "1000",
+    "overflowPolicy" : "REJECT",
+    "owner" : null,
+    "lastUpdatedBy" : "guest",
+    "lastUpdatedTime" : 1663341360805,
+    "createdBy" : "guest",
+    "createdTime" : 1663341360805
+  } ]
+}

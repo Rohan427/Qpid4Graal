@@ -715,3 +715,68 @@ WARNING: Illegal reflective access by org.apache.qpid.server.transport.network.s
 WARNING: Please consider reporting this to the maintainers of org.apache.qpid.server.transport.network.security.ssl.SSLUtil
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 WARNING: All illegal access operations will be denied in a future release
+
+
+
+Warning: Could not resolve oracle.jdbc.OracleDriver for reflection configuration. Reason: java.lang.ClassNotFoundException: oracle.jdbc.OracleDriver.
+Warning: Could not resolve oracle.jdbc.driver.DiagnosabilityMXBean for reflection configuration. Reason: java.lang.ClassNotFoundException: oracle.jdbc.driver.DiagnosabilityMXBean.
+Warning: Could not resolve oracle.jdbc.driver.Message11 for reflection configuration. Reason: java.lang.ClassNotFoundException: oracle.jdbc.driver.Message11.
+Warning: Could not resolve oracle.jdbc.driver.OracleDiagnosabilityMBean for reflection configuration. Reason: java.lang.ClassNotFoundException: oracle.jdbc.driver.OracleDiagnosabilityMBean.
+Warning: Could not resolve oracle.jdbc.logging.annotations.Feature for reflection configuration. Reason: java.lang.ClassNotFoundException: oracle.jdbc.logging.annotations.Feature.
+Warning: Could not resolve oracle.jdbc.logging.annotations.Supports for reflection configuration. Reason: java.lang.ClassNotFoundException: oracle.jdbc.logging.annotations.Supports.
+Warning: Could not resolve oracle.jdbc.logging.runtime.TraceController for reflection configuration. Reason: java.lang.ClassNotFoundException: oracle.jdbc.logging.runtime.TraceController.
+Warning: Could not resolve oracle.sql.AnyDataFactory for reflection configuration. Reason: java.lang.ClassNotFoundException: oracle.sql.AnyDataFactory.
+Warning: Could not resolve oracle.sql.TypeDescriptorFactory for reflection configuration. Reason: java.lang.ClassNotFoundException: oracle.sql.TypeDescriptorFactory.
+Warning: Method org.apache.qpid.server.model.Binding.getDestination() not found.
+Warning: Could not resolve org.h2.Driver for reflection configuration. Reason: java.lang.ClassNotFoundException: org.h2.Driver.
+Warning: Could not resolve org.postgresql.Driver for reflection configuration. Reason: java.lang.ClassNotFoundException: org.postgresql.Driver.
+
+
+
+2022-09-21T14:38:26,767Z ERROR [VirtualHostNode-default-Config] (o.a.q.s.u.ServerScopedRuntimeException) - Unable to find field definition for automated field port in class org.apache.qpid.s
+erver.logging.logback.VirtualHostSyslogLoggerImplWithAccessChecking
+2022-09-21T14:38:26,767Z INFO  [VirtualHostNode-default-Config] (q.m..v.create) - [mng:Ni2xDoRd(guest@/127.0.0.1:42349)] VirtualHostLogger (bob) : Create : FAILURE : {context={},name=bob,typ
+e=Syslog}
+2022-09-21T14:38:26,767Z WARN  [qtp1227269778-74] (o.a.q.s.m.p.ManagementException) - Unexpected Exception
+org.apache.qpid.server.util.ServerScopedRuntimeException: Unable to find field definition for automated field port in class org.apache.qpid.server.logging.logback.VirtualHostSyslogLoggerImplWithAccessChecking
+        at org.apache.qpid.server.model.ConfiguredObjectTypeRegistry.findField(ConfiguredObjectTypeRegistry.java:1237)
+        at org.apache.qpid.server.model.ConfiguredObjectTypeRegistry.processAttributesTypesAndFields(ConfiguredObjectTypeRegistry.java:1002)
+        at org.apache.qpid.server.model.ConfiguredObjectTypeRegistry.process(ConfiguredObjectTypeRegistry.java:766)
+        at org.apache.qpid.server.model.ConfiguredObjectTypeRegistry.processClassIfNecessary(ConfiguredObjectTypeRegistry.java:1292)
+        at org.apache.qpid.server.model.ConfiguredObjectTypeRegistry.getAttributeTypes(ConfiguredObjectTypeRegistry.java:1332)
+        at org.apache.qpid.server.model.AbstractConfiguredObject.<init>(AbstractConfiguredObject.java:274)
+        at org.apache.qpid.server.model.AbstractConfiguredObject.<init>(AbstractConfiguredObject.java:254)
+        at org.apache.qpid.server.model.AbstractConfiguredObject.<init>(AbstractConfiguredObject.java:246)
+        at org.apache.qpid.server.logging.logback.AbstractLogger.<init>(AbstractLogger.java:59)
+        at org.apache.qpid.server.logging.logback.AbstractVirtualHostLogger.<init>(AbstractVirtualHostLogger.java:39)
+        at org.apache.qpid.server.logging.logback.VirtualHostSyslogLoggerImpl.<init>(VirtualHostSyslogLoggerImpl.java:51)
+        at org.apache.qpid.server.logging.logback.VirtualHostSyslogLoggerImplWithAccessChecking.<init>(VirtualHostSyslogLoggerImplWithAccessChecking.java:37)
+        at org.apache.qpid.server.logging.logback.VirtualHostSyslogLoggerImplFactory.createInstance(VirtualHostSyslogLoggerImplFactory.java:39)
+        at org.apache.qpid.server.logging.logback.VirtualHostSyslogLoggerImplFactory.createInstance(VirtualHostSyslogLoggerImplFactory.java:28)
+        at org.apache.qpid.server.model.AbstractConfiguredObjectTypeFactory.createAsync(AbstractConfiguredObjectTypeFactory.java:74)
+        at org.apache.qpid.server.model.ConfiguredObjectFactoryImpl.createAsync(ConfiguredObjectFactoryImpl.java:145)
+        at org.apache.qpid.server.model.AbstractConfiguredObject.addChildAsync(AbstractConfiguredObject.java:2140)
+        at org.apache.qpid.server.virtualhost.AbstractVirtualHost.addChildAsync(AbstractVirtualHost.java:871)
+        at org.apache.qpid.server.model.AbstractConfiguredObject$17.create(AbstractConfiguredObject.java:2097)
+        at org.apache.qpid.server.model.AbstractConfiguredObject$17.execute(AbstractConfiguredObject.java:2082)
+        at org.apache.qpid.server.model.AbstractConfiguredObject$17.execute(AbstractConfiguredObject.java:2075)
+        at org.apache.qpid.server.model.AbstractConfiguredObject$2.execute(AbstractConfiguredObject.java:647)
+        at org.apache.qpid.server.model.AbstractConfiguredObject$2.execute(AbstractConfiguredObject.java:640)
+        at org.apache.qpid.server.configuration.updater.TaskExecutorImpl$TaskLoggingWrapper.execute(TaskExecutorImpl.java:248)
+        at org.apache.qpid.server.configuration.updater.TaskExecutorImpl$CallableWrapper$1.run(TaskExecutorImpl.java:320)
+        at java.security.AccessController.executePrivileged(AccessController.java:169)
+        at java.security.AccessController.doPrivileged(AccessController.java:91)
+        at javax.security.auth.Subject.doAs(Subject.java:361)
+        at org.apache.qpid.server.configuration.updater.TaskExecutorImpl$CallableWrapper.call(TaskExecutorImpl.java:313)
+        at com.google.common.util.concurrent.TrustedListenableFutureTask$TrustedFutureInterruptibleTask.runInterruptibly(TrustedListenableFutureTask.java:125)
+        at com.google.common.util.concurrent.InterruptibleTask.run(InterruptibleTask.java:69)
+        at com.google.common.util.concurrent.TrustedListenableFutureTask.run(TrustedListenableFutureTask.java:78)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at org.apache.qpid.server.bytebuffer.QpidByteBufferFactory.lambda$createQpidByteBufferTrackingThreadFactory$0(QpidByteBufferFactory.java:464)
+        at java.lang.Thread.run(Thread.java:829)
+        at com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:705)
+        at com.oracle.svm.core.posix.thread.PosixPlatformThreads.pthreadStartRoutine(PosixPlatformThreads.java:202)
+
+
+

@@ -17,4 +17,4 @@ else
     fi
 fi
 
-#exec /usr/local/src/qpid/Qpid4Graal/native/images/graalfull/build/bin/qpid-server -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/images/graalfull/build -DQPID_WORK=/var/qpidwork -st Memory"
+#exec /usr/local/src/qpid/Qpid4Graal/native/images/graalfull/build/bin/qpid-server -DPNAME=QPBRKR -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/images/graalfull/build -DQPID_WORK=/var/qpidwork -st Memory

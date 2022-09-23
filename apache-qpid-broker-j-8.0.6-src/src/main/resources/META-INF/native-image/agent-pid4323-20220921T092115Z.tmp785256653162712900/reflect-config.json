@@ -1,0 +1,3253 @@
+[
+{
+  "name":"[B"
+},
+{
+  "name":"[C"
+},
+{
+  "name":"[D"
+},
+{
+  "name":"[F"
+},
+{
+  "name":"[I"
+},
+{
+  "name":"[J"
+},
+{
+  "name":"[Lcom.fasterxml.jackson.databind.ser.Serializers;"
+},
+{
+  "name":"[Ljava.lang.Object;"
+},
+{
+  "name":"[Ljava.lang.String;"
+},
+{
+  "name":"[Ljava.math.BigDecimal;"
+},
+{
+  "name":"[Ljavax.management.openmbean.CompositeData;"
+},
+{
+  "name":"[Lorg.apache.qpid.server.protocol.v1_0.type.Symbol;"
+},
+{
+  "name":"[Lorg.apache.qpid.server.store.preferences.JsonFilePreferenceStore$StoredPreferenceRecord;"
+},
+{
+  "name":"[Lorg.eclipse.jetty.servlet.ServletMapping;"
+},
+{
+  "name":"[Lsun.security.pkcs.SignerInfo;"
+},
+{
+  "name":"[S"
+},
+{
+  "name":"[Z"
+},
+{
+  "name":"ch.qos.logback.classic.pattern.DateConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.pattern.LevelConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.pattern.LineSeparatorConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.pattern.LoggerConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.pattern.MDCConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.pattern.MessageConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.pattern.ThreadConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.core.rolling.helper.DateTokenConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.core.rolling.helper.IntegerTokenConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.fasterxml.jackson.databind.ext.Java7HandlersImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.fasterxml.jackson.databind.ext.Java7SupportImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.google.common.collect.ImmutableCollection",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.google.common.collect.ImmutableSet",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.google.common.collect.RegularImmutableSet",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.google.common.util.concurrent.AbstractFuture",
+  "fields":[
+    {"name":"listeners"}, 
+    {"name":"value"}, 
+    {"name":"waiters"}
+  ]
+},
+{
+  "name":"com.google.common.util.concurrent.AbstractFuture$Waiter",
+  "fields":[
+    {"name":"next"}, 
+    {"name":"thread"}
+  ]
+},
+{
+  "name":"com.jolbox.bonecp.BoneCPConfig",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"com.sleepycat.je.Environment"
+},
+{
+  "name":"com.sleepycat.je.dbi.DbTree",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.log.FileHeader",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.log.Trace",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.log.entry.EmptyLogEntry",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.log.entry.RestoreRequired",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.recovery.CheckpointEnd",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.recovery.CheckpointStart",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.BIN",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.FileSummaryLN",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.IN",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.LN",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.MapLN",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.NameLN",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.OldBINDelta",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.VersionedLN",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.dupConvert.DBIN",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.dupConvert.DIN",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.dupConvert.DupCountLN",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.dupConvert.INDeleteInfo",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.tree.dupConvert.INDupDeleteInfo",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.txn.RollbackEnd",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.txn.RollbackStart",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.txn.TxnAbort",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.txn.TxnCommit",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.txn.TxnPrepare",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sleepycat.je.utilint.Matchpoint",
+  "queriedMethods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.HmacCore$HmacSHA256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.HmacPKCS12PBECore$HmacPKCS12PBE_SHA1",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.PBEKeyFactory$PBEWithMD5AndDES",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.PBES2Core$HmacSHA256AndAES_256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.PBES2Parameters$General",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.PBES2Parameters$HmacSHA256AndAES_256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.management.GarbageCollectorMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"com.sun.management.GcInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"com.sun.management.HotSpotDiagnosticMXBean",
+  "queryAllPublicMethods":true,
+  "methods":[{"name":"getVMOption","parameterTypes":["java.lang.String"] }],
+  "queriedMethods":[
+    {"name":"dumpHeap","parameterTypes":["java.lang.String","boolean"] }, 
+    {"name":"setVMOption","parameterTypes":["java.lang.String","java.lang.String"] }
+  ]
+},
+{
+  "name":"com.sun.management.OperatingSystemMXBean",
+  "methods":[
+    {"name":"getProcessCpuLoad","parameterTypes":[] }, 
+    {"name":"getProcessCpuTime","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.management.ThreadMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"com.sun.management.UnixOperatingSystemMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"com.sun.management.VMOption",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"from","parameterTypes":["javax.management.openmbean.CompositeData"] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getOrigin","parameterTypes":[] }, 
+    {"name":"getValue","parameterTypes":[] }, 
+    {"name":"isWriteable","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.management.internal.GarbageCollectorExtImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"com.sun.management.internal.HotSpotDiagnostic",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"com.sun.management.internal.HotSpotThreadImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"com.sun.management.internal.OperatingSystemImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"java.io.FilePermission"
+},
+{
+  "name":"java.io.Serializable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.Boolean",
+  "fields":[{"name":"TYPE"}],
+  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.Byte",
+  "fields":[{"name":"TYPE"}],
+  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.Character",
+  "fields":[{"name":"TYPE"}]
+},
+{
+  "name":"java.lang.Class",
+  "methods":[{"name":"getModule","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.Cloneable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.Comparable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.Double",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "fields":[{"name":"TYPE"}],
+  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.Float",
+  "fields":[{"name":"TYPE"}],
+  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.Integer",
+  "fields":[{"name":"TYPE"}],
+  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.Iterable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.Long",
+  "fields":[{"name":"TYPE"}],
+  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.Module",
+  "methods":[
+    {"name":"getLayer","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.lang.ModuleLayer",
+  "methods":[{"name":"configuration","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.Number",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.Object",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.RuntimePermission"
+},
+{
+  "name":"java.lang.Short",
+  "fields":[{"name":"TYPE"}],
+  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.StackTraceElement",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.String"
+},
+{
+  "name":"java.lang.Throwable",
+  "methods":[{"name":"getSuppressed","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.Void",
+  "fields":[{"name":"TYPE"}]
+},
+{
+  "name":"java.lang.management.BufferPoolMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.ClassLoadingMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.CompilationMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.LockInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.ManagementFactory",
+  "methods":[{"name":"getRuntimeMXBean","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.management.ManagementPermission",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.management.MemoryMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.MemoryManagerMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.MemoryPoolMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.MemoryUsage",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.MonitorInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.PlatformLoggingMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.management.RuntimeMXBean",
+  "queryAllPublicMethods":true,
+  "methods":[{"name":"getUptime","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.management.ThreadInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.module.Configuration",
+  "methods":[{"name":"findModule","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.module.ModuleReference",
+  "methods":[{"name":"location","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.module.ResolvedModule",
+  "methods":[{"name":"reference","parameterTypes":[] }]
+},
+{
+  "name":"java.math.BigDecimal",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"java.math.BigInteger"
+},
+{
+  "name":"java.net.NetPermission"
+},
+{
+  "name":"java.net.SocketPermission"
+},
+{
+  "name":"java.net.URLPermission",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }]
+},
+{
+  "name":"java.nio.Buffer"
+},
+{
+  "name":"java.security.AlgorithmParametersSpi"
+},
+{
+  "name":"java.security.AllPermission"
+},
+{
+  "name":"java.security.KeyStoreSpi"
+},
+{
+  "name":"java.security.MessageDigestSpi"
+},
+{
+  "name":"java.security.SecureRandomParameters"
+},
+{
+  "name":"java.security.SecurityPermission"
+},
+{
+  "name":"java.security.interfaces.RSAPrivateKey"
+},
+{
+  "name":"java.security.interfaces.RSAPublicKey"
+},
+{
+  "name":"java.sql.Driver"
+},
+{
+  "name":"java.util.AbstractCollection",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.AbstractList",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.ArrayList",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.Collection",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.Date",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"java.util.HashSet",
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"java.util.List",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.PropertyPermission",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }]
+},
+{
+  "name":"java.util.RandomAccess",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.Set",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.UUID",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"java.util.logging.LogManager",
+  "methods":[{"name":"getLoggingMXBean","parameterTypes":[] }]
+},
+{
+  "name":"java.util.logging.LoggingMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"javax.crypto.SecretKey"
+},
+{
+  "name":"javax.management.MBeanOperationInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"javax.management.MBeanServerBuilder",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"javax.management.NotificationEmitter"
+},
+{
+  "name":"javax.management.ObjectName"
+},
+{
+  "name":"javax.management.openmbean.CompositeData"
+},
+{
+  "name":"javax.management.openmbean.OpenMBeanOperationInfoSupport"
+},
+{
+  "name":"javax.management.openmbean.TabularData"
+},
+{
+  "name":"javax.naming.directory.InitialDirContext"
+},
+{
+  "name":"javax.security.auth.x500.X500Principal",
+  "fields":[{"name":"thisX500Name"}],
+  "methods":[{"name":"<init>","parameterTypes":["sun.security.x509.X500Name"] }]
+},
+{
+  "name":"javax.sql.ConnectionPoolDataSource"
+},
+{
+  "name":"javax.sql.DataSource"
+},
+{
+  "name":"javax.sql.PooledConnection"
+},
+{
+  "name":"javax.sql.XAConnection"
+},
+{
+  "name":"javax.sql.XADataSource"
+},
+{
+  "name":"javax.transaction.xa.XAException"
+},
+{
+  "name":"javax.transaction.xa.XAResource"
+},
+{
+  "name":"javax.transaction.xa.Xid"
+},
+{
+  "name":"jdk.management.jfr.ConfigurationInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"jdk.management.jfr.EventTypeInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"jdk.management.jfr.FlightRecorderMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"jdk.management.jfr.FlightRecorderMXBeanImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"jdk.management.jfr.RecordingInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"jdk.management.jfr.SettingDescriptorInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"oracle.jdbc.OracleDriver"
+},
+{
+  "name":"oracle.jdbc.driver.DiagnosabilityMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"oracle.jdbc.driver.Message11",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.driver.OracleDiagnosabilityMBean",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"oracle.jdbc.logging.annotations.Feature",
+  "methods":[{"name":"values","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.logging.annotations.Supports",
+  "queriedMethods":[{"name":"value","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.logging.runtime.TraceController",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"oracle.sql.AnyDataFactory"
+},
+{
+  "name":"oracle.sql.TypeDescriptorFactory"
+},
+{
+  "name":"org.apache.derby.catalog.types.IndexDescriptorImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.catalog.types.ReferencedColumnsDescriptorImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.catalog.types.RoutineAliasInfo",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.catalog.types.TypeDescriptorImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.catalog.types.TypesImplInstanceGetter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.catalog.types.UserDefinedTypeIdImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.database.Database"
+},
+{
+  "name":"org.apache.derby.exe.ac3405c0cbx0183x445ax0861x00001bbceb200",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.ac3405c0cbx0183x445ax0861x00001bbceb201",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.ac3405c0cbx0183x445ax0861x00001bbceb202",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.ac560740aax0183x445ax0861x00001bbceb200",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.ac560740aax0183x445ax0861x00001bbceb201",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.ac83ba410fx0183x445ax0861x00001bbceb200",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.ac83ba410fx0183x445ax0861x00001bbceb201",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.ac83ba410fx0183x445ax0861x00001bbceb202",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.aca4420111x0183x445ax0861x00001bbceb200",
+  "methods":[{"name":"<init>","parameterTypes":[] }],
+  "queriedMethods":[
+    {"name":"e10","parameterTypes":[] }, 
+    {"name":"e11","parameterTypes":[] }, 
+    {"name":"e12","parameterTypes":[] }, 
+    {"name":"e13","parameterTypes":[] }, 
+    {"name":"e14","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.derby.exe.acb278c0c3x0183x445ax0861x00001bbceb200",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.acbaf0810cx0183x445ax0861x00001bbceb200",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.acfb0bc0c6x0183x445ax0861x00001bbceb200",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.exe.acfb0bc0c6x0183x445ax0861x00001bbceb201",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.jdbc.AuthenticationService"
+},
+{
+  "name":"org.apache.derby.iapi.jdbc.DRDAServerStarter"
+},
+{
+  "name":"org.apache.derby.iapi.jdbc.ResourceAdapter"
+},
+{
+  "name":"org.apache.derby.iapi.services.cache.CacheFactory"
+},
+{
+  "name":"org.apache.derby.iapi.services.cache.ClassSizeCatalogImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.services.compiler.JavaFactory"
+},
+{
+  "name":"org.apache.derby.iapi.services.daemon.DaemonFactory"
+},
+{
+  "name":"org.apache.derby.iapi.services.info.Version",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"org.apache.derby.iapi.services.io.FormatableArrayHolder",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.services.io.FormatableBitSet",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.services.io.FormatableHashtable",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.services.io.FormatableIntHolder",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.services.jmx.ManagementService"
+},
+{
+  "name":"org.apache.derby.iapi.services.loader.ClassFactory"
+},
+{
+  "name":"org.apache.derby.iapi.services.locks.LockFactory"
+},
+{
+  "name":"org.apache.derby.iapi.services.property.PropertyFactory"
+},
+{
+  "name":"org.apache.derby.iapi.services.property.PropertyValidation",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.services.stream.InfoStreams"
+},
+{
+  "name":"org.apache.derby.iapi.services.timer.TimerFactory"
+},
+{
+  "name":"org.apache.derby.iapi.services.uuid.UUIDFactory"
+},
+{
+  "name":"org.apache.derby.iapi.sql.LanguageFactory"
+},
+{
+  "name":"org.apache.derby.iapi.sql.compile.OptimizerFactory"
+},
+{
+  "name":"org.apache.derby.iapi.sql.compile.TypeCompilerFactory"
+},
+{
+  "name":"org.apache.derby.iapi.sql.conn.LanguageConnectionFactory"
+},
+{
+  "name":"org.apache.derby.iapi.sql.dictionary.DataDictionary"
+},
+{
+  "name":"org.apache.derby.iapi.sql.execute.ExecRowBuilder",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.sql.execute.ExecutionFactory"
+},
+{
+  "name":"org.apache.derby.iapi.store.access.AccessFactory"
+},
+{
+  "name":"org.apache.derby.iapi.store.access.conglomerate.MethodFactory"
+},
+{
+  "name":"org.apache.derby.iapi.store.raw.RawStoreFactory"
+},
+{
+  "name":"org.apache.derby.iapi.store.raw.data.DataFactory"
+},
+{
+  "name":"org.apache.derby.iapi.store.raw.log.LogFactory"
+},
+{
+  "name":"org.apache.derby.iapi.store.raw.xact.TransactionFactory"
+},
+{
+  "name":"org.apache.derby.iapi.types.DataTypeDescriptor",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.types.DataValueFactory"
+},
+{
+  "name":"org.apache.derby.iapi.types.DataValueFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.iapi.types.Like",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.apache.derby.impl.db.BasicDatabase",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.db.SlaveDatabase"
+},
+{
+  "name":"org.apache.derby.impl.io.DirStorageFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.jdbc.SQLExceptionFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.jdbc.authentication.BasicAuthenticationServiceImpl"
+},
+{
+  "name":"org.apache.derby.impl.jdbc.authentication.JNDIAuthenticationService"
+},
+{
+  "name":"org.apache.derby.impl.jdbc.authentication.NativeAuthenticationServiceImpl"
+},
+{
+  "name":"org.apache.derby.impl.jdbc.authentication.NoneAuthenticationServiceImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.jdbc.authentication.SpecificAuthenticationServiceImpl"
+},
+{
+  "name":"org.apache.derby.impl.services.bytecode.BCJava",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.services.cache.ConcurrentCacheFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.services.cache.ConcurrentCacheMBeanImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"org.apache.derby.impl.services.daemon.SingleThreadDaemonFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.services.jce.JCECipherFactoryBuilder"
+},
+{
+  "name":"org.apache.derby.impl.services.jmx.JMXManagementService",
+  "queryAllPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.services.jmxnone.NoManagementService"
+},
+{
+  "name":"org.apache.derby.impl.services.locks.ConcurrentPool",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.services.reflect.ReflectClassesJava2",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.services.stream.SingleStream",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.services.timer.SingletonTimerFactory",
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"getWarnings","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.derby.impl.services.uuid.BasicUUIDFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.services.uuid.BasicUUIDGetter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.CursorInfo",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.GenericColumnDescriptor",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.GenericLanguageFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.GenericResultDescription",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.GenericStorablePreparedStatement",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.catalog.DD_Version",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.catalog.DataDictionaryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.compile.BooleanTypeCompiler",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.compile.CharTypeCompiler",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.compile.LOBTypeCompiler",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.compile.NumericTypeCompiler",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.compile.OptimizerFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.compile.RefTypeCompiler",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.compile.TypeCompilerFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.conn.GenericLanguageConnectionFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.execute.ConstantActionActivation",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.execute.GenericExecutionFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.execute.IndexColumnOrder",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.sql.execute.RealResultSetStatisticsFactory"
+},
+{
+  "name":"org.apache.derby.impl.sql.execute.xplain.XPLAINFactory"
+},
+{
+  "name":"org.apache.derby.impl.store.access.PC_XenaVersion",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.access.RllRAMAccessManager",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.access.btree.index.B2I",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.access.btree.index.B2IFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.access.btree.index.B2IStaticCompiledInfo",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.access.heap.Heap",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.access.heap.HeapClassInfo",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.access.heap.HeapConglomerateFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.access.sort.ExternalSortFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.access.sort.UniqueWithDuplicateNullsExternalSortFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.raw.RawStore",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.raw.data.AllocPage",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.raw.data.BaseDataFileFactory"
+},
+{
+  "name":"org.apache.derby.impl.store.raw.data.BaseDataFileFactoryJ4",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.raw.log.LogToFile",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.raw.log.ReadOnly",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.raw.xact.XactFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.impl.store.replication.master.MasterController"
+},
+{
+  "name":"org.apache.derby.impl.store.replication.slave.SlaveController"
+},
+{
+  "name":"org.apache.derby.jdbc.AutoloadedDriver"
+},
+{
+  "name":"org.apache.derby.jdbc.Driver42",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.jdbc.EmbeddedDriver"
+},
+{
+  "name":"org.apache.derby.jdbc.InternalDriver"
+},
+{
+  "name":"org.apache.derby.jdbc.JDBC",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"org.apache.derby.jdbc.ResourceAdapterImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.derby.mbeans.CacheManagerMBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.apache.derby.mbeans.JDBCMBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.apache.derby.mbeans.ManagementMBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.apache.derby.mbeans.VersionMBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.apache.qpid.server.binding.BindingImpl",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getArguments","parameterTypes":[] }, 
+    {"name":"getBindingKey","parameterTypes":[] }, 
+    {"name":"getDestination","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.exchange.AbstractExchange",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.exchange.DirectExchange",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.DirectExchangeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.DirectExchangeImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.FanoutExchange",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.FanoutExchangeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.FanoutExchangeImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.HeadersExchange",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.HeadersExchangeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.HeadersExchangeImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.TopicExchange",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.TopicExchangeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.exchange.TopicExchangeImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.LogFileDetails",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getLastModified","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getSize","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.logging.LogLevel",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"validValues","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.AbstractBrokerLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.AbstractLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"doActivate","parameterTypes":[] }, 
+    {"name":"getSupportedBrokerLoggerChildTypes","parameterTypes":[] }, 
+    {"name":"getSupportedVirtualHostLoggerChildTypes","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.AbstractNameAndLevelLogInclusionRule",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"doActivate","parameterTypes":[] }, 
+    {"name":"logLevelAfterSet","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.AbstractVirtualHostLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerConsoleLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerConsoleLogger$ConsoleStreamTarget",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerConsoleLoggerImpl",
+  "methods":[{"name":"getAllConsoleStreamTarget","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerFileLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getFileName","parameterTypes":[] }, 
+    {"name":"getLayout","parameterTypes":[] }, 
+    {"name":"getLogFiles","parameterTypes":[] }, 
+    {"name":"getMaxFileSize","parameterTypes":[] }, 
+    {"name":"getMaxHistory","parameterTypes":[] }, 
+    {"name":"isCompressOldFiles","parameterTypes":[] }, 
+    {"name":"isRollDaily","parameterTypes":[] }, 
+    {"name":"isRollOnRestart","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerFileLoggerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerFileLoggerImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerLogbackSocketLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerMemoryLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getMaxRecords","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerMemoryLoggerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerMemoryLoggerImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerNameAndLevelLogInclusionRule",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getLevel","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerNameAndLevelLogInclusionRuleImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerNameAndLevelLogInclusionRuleImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerSyslogLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerUserOrConnectionLogInclusionRule",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.VirtualHostFileLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getFileName","parameterTypes":[] }, 
+    {"name":"getLayout","parameterTypes":[] }, 
+    {"name":"getLogFiles","parameterTypes":[] }, 
+    {"name":"getMaxFileSize","parameterTypes":[] }, 
+    {"name":"getMaxHistory","parameterTypes":[] }, 
+    {"name":"isCompressOldFiles","parameterTypes":[] }, 
+    {"name":"isRollDaily","parameterTypes":[] }, 
+    {"name":"isRollOnRestart","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.VirtualHostFileLoggerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.VirtualHostFileLoggerImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.VirtualHostNameAndLevelLogInclusionRule",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.VirtualHostSyslogLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.VirtualHostUserOrConnectionLogInclusionRule",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.jdbc.JDBCBrokerLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.jdbc.JDBCBrokerLoggerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.jdbc.JDBCVirtualHostLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.jdbc.JDBCVirtualHostLoggerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.management.plugin.HttpManagement",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"doStart","parameterTypes":[] }, 
+    {"name":"getAllAvailableCorsMethodCombinations","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.management.plugin.HttpManagementConfiguration",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getCorsAllowCredentials","parameterTypes":[] }, 
+    {"name":"getCorsAllowHeaders","parameterTypes":[] }, 
+    {"name":"getCorsAllowMethods","parameterTypes":[] }, 
+    {"name":"getCorsAllowOrigins","parameterTypes":[] }, 
+    {"name":"getSaslExchangeExpiry","parameterTypes":[] }, 
+    {"name":"getSessionTimeout","parameterTypes":[] }, 
+    {"name":"isCompressResponses","parameterTypes":[] }, 
+    {"name":"isHttpBasicAuthenticationEnabled","parameterTypes":[] }, 
+    {"name":"isHttpSaslAuthenticationEnabled","parameterTypes":[] }, 
+    {"name":"isHttpsBasicAuthenticationEnabled","parameterTypes":[] }, 
+    {"name":"isHttpsSaslAuthenticationEnabled","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.management.plugin.HttpManagementWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.management.plugin.servlet.rest.TimeZoneServlet$TimeZoneDetails",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"getCity","parameterTypes":[] }, 
+    {"name":"getId","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getOffset","parameterTypes":[] }, 
+    {"name":"getRegion","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.message.MessageInfoImpl",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getApplicationId","parameterTypes":[] }, 
+    {"name":"getArrivalTime","parameterTypes":[] }, 
+    {"name":"getCorrelationId","parameterTypes":[] }, 
+    {"name":"getDeliveredTo","parameterTypes":[] }, 
+    {"name":"getDeliveredToConsumerId","parameterTypes":[] }, 
+    {"name":"getDeliveryCount","parameterTypes":[] }, 
+    {"name":"getEncoding","parameterTypes":[] }, 
+    {"name":"getExpirationTime","parameterTypes":[] }, 
+    {"name":"getGroupId","parameterTypes":[] }, 
+    {"name":"getHeaderSize","parameterTypes":[] }, 
+    {"name":"getHeaders","parameterTypes":[] }, 
+    {"name":"getId","parameterTypes":[] }, 
+    {"name":"getInitialRoutingAddress","parameterTypes":[] }, 
+    {"name":"getMessageId","parameterTypes":[] }, 
+    {"name":"getMessageType","parameterTypes":[] }, 
+    {"name":"getMimeType","parameterTypes":[] }, 
+    {"name":"getNotValidBefore","parameterTypes":[] }, 
+    {"name":"getPriority","parameterTypes":[] }, 
+    {"name":"getReplyTo","parameterTypes":[] }, 
+    {"name":"getSize","parameterTypes":[] }, 
+    {"name":"getState","parameterTypes":[] }, 
+    {"name":"getTimestamp","parameterTypes":[] }, 
+    {"name":"getTo","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }, 
+    {"name":"getUserId","parameterTypes":[] }, 
+    {"name":"isPersistent","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.message.MessageSource$MessageConversionExceptionHandlingPolicy",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.AbstractCaseAwareGroupProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.AbstractConfiguredObject",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.AbstractContainer",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getAvailableConfigurationEncrypters","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.AbstractSystemConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.AccessControlProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getPriority","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.AlternateBinding",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.AuthenticationProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getDisabledMechanisms","parameterTypes":[] }, 
+    {"name":"getMechanisms","parameterTypes":[] }, 
+    {"name":"getSecureOnlyMechanisms","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.Binding",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getArguments","parameterTypes":[] }, 
+    {"name":"getBindingKey","parameterTypes":[] }, 
+    {"name":"getDestination","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.Broker",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getBuildVersion","parameterTypes":[] }, 
+    {"name":"getBytesIn","parameterTypes":[] }, 
+    {"name":"getBytesOut","parameterTypes":[] }, 
+    {"name":"getCompactMemoryInterval","parameterTypes":[] }, 
+    {"name":"getCompactMemoryThreshold","parameterTypes":[] }, 
+    {"name":"getConfidentialConfigurationEncryptionProvider","parameterTypes":[] }, 
+    {"name":"getDirectMemoryTotalCapacity","parameterTypes":[] }, 
+    {"name":"getDocumentationUrl","parameterTypes":[] }, 
+    {"name":"getFlowToDiskThreshold","parameterTypes":[] }, 
+    {"name":"getGroups","parameterTypes":[] }, 
+    {"name":"getHousekeepingCheckPeriod","parameterTypes":[] }, 
+    {"name":"getHousekeepingThreadCount","parameterTypes":[] }, 
+    {"name":"getInboundMessageSizeHighWatermark","parameterTypes":[] }, 
+    {"name":"getJvmArguments","parameterTypes":[] }, 
+    {"name":"getMaximumDirectMemorySize","parameterTypes":[] }, 
+    {"name":"getMaximumHeapMemorySize","parameterTypes":[] }, 
+    {"name":"getMessagesIn","parameterTypes":[] }, 
+    {"name":"getMessagesOut","parameterTypes":[] }, 
+    {"name":"getModelVersion","parameterTypes":[] }, 
+    {"name":"getNumberOfBuffersInPool","parameterTypes":[] }, 
+    {"name":"getNumberOfBuffersInUse","parameterTypes":[] }, 
+    {"name":"getNumberOfCores","parameterTypes":[] }, 
+    {"name":"getNumberOfLiveThreads","parameterTypes":[] }, 
+    {"name":"getNumberOfObjectsPendingFinalization","parameterTypes":[] }, 
+    {"name":"getOperatingSystem","parameterTypes":[] }, 
+    {"name":"getPlatform","parameterTypes":[] }, 
+    {"name":"getProcessPid","parameterTypes":[] }, 
+    {"name":"getProductVersion","parameterTypes":[] }, 
+    {"name":"getShutdownTimeout","parameterTypes":[] }, 
+    {"name":"getSparsityFraction","parameterTypes":[] }, 
+    {"name":"getStatisticsReportingPeriod","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesIn","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesOut","parameterTypes":[] }, 
+    {"name":"getUsedDirectMemorySize","parameterTypes":[] }, 
+    {"name":"getUsedHeapMemorySize","parameterTypes":[] }, 
+    {"name":"getUser","parameterTypes":[] }, 
+    {"name":"isMessageCompressionEnabled","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.BrokerAttributeInjector",
+  "methods":[
+    {"name":"getBigDecimalValue","parameterTypes":["org.apache.qpid.server.model.Broker","java.util.function.Function"] }, 
+    {"name":"getGCCollectionCount","parameterTypes":["org.apache.qpid.server.model.Broker","java.lang.management.GarbageCollectorMXBean"] }, 
+    {"name":"getGCCollectionTime","parameterTypes":["org.apache.qpid.server.model.Broker","java.lang.management.GarbageCollectorMXBean"] }, 
+    {"name":"getLongValue","parameterTypes":["org.apache.qpid.server.model.Broker","java.util.function.ToLongFunction"] }, 
+    {"name":"getMemoryPoolMaximum","parameterTypes":["org.apache.qpid.server.model.Broker","java.lang.management.MemoryPoolMXBean"] }, 
+    {"name":"getMemoryPoolUsed","parameterTypes":["org.apache.qpid.server.model.Broker","java.lang.management.MemoryPoolMXBean"] }
+  ],
+  "queriedMethods":[
+    {"name":"dumpHeap","parameterTypes":["org.apache.qpid.server.model.Broker","java.lang.management.PlatformManagedObject","java.lang.reflect.Method","java.lang.String","boolean"] }, 
+    {"name":"setJVMOptions","parameterTypes":["org.apache.qpid.server.model.Broker","java.lang.management.PlatformManagedObject","java.lang.reflect.Method","java.util.Map"] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.BrokerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.BrokerImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.BrokerLogInclusionRule",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.BrokerLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getErrorCount","parameterTypes":[] }, 
+    {"name":"getWarnCount","parameterTypes":[] }, 
+    {"name":"isVirtualHostLogEventExcluded","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.ConfiguredObject",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getCategoryClass","parameterTypes":[] }, 
+    {"name":"getContext","parameterTypes":[] }, 
+    {"name":"getCreatedBy","parameterTypes":[] }, 
+    {"name":"getCreatedTime","parameterTypes":[] }, 
+    {"name":"getDescription","parameterTypes":[] }, 
+    {"name":"getDesiredState","parameterTypes":[] }, 
+    {"name":"getId","parameterTypes":[] }, 
+    {"name":"getLastOpenedTime","parameterTypes":[] }, 
+    {"name":"getLastUpdatedBy","parameterTypes":[] }, 
+    {"name":"getLastUpdatedTime","parameterTypes":[] }, 
+    {"name":"getLifetimePolicy","parameterTypes":[] }, 
+    {"name":"getModel","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getParent","parameterTypes":[] }, 
+    {"name":"getState","parameterTypes":[] }, 
+    {"name":"getStatistics","parameterTypes":["java.util.List"] }, 
+    {"name":"getType","parameterTypes":[] }, 
+    {"name":"isDurable","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.Connection",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getAddressSpace","parameterTypes":[] }, 
+    {"name":"getBytesIn","parameterTypes":[] }, 
+    {"name":"getBytesOut","parameterTypes":[] }, 
+    {"name":"getClientId","parameterTypes":[] }, 
+    {"name":"getClientProduct","parameterTypes":[] }, 
+    {"name":"getClientVersion","parameterTypes":[] }, 
+    {"name":"getLastInboundMessageTime","parameterTypes":[] }, 
+    {"name":"getLastIoTime","parameterTypes":[] }, 
+    {"name":"getLastMessageTime","parameterTypes":[] }, 
+    {"name":"getLastOutboundMessageTime","parameterTypes":[] }, 
+    {"name":"getLocalAddress","parameterTypes":[] }, 
+    {"name":"getLocalTransactionBegins","parameterTypes":[] }, 
+    {"name":"getLocalTransactionOpen","parameterTypes":[] }, 
+    {"name":"getLocalTransactionRollbacks","parameterTypes":[] }, 
+    {"name":"getMaxUncommittedInMemorySize","parameterTypes":[] }, 
+    {"name":"getMessagesIn","parameterTypes":[] }, 
+    {"name":"getMessagesOut","parameterTypes":[] }, 
+    {"name":"getOldestTransactionStartTime","parameterTypes":[] }, 
+    {"name":"getPort","parameterTypes":[] }, 
+    {"name":"getPrincipal","parameterTypes":[] }, 
+    {"name":"getProtocol","parameterTypes":[] }, 
+    {"name":"getRemoteAddress","parameterTypes":[] }, 
+    {"name":"getRemoteProcessName","parameterTypes":[] }, 
+    {"name":"getRemoteProcessPid","parameterTypes":[] }, 
+    {"name":"getSessionCount","parameterTypes":[] }, 
+    {"name":"getSessionCountLimit","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesIn","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesOut","parameterTypes":[] }, 
+    {"name":"getTransport","parameterTypes":[] }, 
+    {"name":"getTransportInfo","parameterTypes":[] }, 
+    {"name":"isIncoming","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.Consumer",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getBytesOut","parameterTypes":[] }, 
+    {"name":"getDistributionMode","parameterTypes":[] }, 
+    {"name":"getLinkName","parameterTypes":[] }, 
+    {"name":"getMessagesOut","parameterTypes":[] }, 
+    {"name":"getPriority","parameterTypes":[] }, 
+    {"name":"getSelector","parameterTypes":[] }, 
+    {"name":"getSession","parameterTypes":[] }, 
+    {"name":"getSettlementMode","parameterTypes":[] }, 
+    {"name":"getUnacknowledgedBytes","parameterTypes":[] }, 
+    {"name":"getUnacknowledgedMessages","parameterTypes":[] }, 
+    {"name":"isExclusive","parameterTypes":[] }, 
+    {"name":"isNoLocal","parameterTypes":[] }, 
+    {"name":"isNonLive","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.Container",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.CustomRestHeaders",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.DefaultVirtualHostAlias",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getPriority","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.Exchange",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"bind","parameterTypes":["java.lang.String","java.lang.String","java.util.Map","boolean"] }, 
+    {"name":"getAlternateBinding","parameterTypes":[] }, 
+    {"name":"getBindingCount","parameterTypes":[] }, 
+    {"name":"getBindings","parameterTypes":[] }, 
+    {"name":"getBytesDropped","parameterTypes":[] }, 
+    {"name":"getBytesIn","parameterTypes":[] }, 
+    {"name":"getCreatingLinkInfo","parameterTypes":[] }, 
+    {"name":"getDurableBindings","parameterTypes":[] }, 
+    {"name":"getMessagesDropped","parameterTypes":[] }, 
+    {"name":"getMessagesIn","parameterTypes":[] }, 
+    {"name":"getUnroutableMessageBehaviour","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.Exchange$UnroutableMessageBehaviour",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.ExclusivityPolicy",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.ExternalFileBasedAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.FixedVirtualHostNodeAlias",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getVirtualHostNode","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.Group",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.GroupMember",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.GroupProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.HostNameAlias",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getPriority","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.JsonSystemConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.JsonSystemConfigImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.KeyStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getCertificateDetails","parameterTypes":[] }, 
+    {"name":"getCertificateExpiryCheckFrequency","parameterTypes":[] }, 
+    {"name":"getCertificateExpiryWarnPeriod","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.LifetimePolicy",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.ManagedAttributeValue",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.MemorySystemConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.OverflowPolicy",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.PasswordCredentialManagingAuthenticationProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.PatternMatchingAlias",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.Plugin",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.Port",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getAuthenticationProvider","parameterTypes":[] }, 
+    {"name":"getBindingAddress","parameterTypes":[] }, 
+    {"name":"getBoundPort","parameterTypes":[] }, 
+    {"name":"getClientCertRecorder","parameterTypes":[] }, 
+    {"name":"getKeyStore","parameterTypes":[] }, 
+    {"name":"getPort","parameterTypes":[] }, 
+    {"name":"getTLSSessionCacheSize","parameterTypes":[] }, 
+    {"name":"getTLSSessionTimeout","parameterTypes":[] }, 
+    {"name":"getTlsCipherSuiteAllowList","parameterTypes":[] }, 
+    {"name":"getTlsCipherSuiteBlackList","parameterTypes":[] }, 
+    {"name":"getTlsCipherSuiteDenyList","parameterTypes":[] }, 
+    {"name":"getTlsCipherSuiteWhiteList","parameterTypes":[] }, 
+    {"name":"getTlsProtocolAllowList","parameterTypes":[] }, 
+    {"name":"getTlsProtocolBlackList","parameterTypes":[] }, 
+    {"name":"getTlsProtocolDenyList","parameterTypes":[] }, 
+    {"name":"getTlsProtocolWhiteList","parameterTypes":[] }, 
+    {"name":"getTrustStores","parameterTypes":[] }, 
+    {"name":"isAllowConfidentialOperationsOnInsecureChannels","parameterTypes":[] }, 
+    {"name":"isTlsSupported","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.Protocol",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.PublishingLink",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getDestination","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.Queue",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getAlertRepeatGap","parameterTypes":[] }, 
+    {"name":"getAlertThresholdMessageAge","parameterTypes":[] }, 
+    {"name":"getAlertThresholdMessageSize","parameterTypes":[] }, 
+    {"name":"getAlertThresholdQueueDepthBytes","parameterTypes":[] }, 
+    {"name":"getAlertThresholdQueueDepthMessages","parameterTypes":[] }, 
+    {"name":"getAlternateBinding","parameterTypes":[] }, 
+    {"name":"getAvailableBytes","parameterTypes":[] }, 
+    {"name":"getAvailableBytesHighWatermark","parameterTypes":[] }, 
+    {"name":"getAvailableMessages","parameterTypes":[] }, 
+    {"name":"getAvailableMessagesHighWatermark","parameterTypes":[] }, 
+    {"name":"getBindingCount","parameterTypes":[] }, 
+    {"name":"getConsumerCount","parameterTypes":[] }, 
+    {"name":"getConsumerCountWithCredit","parameterTypes":[] }, 
+    {"name":"getCreatingLinkInfo","parameterTypes":[] }, 
+    {"name":"getDefaultFilters","parameterTypes":[] }, 
+    {"name":"getExclusive","parameterTypes":[] }, 
+    {"name":"getExpiryPolicy","parameterTypes":[] }, 
+    {"name":"getMaximumDeliveryAttempts","parameterTypes":[] }, 
+    {"name":"getMaximumDistinctGroups","parameterTypes":[] }, 
+    {"name":"getMaximumLiveConsumers","parameterTypes":[] }, 
+    {"name":"getMaximumMessageTtl","parameterTypes":[] }, 
+    {"name":"getMaximumQueueDepthBytes","parameterTypes":[] }, 
+    {"name":"getMaximumQueueDepthMessages","parameterTypes":[] }, 
+    {"name":"getMessageConversionExceptionHandlingPolicy","parameterTypes":[] }, 
+    {"name":"getMessageDurability","parameterTypes":[] }, 
+    {"name":"getMessageGroupDefaultGroup","parameterTypes":[] }, 
+    {"name":"getMessageGroupKeyOverride","parameterTypes":[] }, 
+    {"name":"getMessageGroupType","parameterTypes":[] }, 
+    {"name":"getMessageInfo","parameterTypes":["int","int","boolean"] }, 
+    {"name":"getMinimumMessageTtl","parameterTypes":[] }, 
+    {"name":"getOldestMessageAge","parameterTypes":[] }, 
+    {"name":"getOverflowPolicy","parameterTypes":[] }, 
+    {"name":"getOwner","parameterTypes":[] }, 
+    {"name":"getPersistentDequeuedBytes","parameterTypes":[] }, 
+    {"name":"getPersistentDequeuedMessages","parameterTypes":[] }, 
+    {"name":"getPersistentEnqueuedBytes","parameterTypes":[] }, 
+    {"name":"getPersistentEnqueuedMessages","parameterTypes":[] }, 
+    {"name":"getPublishingLinks","parameterTypes":[] }, 
+    {"name":"getQueueDepthBytes","parameterTypes":[] }, 
+    {"name":"getQueueDepthBytesHighWatermark","parameterTypes":[] }, 
+    {"name":"getQueueDepthMessages","parameterTypes":[] }, 
+    {"name":"getQueueDepthMessagesHighWatermark","parameterTypes":[] }, 
+    {"name":"getTotalDequeuedBytes","parameterTypes":[] }, 
+    {"name":"getTotalDequeuedMessages","parameterTypes":[] }, 
+    {"name":"getTotalEnqueuedBytes","parameterTypes":[] }, 
+    {"name":"getTotalEnqueuedMessages","parameterTypes":[] }, 
+    {"name":"getTotalExpiredBytes","parameterTypes":[] }, 
+    {"name":"getTotalExpiredMessages","parameterTypes":[] }, 
+    {"name":"getTotalMalformedBytes","parameterTypes":[] }, 
+    {"name":"getTotalMalformedMessages","parameterTypes":[] }, 
+    {"name":"getUnacknowledgedBytes","parameterTypes":[] }, 
+    {"name":"getUnacknowledgedMessages","parameterTypes":[] }, 
+    {"name":"isEnsureNondestructiveConsumers","parameterTypes":[] }, 
+    {"name":"isHoldOnPublishEnabled","parameterTypes":[] }, 
+    {"name":"isNoLocal","parameterTypes":[] }, 
+    {"name":"isQueueFlowStopped","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.Queue$ExpiryPolicy",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.RemoteReplicationNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.Session",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getBytesIn","parameterTypes":[] }, 
+    {"name":"getBytesOut","parameterTypes":[] }, 
+    {"name":"getConsumerCount","parameterTypes":[] }, 
+    {"name":"getMessagesIn","parameterTypes":[] }, 
+    {"name":"getMessagesOut","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesIn","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesOut","parameterTypes":[] }, 
+    {"name":"getUnacknowledgedMessages","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.State",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.StatisticUnit",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.SystemAddressSpaceAlias",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.SystemConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.Transport",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.TrustStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.User",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getPassword","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.VirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getModelVersion","parameterTypes":[] }, 
+    {"name":"getProductVersion","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.VirtualHostAccessControlProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getPriority","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.VirtualHostAlias",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getPriority","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.VirtualHostLogInclusionRule",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.VirtualHostLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getErrorCount","parameterTypes":[] }, 
+    {"name":"getWarnCount","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.VirtualHostNameAlias",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.VirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getVirtualHostInitialConfiguration","parameterTypes":[] }, 
+    {"name":"isDefaultVirtualHostNode","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.adapter.AbstractPluginAdapter",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.adapter.FileBasedGroupProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.port.AbstractPort",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.port.AmqpPort",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getCloseWhenNoRoute","parameterTypes":[] }, 
+    {"name":"getConnectionCount","parameterTypes":[] }, 
+    {"name":"getHeartbeatDelay","parameterTypes":[] }, 
+    {"name":"getMaxOpenConnections","parameterTypes":[] }, 
+    {"name":"getNeedClientAuth","parameterTypes":[] }, 
+    {"name":"getNumberOfSelectors","parameterTypes":[] }, 
+    {"name":"getProtocolHandshakeTimeout","parameterTypes":[] }, 
+    {"name":"getProtocols","parameterTypes":[] }, 
+    {"name":"getSessionCountLimit","parameterTypes":[] }, 
+    {"name":"getThreadPoolSize","parameterTypes":[] }, 
+    {"name":"getTotalConnectionCount","parameterTypes":[] }, 
+    {"name":"getTransports","parameterTypes":[] }, 
+    {"name":"getWantClientAuth","parameterTypes":[] }, 
+    {"name":"isIgnoreInvalidSni","parameterTypes":[] }, 
+    {"name":"isTcpNoDelay","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.port.AmqpPortImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getAllAvailableProtocolCombinations","parameterTypes":[] }, 
+    {"name":"getAllAvailableTransportCombinations","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.port.AmqpPortImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.port.HttpPort",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getAbsoluteSessionTimeout","parameterTypes":[] }, 
+    {"name":"getAcceptBacklogSize","parameterTypes":[] }, 
+    {"name":"getDesiredNumberOfAcceptors","parameterTypes":[] }, 
+    {"name":"getDesiredNumberOfSelectors","parameterTypes":[] }, 
+    {"name":"getNeedClientAuth","parameterTypes":[] }, 
+    {"name":"getNumberOfAcceptors","parameterTypes":[] }, 
+    {"name":"getNumberOfSelectors","parameterTypes":[] }, 
+    {"name":"getProtocols","parameterTypes":[] }, 
+    {"name":"getThreadPoolMaximum","parameterTypes":[] }, 
+    {"name":"getThreadPoolMinimum","parameterTypes":[] }, 
+    {"name":"getTransports","parameterTypes":[] }, 
+    {"name":"getWantClientAuth","parameterTypes":[] }, 
+    {"name":"isManageBrokerOnNoAliasMatch","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.model.port.HttpPortImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.model.port.HttpPortImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.protocol.v0_10.AMQPConnection_0_10",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.protocol.v0_10.Session",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.protocol.v0_8.AMQPConnection_0_8",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getIncomingIdleTimeout","parameterTypes":[] }, 
+    {"name":"getOutgoingIdleTimeout","parameterTypes":[] }, 
+    {"name":"getSendSaslFinalChallengeAsChallenge","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0Impl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.protocol.v1_0.Session_1_0",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.protocol.v1_0.StandardReceivingLinkEndpoint$1",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getDestination","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.queue.AbstractQueue",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"activate","parameterTypes":[] }, 
+    {"name":"postSetAlternateBinding","parameterTypes":[] }, 
+    {"name":"preSetAlternateBinding","parameterTypes":[] }, 
+    {"name":"queueMessageTtlChanged","parameterTypes":[] }, 
+    {"name":"updateAlertChecks","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.queue.AbstractQueue$MessageCollector$MessageRangeList",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.CreatingLinkInfo",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.LastValueQueue",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.MessageGroupType",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.PriorityQueue",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.QueueConsumer",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.QueueConsumerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.SortedQueue",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.StandardQueue",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.StandardQueueImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.queue.StandardQueueImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.AbstractKeyStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.AbstractTrustStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.AllowAllAccessControlProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.AllowAllAccessControlProviderImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.AllowAllAccessControlProviderImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.AutoGeneratedSelfSignedKeyStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getCertificate","parameterTypes":[] }, 
+    {"name":"getClientTrustStore","parameterTypes":["java.lang.String"] }, 
+    {"name":"getDurationInMonths","parameterTypes":[] }, 
+    {"name":"getEncodedCertificate","parameterTypes":[] }, 
+    {"name":"getEncodedPrivateKey","parameterTypes":[] }, 
+    {"name":"getKeyAlgorithm","parameterTypes":[] }, 
+    {"name":"getKeyLength","parameterTypes":[] }, 
+    {"name":"getSignatureAlgorithm","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.security.AutoGeneratedSelfSignedKeyStoreImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.AutoGeneratedSelfSignedKeyStoreImpl$CertificateContent",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getContentDisposition","parameterTypes":[] }, 
+    {"name":"getContentType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.security.AutoGeneratedSelfSignedKeyStoreImpl$TrustStoreContent",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getContentDisposition","parameterTypes":[] }, 
+    {"name":"getContentType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.security.AutoGeneratedSelfSignedKeyStoreImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.CaseAwareGroupProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"isCaseSensitive","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.CertificateDetailsImpl",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getAlias","parameterTypes":[] }, 
+    {"name":"getIssuerName","parameterTypes":[] }, 
+    {"name":"getSerialNumber","parameterTypes":[] }, 
+    {"name":"getSignatureAlgorithm","parameterTypes":[] }, 
+    {"name":"getSubjectAltNames","parameterTypes":[] }, 
+    {"name":"getSubjectName","parameterTypes":[] }, 
+    {"name":"getValidFrom","parameterTypes":[] }, 
+    {"name":"getValidUntil","parameterTypes":[] }, 
+    {"name":"getVersion","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.security.FileKeyStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.FileKeyStoreImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.FileTrustStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.ManagedPeerCertificateTrustStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.ManagedPeerCertificateTrustStoreImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"initialize","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.ManagedPeerCertificateTrustStoreImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.NonJavaKeyStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.NonJavaKeyStoreImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.NonJavaTrustStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.NonJavaTrustStoreImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.Result",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.SiteSpecificTrustStore",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.SiteSpecificTrustStoreImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.AbstractAccessControlProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.config.LegacyOperation",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.config.ObjectType",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.AbstractCommonRuleBasedAccessControlProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.AbstractLegacyAccessControlProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.AclFileAccessControlProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.AclFileAccessControlProviderImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.AclFileAccessControlProviderImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.AclRule",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getAttributes","parameterTypes":[] }, 
+    {"name":"getIdentity","parameterTypes":[] }, 
+    {"name":"getObjectType","parameterTypes":[] }, 
+    {"name":"getOperation","parameterTypes":[] }, 
+    {"name":"getOutcome","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.RuleBasedAccessControlProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getDefaultResult","parameterTypes":[] }, 
+    {"name":"getRules","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.RuleBasedAccessControlProviderImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.RuleBasedAccessControlProviderImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.RuleBasedVirtualHostAccessControlProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getDefaultResult","parameterTypes":[] }, 
+    {"name":"getRules","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.RuleBasedVirtualHostAccessControlProviderImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.RuleBasedVirtualHostAccessControlProviderImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.access.plugins.RuleOutcome",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.AbstractAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.AbstractScramAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.AnonymousAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.AnonymousAuthenticationManagerWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.Base64MD5PasswordDatabaseAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.CachingAuthenticationProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ConfigModelPasswordManagingAuthenticationProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getSupportedUserTypes","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ExternalAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getUseFullDN","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ExternalAuthenticationManagerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ExternalAuthenticationManagerImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.KerberosAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.KerberosAuthenticationManagerWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.LdapAuthenticationMethod",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.MD5AuthenticationProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.MD5AuthenticationProviderWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ManagedUser",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ManagedUserWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.PlainAuthenticationProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.PlainAuthenticationProviderWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.PlainPasswordDatabaseAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.PrincipalDatabaseAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ScramSHA1AuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ScramSHA1AuthenticationManagerWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ScramSHA256AuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.ScramSHA256AuthenticationManagerWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.SimpleLDAPAuthenticationManager",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.UsernamePasswordAuthenticationProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.oauth2.OAuth2AuthenticationProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.auth.manager.oauth2.OAuth2AuthenticationProviderImpl",
+  "methods":[{"name":"validIdentityResolvers","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.group.GroupImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.group.GroupMemberImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.group.GroupProviderImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.security.group.GroupProviderImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.security.group.cloudfoundry.CloudFoundryDashboardManagementGroupProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.session.AMQPSession",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.session.AbstractAMQPSession",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.store.MemorySystemConfigImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.store.MessageDurability",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.store.berkeleydb.BDBEnvironmentContainer",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.store.berkeleydb.BDBSystemConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getStoreOverfullSize","parameterTypes":[] }, 
+    {"name":"getStoreUnderfullSize","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.store.berkeleydb.BDBSystemConfigImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.store.derby.DerbySystemConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getStoreOverfullSize","parameterTypes":[] }, 
+    {"name":"getStoreUnderfullSize","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.store.derby.DerbySystemConfigImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.store.jdbc.DefaultConnectionProviderFactory",
+  "methods":[{"name":"getAllAvailableConnectionProviderTypes","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.store.jdbc.JDBCSystemConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getConnectionUrl","parameterTypes":[] }, 
+    {"name":"getTableNamePrefix","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.store.jdbc.JDBCSystemConfigImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.store.preferences.JsonFilePreferenceStore$StoreContent",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"getPreferences","parameterTypes":[] }, 
+    {"name":"getVersion","parameterTypes":[] }, 
+    {"name":"setVersion","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.store.preferences.JsonFilePreferenceStore$StoredPreferenceRecord",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"getAttributes","parameterTypes":[] }, 
+    {"name":"getId","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.store.preferences.PreferenceRecord",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.store.preferences.PreferenceStoreAttributes",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getAttributes","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.transport.AMQPConnection",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.transport.AbstractAMQPConnection",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.AbstractVirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"onActivate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.NodeAutoCreationPolicy",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.NonStandardVirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.ProvidedStoreVirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.ProvidedStoreVirtualHostImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.QueueManagingVirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getBytesEvacuatedFromMemory","parameterTypes":[] }, 
+    {"name":"getBytesIn","parameterTypes":[] }, 
+    {"name":"getBytesOut","parameterTypes":[] }, 
+    {"name":"getConnectionCount","parameterTypes":[] }, 
+    {"name":"getConnectionThreadPoolSize","parameterTypes":[] }, 
+    {"name":"getDisabledConnectionValidators","parameterTypes":[] }, 
+    {"name":"getEnabledConnectionValidators","parameterTypes":[] }, 
+    {"name":"getExchangeCount","parameterTypes":[] }, 
+    {"name":"getFlowToDiskCheckPeriod","parameterTypes":[] }, 
+    {"name":"getGlobalAddressDomains","parameterTypes":[] }, 
+    {"name":"getHousekeepingCheckPeriod","parameterTypes":[] }, 
+    {"name":"getHousekeepingThreadCount","parameterTypes":[] }, 
+    {"name":"getInMemoryMessageSize","parameterTypes":[] }, 
+    {"name":"getInMemoryMessageThreshold","parameterTypes":[] }, 
+    {"name":"getInboundMessageSizeHighWatermark","parameterTypes":[] }, 
+    {"name":"getMessagesIn","parameterTypes":[] }, 
+    {"name":"getMessagesOut","parameterTypes":[] }, 
+    {"name":"getNodeAutoCreationPolicies","parameterTypes":[] }, 
+    {"name":"getNumberOfSelectors","parameterTypes":[] }, 
+    {"name":"getQueueCount","parameterTypes":[] }, 
+    {"name":"getStatisticsReportingPeriod","parameterTypes":[] }, 
+    {"name":"getStoreTransactionIdleTimeoutClose","parameterTypes":[] }, 
+    {"name":"getStoreTransactionIdleTimeoutWarn","parameterTypes":[] }, 
+    {"name":"getStoreTransactionOpenTimeoutClose","parameterTypes":[] }, 
+    {"name":"getStoreTransactionOpenTimeoutWarn","parameterTypes":[] }, 
+    {"name":"getTotalConnectionCount","parameterTypes":[] }, 
+    {"name":"getTotalDepthOfQueuesBytes","parameterTypes":[] }, 
+    {"name":"getTotalDepthOfQueuesMessages","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesIn","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesOut","parameterTypes":[] }, 
+    {"name":"isDiscardGlobalSharedSubscriptionLinksOnDetach","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.berkeleydb.BDBHAVirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.berkeleydb.BDBHAVirtualHostImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.berkeleydb.BDBVirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getStoreOverfullSize","parameterTypes":[] }, 
+    {"name":"getStorePath","parameterTypes":[] }, 
+    {"name":"getStoreUnderfullSize","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.berkeleydb.BDBVirtualHostImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.berkeleydb.BDBVirtualHostImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.derby.DerbyVirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.jdbc.JDBCVirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.jdbc.JDBCVirtualHostImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhost.memory.MemoryVirtualHost",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostalias.AbstractFixedVirtualHostNodeAlias",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostalias.AbstractVirtualHostAlias",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostalias.DefaultVirtualHostAliasImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostalias.DefaultVirtualHostAliasImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostalias.HostNameAliasImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostalias.HostNameAliasImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostalias.VirtualHostNameAliasImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostalias.VirtualHostNameAliasImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.AbstractStandardVirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.AbstractVirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"doActivate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.JsonVirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getPreferenceStoreAttributes","parameterTypes":[] }, 
+    {"name":"getStorePath","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.JsonVirtualHostNodeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getSupportedChildTypes","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.JsonVirtualHostNodeImplWithAccessChecking",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.RedirectingVirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.RedirectingVirtualHostNodeImpl",
+  "methods":[{"name":"getSupportedChildTypes","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.berkeleydb.BDBHARemoteReplicationNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.berkeleydb.BDBHAVirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.berkeleydb.BDBHAVirtualHostNodeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getSupportedChildTypes","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.berkeleydb.BDBVirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.berkeleydb.BDBVirtualHostNodeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getSupportedChildTypes","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.berkeleydb.NodeRole",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.derby.DerbyVirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.derby.DerbyVirtualHostNodeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getSupportedChildTypes","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.jdbc.JDBCVirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.jdbc.JDBCVirtualHostNodeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getSupportedChildTypes","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.virtualhostnode.memory.MemoryVirtualHostNode",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getSupportedChildTypes","parameterTypes":[] }]
+},
+{
+  "name":"org.eclipse.jetty.util.TypeUtil",
+  "methods":[
+    {"name":"getClassLoaderLocation","parameterTypes":["java.lang.Class"] }, 
+    {"name":"getCodeSourceLocation","parameterTypes":["java.lang.Class"] }, 
+    {"name":"getModuleLocation","parameterTypes":["java.lang.Class"] }, 
+    {"name":"getSystemClassLoaderLocation","parameterTypes":["java.lang.Class"] }
+  ]
+},
+{
+  "name":"org.eclipse.jetty.util.log.Slf4jLog",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.h2.Driver"
+},
+{
+  "name":"org.postgresql.Driver"
+},
+{
+  "name":"sun.management.ClassLoadingImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"sun.management.CompilationImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"sun.management.ManagementFactoryHelper$1",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"sun.management.ManagementFactoryHelper$PlatformLoggingImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"sun.management.MemoryImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"sun.management.MemoryManagerImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"sun.management.MemoryPoolImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"sun.management.RuntimeImpl",
+  "queryAllPublicConstructors":true
+},
+{
+  "name":"sun.misc.Unsafe",
+  "allDeclaredFields":true
+},
+{
+  "name":"sun.security.pkcs12.PKCS12KeyStore",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.pkcs12.PKCS12KeyStore$DualFormatPKCS12",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.MD5",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.NativePRNG",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA2$SHA256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.X509Factory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.RSAKeyFactory$Legacy",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.RSAKeyPairGenerator$Legacy",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.RSASignature$SHA256withRSA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.ssl.KeyManagerFactoryImpl$SunX509",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.ssl.TrustManagerFactoryImpl$PKIXFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.tools.keytool.CertAndKeyGen",
+  "methods":[
+    {"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }, 
+    {"name":"generate","parameterTypes":["int"] }, 
+    {"name":"getPrivateKey","parameterTypes":[] }, 
+    {"name":"getSelfCertificate","parameterTypes":["sun.security.x509.X500Name","java.util.Date","long","sun.security.x509.CertificateExtensions"] }
+  ]
+},
+{
+  "name":"sun.security.util.ObjectIdentifier"
+},
+{
+  "name":"sun.security.x509.CertificateExtensions",
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"set","parameterTypes":["java.lang.String","java.lang.Object"] }
+  ]
+},
+{
+  "name":"sun.security.x509.DNSName",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"sun.security.x509.GeneralName",
+  "methods":[{"name":"<init>","parameterTypes":["sun.security.x509.GeneralNameInterface"] }]
+},
+{
+  "name":"sun.security.x509.GeneralNameInterface"
+},
+{
+  "name":"sun.security.x509.GeneralNames",
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"add","parameterTypes":["sun.security.x509.GeneralName"] }
+  ]
+},
+{
+  "name":"sun.security.x509.IPAddressName",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"sun.security.x509.SubjectAlternativeNameExtension",
+  "methods":[
+    {"name":"<init>","parameterTypes":["sun.security.x509.GeneralNames"] }, 
+    {"name":"getName","parameterTypes":[] }
+  ]
+},
+{
+  "name":"sun.security.x509.X500Name",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+}
+]

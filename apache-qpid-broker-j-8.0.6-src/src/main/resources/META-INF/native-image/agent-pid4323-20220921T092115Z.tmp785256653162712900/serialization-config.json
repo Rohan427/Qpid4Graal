@@ -1,0 +1,15 @@
+{
+  "types":[
+    {
+      "name":"boolean[]"
+    },
+    {
+      "name":"byte[]"
+    },
+    {
+      "name":"int[]"
+    }
+  ],
+  "lambdaCapturingTypes":[
+  ]
+}

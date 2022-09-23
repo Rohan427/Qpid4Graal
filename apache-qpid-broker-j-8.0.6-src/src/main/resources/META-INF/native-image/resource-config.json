@@ -146,6 +146,9 @@
       "pattern":"\\QMETA-INF/services/org.apache.qpid.server.plugin.MessageFormat\\E"
     }, 
     {
+      "pattern":"\\QMETA-INF/services/org.apache.qpid.server.plugin.MessageMetaDataType\\E"
+    }, 
+    {
       "pattern":"\\QMETA-INF/services/org.apache.qpid.server.plugin.ProtocolEngineCreator\\E"
     }, 
     {
@@ -986,7 +989,13 @@
       "pattern":"\\Qresources/accesscontrolprovider/aclfile/add.html\\E"
     }, 
     {
+      "pattern":"\\Qresources/accesscontrolprovider/rulebased/LoadForm.html\\E"
+    }, 
+    {
       "pattern":"\\Qresources/accesscontrolprovider/rulebased/add.html\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/accesscontrolprovider/showRuleBased.html\\E"
     }, 
     {
       "pattern":"\\Qresources/addAccessControlProvider.html\\E"
@@ -1130,6 +1139,9 @@
       "pattern":"\\Qresources/images/question.svg\\E"
     }, 
     {
+      "pattern":"\\Qresources/images/warning-yellow.svg\\E"
+    }, 
+    {
       "pattern":"\\Qresources/index.html\\E"
     }, 
     {
@@ -1137,6 +1149,9 @@
     }, 
     {
       "pattern":"\\Qresources/js/crypto-js/hmac-sha256.js\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/js/qpid/common/CategoryTabExtension.js\\E"
     }, 
     {
       "pattern":"\\Qresources/js/qpid/common/ConsoleHelper.js\\E"
@@ -1268,7 +1283,13 @@
       "pattern":"\\Qresources/js/qpid/management/VirtualHostNode.js\\E"
     }, 
     {
+      "pattern":"\\Qresources/js/qpid/management/accesscontrolprovider/RuleBased.js\\E"
+    }, 
+    {
       "pattern":"\\Qresources/js/qpid/management/accesscontrolprovider/aclfile/add.js\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/js/qpid/management/accesscontrolprovider/rulebased/LoadForm.js\\E"
     }, 
     {
       "pattern":"\\Qresources/js/qpid/management/accesscontrolprovider/rulebased/add.js\\E"
@@ -1385,10 +1406,28 @@
       "pattern":"\\Qresources/js/qpid/management/logger/brokerlogger/add.js\\E"
     }, 
     {
+      "pattern":"\\Qresources/js/qpid/management/logger/brokerlogger/console/add.js\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/js/qpid/management/logger/brokerlogger/syslog/add.js\\E"
+    }, 
+    {
       "pattern":"\\Qresources/js/qpid/management/logger/virtualhostlogger/add.js\\E"
     }, 
     {
       "pattern":"\\Qresources/js/qpid/management/logger/virtualhostlogger/file/add.js\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/js/qpid/management/logger/virtualhostlogger/show.js\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/js/qpid/management/logger/virtualhostlogger/syslog/add.js\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/js/qpid/management/logger/virtualhostlogger/syslog/show.js\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/js/qpid/management/loginclusionrule/virtualhostloginclusionrule/nameandlevel/add.js\\E"
     }, 
     {
       "pattern":"\\Qresources/js/qpid/management/moveCopyMessages.js\\E"
@@ -1469,6 +1508,9 @@
       "pattern":"\\Qresources/js/qpid/management/virtualhost/bdb/add.js\\E"
     }, 
     {
+      "pattern":"\\Qresources/js/qpid/management/virtualhost/bdb/edit.js\\E"
+    }, 
+    {
       "pattern":"\\Qresources/js/qpid/management/virtualhost/bdb/show.js\\E"
     }, 
     {
@@ -1511,7 +1553,22 @@
       "pattern":"\\Qresources/logger/brokerlogger/add.html\\E"
     }, 
     {
+      "pattern":"\\Qresources/logger/console/add.html\\E"
+    }, 
+    {
       "pattern":"\\Qresources/logger/file/add.html\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/logger/syslog/add.html\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/logger/syslog/show.html\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/logger/virtualhostlogger/show.html\\E"
+    }, 
+    {
+      "pattern":"\\Qresources/loginclusionrule/nameandlevel/add.html\\E"
     }, 
     {
       "pattern":"\\Qresources/logout.html\\E"
@@ -1640,6 +1697,9 @@
       "pattern":"\\Qresources/virtualhost/sizemonitoring/add.html\\E"
     }, 
     {
+      "pattern":"\\Qresources/virtualhost/sizemonitoring/edit.html\\E"
+    }, 
+    {
       "pattern":"\\Qresources/virtualhost/sizemonitoring/show.html\\E"
     }, 
     {
@@ -1675,10 +1735,7 @@
     }, 
     {
       "name":"oracle.jdbc.driver.Messages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.AccessControl_logmessages",
@@ -1693,10 +1750,7 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Binding_logmessages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Broker_logmessages",
@@ -1707,10 +1761,7 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Channel_logmessages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.ConfigStore_logmessages",
@@ -1721,10 +1772,7 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Connection_logmessages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Exchange_logmessages",
@@ -1760,24 +1808,15 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Queue_logmessages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Sender_logmessages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Subscription_logmessages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.TransactionLog_logmessages",

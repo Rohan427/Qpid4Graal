@@ -6,6 +6,9 @@
     "interfaces":["org.apache.qpid.server.exchange.HeadersExchange"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.logging.logback.VirtualHostSyslogLogger"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.model.AccessControlProvider"]}
   ,
   {
@@ -13,6 +16,9 @@
   ,
   {
     "interfaces":["org.apache.qpid.server.model.Binding"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.BrokerLogger"]}
   ,
   {
     "interfaces":["org.apache.qpid.server.model.DefaultVirtualHostAlias"]}
@@ -48,6 +54,9 @@
     "interfaces":["org.apache.qpid.server.model.VirtualHostAlias"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.model.VirtualHostLogInclusionRule"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.model.VirtualHostLogger"]}
   ,
   {
@@ -76,6 +85,9 @@
   ,
   {
     "interfaces":["org.apache.qpid.server.security.access.plugins.RuleBasedAccessControlProvider"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.security.access.plugins.RuleBasedVirtualHostAccessControlProvider"]}
   ,
   {
     "interfaces":["org.apache.qpid.server.store.preferences.PreferenceStoreAttributes"]}

@@ -46,3 +46,18 @@ Use JDBC for configuration store:
   -prop "systemConfig.connectionUrl=jdbc:derby://localhost:1527/path/to/store;create=true" \
   -prop "systemConfig.username=test" -prop "systemConfig.password=password"
 
+
+./qpid-start.sh JDBC "systemConfig.connectionUrl=jdbc:postgresql://10.0.0.183:5432/qpid" "systemConfig.username=graalvm" "systemConfig.password=graalvm"
+
+
+Warning: Method org.apache.qpid.server.model.Binding.getDestination() not found.
+Warning: Could not resolve org.h2.Driver for reflection configuration. Reason: java.lang.ClassNotFoundException: org.h2.Driver.
+Warning: Could not resolve com.sun.rowset.providers.RIOptimisticProvider for reflection configuration. Reason: java.lang.ClassNotFoundException: com.sun.rowset.providers.RIOptimisticProvider.
+Warning: Method org.apache.qpid.server.model.Binding.getDestination() not found.
+Warning: Could not resolve org.h2.Driver for reflection configuration. Reason: java.lang.ClassNotFoundException: org.h2.Driver.
+Warning: Could not resolve com.sun.rowset.providers.RIOptimisticProvider for reflection configuration. Reason: java.lang.ClassNotFoundException: com.sun.rowset.providers.RIOptimisticProvider.
+
+The bundle named: com/sun/rowset/RowSetResourceBundle, has not been found. If the bundle is part of a module, verify the bundle name is a fully qualified class name. Otherwise verify the bundle path is accessible in the classpath.
+
+
+

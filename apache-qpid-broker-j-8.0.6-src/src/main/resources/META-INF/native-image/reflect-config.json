@@ -75,6 +75,14 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"ch.qos.logback.classic.pattern.NopThrowableInformationConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.pattern.SyslogStartConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"ch.qos.logback.classic.pattern.ThreadConverter",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -1113,6 +1121,23 @@
 {
   "name":"org.apache.qpid.server.logging.logback.BrokerSyslogLogger",
   "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getPort","parameterTypes":[] }, 
+    {"name":"getStackTracePattern","parameterTypes":[] }, 
+    {"name":"getSuffixPattern","parameterTypes":[] }, 
+    {"name":"getSyslogHost","parameterTypes":[] }, 
+    {"name":"isThrowableExcluded","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerSyslogLoggerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.BrokerSyslogLoggerImplWithAccessChecking",
+  "allDeclaredFields":true,
   "queryAllDeclaredMethods":true
 },
 {
@@ -1152,6 +1177,23 @@
 },
 {
   "name":"org.apache.qpid.server.logging.logback.VirtualHostSyslogLogger",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getPort","parameterTypes":[] }, 
+    {"name":"getStackTracePattern","parameterTypes":[] }, 
+    {"name":"getSuffixPattern","parameterTypes":[] }, 
+    {"name":"getSyslogHost","parameterTypes":[] }, 
+    {"name":"isThrowableExcluded","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.VirtualHostSyslogLoggerImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.logging.logback.VirtualHostSyslogLoggerImplWithAccessChecking",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true
 },
@@ -1223,6 +1265,38 @@
     {"name":"getName","parameterTypes":[] }, 
     {"name":"getOffset","parameterTypes":[] }, 
     {"name":"getRegion","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.apache.qpid.server.message.MessageInfoImpl",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getApplicationId","parameterTypes":[] }, 
+    {"name":"getArrivalTime","parameterTypes":[] }, 
+    {"name":"getCorrelationId","parameterTypes":[] }, 
+    {"name":"getDeliveredTo","parameterTypes":[] }, 
+    {"name":"getDeliveredToConsumerId","parameterTypes":[] }, 
+    {"name":"getDeliveryCount","parameterTypes":[] }, 
+    {"name":"getEncoding","parameterTypes":[] }, 
+    {"name":"getExpirationTime","parameterTypes":[] }, 
+    {"name":"getGroupId","parameterTypes":[] }, 
+    {"name":"getHeaderSize","parameterTypes":[] }, 
+    {"name":"getHeaders","parameterTypes":[] }, 
+    {"name":"getId","parameterTypes":[] }, 
+    {"name":"getInitialRoutingAddress","parameterTypes":[] }, 
+    {"name":"getMessageId","parameterTypes":[] }, 
+    {"name":"getMessageType","parameterTypes":[] }, 
+    {"name":"getMimeType","parameterTypes":[] }, 
+    {"name":"getNotValidBefore","parameterTypes":[] }, 
+    {"name":"getPriority","parameterTypes":[] }, 
+    {"name":"getReplyTo","parameterTypes":[] }, 
+    {"name":"getSize","parameterTypes":[] }, 
+    {"name":"getState","parameterTypes":[] }, 
+    {"name":"getTimestamp","parameterTypes":[] }, 
+    {"name":"getTo","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }, 
+    {"name":"getUserId","parameterTypes":[] }, 
+    {"name":"isPersistent","parameterTypes":[] }
   ]
 },
 {
@@ -1399,30 +1473,58 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "methods":[
+    {"name":"getAddressSpace","parameterTypes":[] }, 
     {"name":"getBytesIn","parameterTypes":[] }, 
     {"name":"getBytesOut","parameterTypes":[] }, 
+    {"name":"getClientId","parameterTypes":[] }, 
+    {"name":"getClientProduct","parameterTypes":[] }, 
+    {"name":"getClientVersion","parameterTypes":[] }, 
     {"name":"getLastInboundMessageTime","parameterTypes":[] }, 
     {"name":"getLastIoTime","parameterTypes":[] }, 
     {"name":"getLastMessageTime","parameterTypes":[] }, 
     {"name":"getLastOutboundMessageTime","parameterTypes":[] }, 
+    {"name":"getLocalAddress","parameterTypes":[] }, 
     {"name":"getLocalTransactionBegins","parameterTypes":[] }, 
     {"name":"getLocalTransactionOpen","parameterTypes":[] }, 
     {"name":"getLocalTransactionRollbacks","parameterTypes":[] }, 
+    {"name":"getMaxUncommittedInMemorySize","parameterTypes":[] }, 
     {"name":"getMessagesIn","parameterTypes":[] }, 
     {"name":"getMessagesOut","parameterTypes":[] }, 
     {"name":"getOldestTransactionStartTime","parameterTypes":[] }, 
     {"name":"getPort","parameterTypes":[] }, 
     {"name":"getPrincipal","parameterTypes":[] }, 
+    {"name":"getProtocol","parameterTypes":[] }, 
+    {"name":"getRemoteAddress","parameterTypes":[] }, 
+    {"name":"getRemoteProcessName","parameterTypes":[] }, 
+    {"name":"getRemoteProcessPid","parameterTypes":[] }, 
     {"name":"getSessionCount","parameterTypes":[] }, 
+    {"name":"getSessionCountLimit","parameterTypes":[] }, 
     {"name":"getTransactedMessagesIn","parameterTypes":[] }, 
     {"name":"getTransactedMessagesOut","parameterTypes":[] }, 
-    {"name":"getTransport","parameterTypes":[] }
+    {"name":"getTransport","parameterTypes":[] }, 
+    {"name":"getTransportInfo","parameterTypes":[] }, 
+    {"name":"isIncoming","parameterTypes":[] }
   ]
 },
 {
   "name":"org.apache.qpid.server.model.Consumer",
   "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getBytesOut","parameterTypes":[] }, 
+    {"name":"getDistributionMode","parameterTypes":["java.lang.String"] }, 
+    {"name":"getLinkName","parameterTypes":[] }, 
+    {"name":"getMessagesOut","parameterTypes":[] }, 
+    {"name":"getPriority","parameterTypes":[] }, 
+    {"name":"getSelector","parameterTypes":[] }, 
+    {"name":"getSession","parameterTypes":[] }, 
+    {"name":"getSettlementMode","parameterTypes":[] }, 
+    {"name":"getUnacknowledgedBytes","parameterTypes":[] }, 
+    {"name":"getUnacknowledgedMessages","parameterTypes":[] }, 
+    {"name":"isExclusive","parameterTypes":[] }, 
+    {"name":"isNoLocal","parameterTypes":[] }, 
+    {"name":"isNonLive","parameterTypes":[] }
+  ]
 },
 {
   "name":"org.apache.qpid.server.model.Container",
@@ -1586,14 +1688,21 @@
 },
 {
   "name":"org.apache.qpid.server.model.PublishingLink",
+  "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
-  "methods":[{"name":"getDestination","parameterTypes":[] }]
+  "methods":[
+    {"name":"getDestination","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }
+  ]
 },
 {
   "name":"org.apache.qpid.server.model.Queue",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "methods":[
+    {"name":"clearQueue","parameterTypes":[] }, 
+    {"name":"copyMessages","parameterTypes":["org.apache.qpid.server.model.Queue","java.util.List","java.lang.String","int"] }, 
+    {"name":"deleteMessages","parameterTypes":["java.util.List","java.lang.String","int"] }, 
     {"name":"getAlertRepeatGap","parameterTypes":[] }, 
     {"name":"getAlertThresholdMessageAge","parameterTypes":[] }, 
     {"name":"getAlertThresholdMessageSize","parameterTypes":[] }, 
@@ -1623,6 +1732,7 @@
     {"name":"getMessageGroupKeyOverride","parameterTypes":[] }, 
     {"name":"getMessageGroupType","parameterTypes":[] }, 
     {"name":"getMessageInfo","parameterTypes":["int","int","boolean"] }, 
+    {"name":"getMessageInfoById","parameterTypes":["long","boolean"] }, 
     {"name":"getMinimumMessageTtl","parameterTypes":[] }, 
     {"name":"getOldestMessageAge","parameterTypes":[] }, 
     {"name":"getOverflowPolicy","parameterTypes":[] }, 
@@ -1649,7 +1759,8 @@
     {"name":"isEnsureNondestructiveConsumers","parameterTypes":[] }, 
     {"name":"isHoldOnPublishEnabled","parameterTypes":[] }, 
     {"name":"isNoLocal","parameterTypes":[] }, 
-    {"name":"isQueueFlowStopped","parameterTypes":[] }
+    {"name":"isQueueFlowStopped","parameterTypes":[] }, 
+    {"name":"moveMessages","parameterTypes":["org.apache.qpid.server.model.Queue","java.util.List","java.lang.String","int"] }
   ]
 },
 {
@@ -1665,7 +1776,17 @@
 {
   "name":"org.apache.qpid.server.model.Session",
   "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getBytesIn","parameterTypes":[] }, 
+    {"name":"getBytesOut","parameterTypes":[] }, 
+    {"name":"getConsumerCount","parameterTypes":[] }, 
+    {"name":"getMessagesIn","parameterTypes":[] }, 
+    {"name":"getMessagesOut","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesIn","parameterTypes":[] }, 
+    {"name":"getTransactedMessagesOut","parameterTypes":[] }, 
+    {"name":"getUnacknowledgedMessages","parameterTypes":[] }
+  ]
 },
 {
   "name":"org.apache.qpid.server.model.State",
@@ -1760,6 +1881,18 @@
 {
   "name":"org.apache.qpid.server.model.adapter.FileBasedGroupProvider",
   "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getPath","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.adapter.FileBasedGroupProviderImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"activate","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.qpid.server.model.adapter.FileBasedGroupProviderImplWithAccessChecking",
+  "allDeclaredFields":true,
   "queryAllDeclaredMethods":true
 },
 {
@@ -1852,7 +1985,12 @@
 {
   "name":"org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0",
   "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getIncomingIdleTimeout","parameterTypes":[] }, 
+    {"name":"getOutgoingIdleTimeout","parameterTypes":[] }, 
+    {"name":"getSendSaslFinalChallengeAsChallenge","parameterTypes":[] }
+  ]
 },
 {
   "name":"org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0Impl",
@@ -1863,6 +2001,15 @@
   "name":"org.apache.qpid.server.protocol.v1_0.Session_1_0",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.apache.qpid.server.protocol.v1_0.StandardReceivingLinkEndpoint$1",
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getDestination","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }
+  ]
 },
 {
   "name":"org.apache.qpid.server.queue.AbstractQueue",

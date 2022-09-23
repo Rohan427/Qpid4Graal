@@ -40,3 +40,73 @@ Docker qpid-full/native:0.9.0 image build time:
 60326ms
 60s
 
+
+Docker qpid-full/native:0.9.0 image build time:
+61376145663ns
+61376145us
+61376ms
+61s
+
+
+Docker qpid-full/native:0.9.0 image build time:
+59799424199ns
+59799424us
+59799ms
+59s
+
+
+Docker qpid-full/native:0.9.0 image build time:
+59440882757ns
+59440882us
+59440ms
+59s
+
+
+Docker qpid-full/native:0.9.0 image build time:
+57872800485ns
+57872800us
+57872ms
+57s
+
+
+Docker qpid-full/native:0.9.0 image build time:
+63788634832ns
+63788634us
+63788ms
+63s
+
+
+Docker qpid-full/native:0.9.0 image build time:
+57058131242ns
+57058131us
+57058ms
+57s
+
+
+Docker qpid-full/native:0.9.0 image build time:
+57953774414ns
+57953774us
+57953ms
+57s
+
+
+Docker qpid-full/native:0.9.0 image build time:
+56975229041ns
+56975229us
+56975ms
+56s
+
+
+Docker qpid-full/native:0.9.0 image build time:
+59931680934ns
+59931680us
+59931ms
+59s
+
+
+Docker qpid-full/native:0.9.0 image build time:
+62489551484ns
+62489551us
+62489ms
+62s
+
