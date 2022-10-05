@@ -111,11 +111,11 @@ public class SystemLauncher
                 System.out.println ("principals:       " + principals.toString());
                 
                 /* Test for locale resource for native image support.
-                 * This should throw and exception causing a resource request for
+                 * This should throw an exception causing a resource request for
                  * a language bundle. The native image agent should pick this up
-                 * and add a configuration option for the proper locate resource.
+                 * and add a configuration option for the proper locale resource.
                  * 
-                 * Necessary for currently broken GrallVM native image locale
+                 * Necessary for currently broken GraalVM native image locale
                  * resource support.
                  */
                 try

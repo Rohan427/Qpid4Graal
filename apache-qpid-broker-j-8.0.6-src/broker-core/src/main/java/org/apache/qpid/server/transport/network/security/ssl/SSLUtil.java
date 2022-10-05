@@ -1029,12 +1029,13 @@ public class SSLUtil
                                         altNamesExtension);
         }
 
-        final X509Certificate _certificate = (X509Certificate) GET_SELF_CERTIFICATE_METHOD.invoke(certAndKeyGen,
-                                                                                                  X500_NAME_CONSTRUCTOR
-                                                                                                          .newInstance(x500Name),
-                                                                                                  new Date(startTime),
-                                                                                                  duration,
-                                                                                                  certificateExtensions);
+        final X509Certificate _certificate = (X509Certificate) GET_SELF_CERTIFICATE_METHOD.invoke (certAndKeyGen,
+                                                                                                   X500_NAME_CONSTRUCTOR
+                                                                                                           .newInstance (x500Name),
+                                                                                                   new Date(startTime),
+                                                                                                   duration,
+                                                                                                   certificateExtensions
+                                                                                                  );
 
         return new KeyCertPair()
         {
@@ -1057,52 +1058,55 @@ public class SSLUtil
      * Get keystore certificates
      * @deprecated
      * The signature of this method is changed in version 9.0 and onwards.
-     * <p> Use {@link SSLUtil#getCertificatesAsMap(KeyStore)} instead.
+     * <p> Use {@link SSLUtil#getCertificatesAsMap (KeyStore)} instead.
      *
-     * @return cllection of keystore certificates
+     * @return collection of keystore certificates
      */
     @Deprecated
-    public static Collection<Certificate> getCertificates(final KeyStore ks) throws KeyStoreException
+    public static Collection<Certificate> getCertificates (final KeyStore ks) throws KeyStoreException
     {
-        return getCertificatesAsMap(ks).values();
+        return getCertificatesAsMap (ks).values();
     }
 
-    public static Map<String, Certificate> getCertificatesAsMap(final KeyStore ks) throws KeyStoreException
+    public static Map<String, Certificate> getCertificatesAsMap (final KeyStore ks) throws KeyStoreException
     {
         final Map<String ,Certificate> certificates = new HashMap<>();
         final Enumeration<String> aliases = ks.aliases();
+        
         while (aliases.hasMoreElements())
         {
             final String alias = aliases.nextElement();
-            if (ks.isCertificateEntry(alias))
+            
+            if (ks.isCertificateEntry (alias))
             {
-                certificates.put(alias, ks.getCertificate(alias));
+                certificates.put(alias, ks.getCertificate (alias));
             }
         }
+        
         return certificates;
     }
 
-    public static SNIHostName createSNIHostName(String hostName)
+    public static SNIHostName createSNIHostName (String hostName)
     {
         try
         {
-            return new SNIHostName(hostName);
+            return new SNIHostName (hostName);
         }
         catch (IllegalArgumentException e)
         {
-            throw new ConnectionScopedRuntimeException("Failed to create SNIHostName from string '" + hostName + "'", e);
+            throw new ConnectionScopedRuntimeException ("Failed to create SNIHostName from string '" + hostName + "'", e);
         }
     }
 
-    public static SNIHostName createSNIHostName(byte[] hostName)
+    public static SNIHostName createSNIHostName (byte[] hostName)
     {
         try
         {
-            return new SNIHostName(hostName);
+            return new SNIHostName (hostName);
         }
         catch (IllegalArgumentException e)
         {
-            throw new ConnectionScopedRuntimeException("Failed to create SNIHostName from byte array '" + new String(hostName) + "'", e);
+            throw new ConnectionScopedRuntimeException ("Failed to create SNIHostName from byte array '" + new String(hostName) + "'", e);
         }
     }
 

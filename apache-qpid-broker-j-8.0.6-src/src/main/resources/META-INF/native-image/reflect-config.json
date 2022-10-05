@@ -369,8 +369,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "fields":[{"name":"TYPE"}],
-  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+  "fields":[{"name":"TYPE"}]
 },
 {
   "name":"java.lang.Float",

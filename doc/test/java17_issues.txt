@@ -1,0 +1,49 @@
+Java 17 build issues:
+
+javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated
+	at org.apache.qpid.server.transport.SNITest.performTest(SNITest.java:219)
+	at org.apache.qpid.server.transport.SNITest.testBypassInvalidSniHostname(SNITest.java:172)
+
+java.lang.NullPointerException: Cannot invoke "javax.script.ScriptEngine.eval(java.io.Reader)" because "engine" is null
+	at org.apache.qpid.disttest.controller.config.JavaScriptConfigEvaluatorTest.testEvaluateJavaScript(JavaScriptConfigEvaluatorTest.java:94)
+
+
+JEP 353: Reimplementation of the Legacy Socket API (https://openjdk.org/jeps/353)
+JEP 372: Removal of the Nashorn JavaScript Engine (https://openjdk.org/jeps/372)
+JEP 396: String encapsulation of JDK Internals (https://openjdk.org/jeps/396)
+JEP 403: Strong encapsulation of Java’s internals (https://openjdk.org/jeps/403)
+JEP 411: Deprecation of the Security Manager with removal being the eventual goal (https://openjdk.org/jeps/411)
+
+
+Maven GraalVM updates:
+
+Java run option for Nashorn support    <argument>-Dpolyglot.js.nashorn-compat=true</argument>
+
+<!-- TODO: Remove when GraalVM engine support is working. -->
+    <dependency>
+	  <groupId>org.openjdk.nashorn</groupId>
+	  <artifactId>nashorn-core</artifactId>
+	  <version>15.4</version>
+	</dependency>
+  <!-- TODO END -->
+  
+  <!-- Java 17 GraalVM compiler and JavaScript engine -->
+    <dependency>
+	    <groupId>org.graalvm.compiler</groupId>
+	    <artifactId>compiler</artifactId>
+	    <version>22.2.0</version>
+	</dependency>
+	
+	<dependency>
+      <groupId>org.graalvm.js</groupId>
+      <artifactId>js</artifactId>
+      <version>22.2.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.graalvm.js</groupId>
+      <artifactId>js-scriptengine</artifactId>
+      <version>22.2.0</version>
+    </dependency>
+  <!-- END Java 17 GraalVM and JavaScript engine -->
+

@@ -93,33 +93,37 @@ public class SNITest extends UnitTestBase
     @Before
     public void setUp() throws Exception
     {
-        final Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
-        final Instant inOneHour = Instant.now().plus(1, ChronoUnit.HOURS);
-        _fooValid = TlsResourceBuilder.createSelfSigned("CN=foo",
-                                                        yesterday,
-                                                        yesterday.plus(365, ChronoUnit.DAYS));
+        final Instant yesterday = Instant.now().minus (1, ChronoUnit.DAYS);
+        final Instant inOneHour = Instant.now().plus (1, ChronoUnit.HOURS);
+        
+        _fooValid = TlsResourceBuilder.createSelfSigned ("CN=foo",
+                                                         yesterday,
+                                                         yesterday.plus (365, ChronoUnit.DAYS)
+                                                        );
         _fooInvalid = TlsResourceBuilder.createSelfSigned("CN=foo",
                                                           inOneHour,
-                                                          inOneHour.plus(365, ChronoUnit.DAYS));
+                                                          inOneHour.plus (365, ChronoUnit.DAYS)
+                                                         );
+        _barInvalid = TlsResourceBuilder.createSelfSigned ("CN=Qpid",
+                                                           inOneHour,
+                                                           inOneHour.plus (365, ChronoUnit.DAYS),
+                                                           new AlternativeName (
+                                                                  AltNameType.DNS_NAME, "bar")
+                                                          );
 
-        _barInvalid = TlsResourceBuilder.createSelfSigned("CN=Qpid",
-                                                          inOneHour,
-                                                          inOneHour.plus(365, ChronoUnit.DAYS),
-                                                          new AlternativeName(
-                                                                  AltNameType.DNS_NAME, "bar"));
-
-
-
-
-        _keyStoreFile = TLS_RESOURCE.createKeyStore(new PrivateKeyEntry("foovalid",
-                                                                        _fooValid.getPrivateKey(),
-                                                                        _fooValid.getCertificate()),
-                                                    new PrivateKeyEntry("fooinvalid",
-                                                                        _fooInvalid.getPrivateKey(),
-                                                                        _fooInvalid.getCertificate()),
-                                                    new PrivateKeyEntry("barinvalid",
-                                                                        _barInvalid.getPrivateKey(),
-                                                                        _barInvalid.getCertificate())).toFile();
+        _keyStoreFile = TLS_RESOURCE.createKeyStore (new PrivateKeyEntry ("foovalid",
+                                                                          _fooValid.getPrivateKey(),
+                                                                          _fooValid.getCertificate()
+                                                                         ),
+                                                     new PrivateKeyEntry ("fooinvalid",
+                                                                          _fooInvalid.getPrivateKey(),
+                                                                          _fooInvalid.getCertificate()
+                                                                         ),
+                                                     new PrivateKeyEntry ("barinvalid",
+                                                                          _barInvalid.getPrivateKey(),
+                                                                          _barInvalid.getCertificate()
+                                                                         )
+                                                    ).toFile();
     }
 
     @After
@@ -157,68 +161,74 @@ public class SNITest extends UnitTestBase
     @Test
     public void testMatchingCanBeDisabled() throws Exception
     {
-        performTest(false, "fooinvalid", "foo", _fooInvalid, false);
+        performTest (false, "fooinvalid", "foo", _fooInvalid, false);
     }
 
-    @Test(expected = SSLPeerUnverifiedException.class)
+    @Test (expected = SSLPeerUnverifiedException.class)
     public void testInvalidHostname() throws Exception
     {
-        performTest(false, "fooinvalid", "_foo", _fooInvalid, false);
+        performTest (false, "fooinvalid", "_foo", _fooInvalid, false);
     }
 
     @Test
     public void testBypassInvalidSniHostname() throws Exception
     {
-        performTest(false, "foovalid", "_foo", _fooValid,true);
+        performTest(false, "foovalid", "_foo", _fooValid, true);
     }
 
 
-    private void performTest(final boolean useMatching,
-                             final String defaultAlias,
-                             final String sniHostName,
-                             final KeyCertificatePair expectedCert, final boolean ignoreInvalidSni) throws Exception
+    private void performTest (final boolean useMatching,
+                              final String defaultAlias,
+                              final String sniHostName,
+                              final KeyCertificatePair expectedCert, final boolean ignoreInvalidSni
+                             ) throws Exception
     {
             doBrokerStartup(useMatching, defaultAlias, ignoreInvalidSni);
             SSLContext context = SSLUtil.tryGetSSLContext();
-            context.init(null,
-                         new TrustManager[]
+            
+            context.init (null,
+                          new TrustManager[]
+                          {
+                             new X509TrustManager()
+                             {
+                                 @Override
+                                 public X509Certificate[] getAcceptedIssuers()
                                  {
-                                         new X509TrustManager()
-                                         {
-                                             @Override
-                                             public X509Certificate[] getAcceptedIssuers()
-                                             {
-                                                 return null;
-                                             }
+                                     return null;
+                                 }
 
-                                             @Override
-                                             public void checkClientTrusted(X509Certificate[] certs, String authType)
-                                             {
-                                             }
+                                 @Override
+                                 public void checkClientTrusted (X509Certificate[] certs, String authType)
+                                 {
+                                 }
 
-                                             @Override
-                                             public void checkServerTrusted(X509Certificate[] certs, String authType)
-                                             {
-                                             }
-                                         }
-                                 },
-                         null);
+                                 @Override
+                                 public void checkServerTrusted (X509Certificate[] certs, String authType)
+                                 {
+                                 }
+                             }
+                          },
+                          null
+                         );
 
             SSLSocketFactory socketFactory = context.getSocketFactory();
+            
             try (SSLSocket socket = (SSLSocket) socketFactory.createSocket())
             {
                 SSLParameters parameters = socket.getSSLParameters();
+                
                 if (sniHostName != null)
                 {
-                    parameters.setServerNames(Collections.singletonList(new TestSNIHostName(sniHostName)));
+                    parameters.setServerNames (Collections.singletonList (new TestSNIHostName (sniHostName)));
                 }
+                
                 socket.setSSLParameters(parameters);
-                InetSocketAddress address = new InetSocketAddress("localhost", _boundPort);
-                socket.connect(address, SOCKET_TIMEOUT);
+                InetSocketAddress address = new InetSocketAddress ("localhost", _boundPort);
+                socket.connect (address, SOCKET_TIMEOUT);
 
                 final Certificate[] certs = socket.getSession().getPeerCertificates();
-                assertEquals((long) 1, (long) certs.length);
-                assertEquals(expectedCert.getCertificate(), certs[0]);
+                assertEquals ((long) 1, (long) certs.length);
+                assertEquals (expectedCert.getCertificate(), certs[0]);
             }
     }
 
@@ -242,33 +252,38 @@ public class SNITest extends UnitTestBase
                 _broker = systemConfig.getContainer(Broker.class);
             }
         });
-        _systemLauncher.startup(attributes);
+        
+        _systemLauncher.startup (attributes);
 
         final Map<String, Object> authProviderAttr = new HashMap<>();
-        authProviderAttr.put(AuthenticationProvider.NAME, "myAuthProvider");
-        authProviderAttr.put(AuthenticationProvider.TYPE, AnonymousAuthenticationManager.PROVIDER_TYPE);
+        authProviderAttr.put (AuthenticationProvider.NAME, "myAuthProvider");
+        authProviderAttr.put (AuthenticationProvider.TYPE, AnonymousAuthenticationManager.PROVIDER_TYPE);
 
-        final AuthenticationProvider authProvider = _broker.createChild(AuthenticationProvider.class, authProviderAttr);
+        final AuthenticationProvider authProvider = _broker.createChild (AuthenticationProvider.class, authProviderAttr);
 
         Map<String, Object> keyStoreAttr = new HashMap<>();
-        keyStoreAttr.put(FileKeyStore.NAME, "myKeyStore");
-        keyStoreAttr.put(FileKeyStore.STORE_URL, _keyStoreFile.toURI().toURL().toString());
-        keyStoreAttr.put(FileKeyStore.PASSWORD, TLS_RESOURCE.getSecret());
-        keyStoreAttr.put(FileKeyStore.USE_HOST_NAME_MATCHING, useMatching);
-        keyStoreAttr.put(FileKeyStore.CERTIFICATE_ALIAS, defaultAlias);
+        keyStoreAttr.put (FileKeyStore.NAME, "myKeyStore");
+        keyStoreAttr.put (FileKeyStore.STORE_URL, _keyStoreFile.toURI().toURL().toString());
+        keyStoreAttr.put (FileKeyStore.PASSWORD, TLS_RESOURCE.getSecret());
+        keyStoreAttr.put (FileKeyStore.USE_HOST_NAME_MATCHING, useMatching);
+        keyStoreAttr.put (FileKeyStore.CERTIFICATE_ALIAS, defaultAlias);
 
         final KeyStore keyStore = _broker.createChild(KeyStore.class, keyStoreAttr);
 
         Map<String, Object> portAttr = new HashMap<>();
-        portAttr.put(Port.NAME, "myPort");
-        portAttr.put(Port.TYPE, "AMQP");
-        portAttr.put(Port.TRANSPORTS, Collections.singleton(Transport.SSL));
-        portAttr.put(Port.PORT, 0);
-        portAttr.put(Port.AUTHENTICATION_PROVIDER, authProvider);
-        portAttr.put(Port.KEY_STORE, keyStore);
-        portAttr.put(Port.CONTEXT, Collections.singletonMap(AmqpPort.PORT_IGNORE_INVALID_SNI, String.valueOf(ignoreInvalidSni)));
+        portAttr.put (Port.NAME, "myPort");
+        portAttr.put (Port.TYPE, "AMQP");
+        portAttr.put (Port.TRANSPORTS, Collections.singleton(Transport.SSL));
+        portAttr.put (Port.PORT, 0);
+        portAttr.put (Port.AUTHENTICATION_PROVIDER, authProvider);
+        portAttr.put (Port.KEY_STORE, keyStore);
+        portAttr.put (Port.CONTEXT, 
+                      Collections.singletonMap (AmqpPort.PORT_IGNORE_INVALID_SNI,
+                                                String.valueOf (ignoreInvalidSni)
+                                               )
+                     );
 
-        final Port<?> port = _broker.createChild(Port.class, portAttr);
+        final Port<?> port = _broker.createChild (Port.class, portAttr);
 
         _boundPort = port.getBoundPort();
     }
@@ -277,19 +292,19 @@ public class SNITest extends UnitTestBase
     {
         // create empty initial configuration
         Map<String,Object> initialConfig = new HashMap<>();
-        initialConfig.put(ConfiguredObject.NAME, "test");
-        initialConfig.put(Broker.MODEL_VERSION, BrokerModel.MODEL_VERSION);
+        initialConfig.put (ConfiguredObject.NAME, "test");
+        initialConfig.put (Broker.MODEL_VERSION, BrokerModel.MODEL_VERSION);
 
         ObjectMapper mapper = new ObjectMapper();
-        String config = mapper.writeValueAsString(initialConfig);
-        return TestFileUtils.createTempFile(this, ".initial-config.json", config);
+        String config = mapper.writeValueAsString (initialConfig);
+        return TestFileUtils.createTempFile (this, ".initial-config.json", config);
     }
 
     private static final class TestSNIHostName extends SNIServerName
     {
-        public TestSNIHostName(String hostname)
+        public TestSNIHostName (String hostname)
         {
-            super(0, hostname.getBytes(StandardCharsets.US_ASCII));
+            super (0, hostname.getBytes (StandardCharsets.US_ASCII));
         }
     }
 }
