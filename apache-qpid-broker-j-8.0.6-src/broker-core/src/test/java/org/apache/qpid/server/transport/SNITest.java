@@ -173,7 +173,7 @@ public class SNITest extends UnitTestBase
     @Test
     public void testBypassInvalidSniHostname() throws Exception
     {
-        performTest(false, "foovalid", "_foo", _fooValid, true);
+        performTest(false, "foovalid", "invalid", _fooValid, true);
     }
 
 

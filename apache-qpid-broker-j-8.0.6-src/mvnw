@@ -14,8 +14,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 AUTHOR="\"com.randomlogic.perftest.author\"=\"Paul Allen <pgallen@randomlogic.net>\""
 
 # Java versions to use
-JVMJAVA="11.0.12-open"
-GRAALJAVA="22.2.r11-grl"
+JVMJAVA="22.2.r17-grl"
+GRAALJAVA="22.2.r17-grl"
 
 # Base paths and references
 BASEPATH="/usr/local/src/qpid/Qpid4Graal/"

@@ -78,9 +78,9 @@
   <properties>
   
     <minimum-maven-version>3.0.0</minimum-maven-version>
-    <minimum-java-version>11</minimum-java-version>
-    <java.source>11</java.source>
-    <java.target>11</java.target>
+    <minimum-java-version>17</minimum-java-version>
+    <java.source>17</java.source>
+    <java.target>17</java.target>
     <skipTests>false</skipTests>
     
     <!--For native build -->
@@ -223,15 +223,15 @@
   </modules>
 
   <dependencies>
-  <!-- TODO: Remove when GraalVM engine support is working. >
+  <!-- TODO: Remove when GraalVM engine support is working. -->
     <dependency>
 	  <groupId>org.openjdk.nashorn</groupId>
 	  <artifactId>nashorn-core</artifactId>
 	  <version>15.4</version>
 	</dependency>
-  <! TODO END -->
+  <!-- TODO END -->
   
-  <!-- Java 17 GraalVM compiler and JavaScript engine >
+  <!-- Java 17 GraalVM compiler and JavaScript engine -->
     <dependency>
 	    <groupId>org.graalvm.compiler</groupId>
 	    <artifactId>compiler</artifactId>
@@ -249,7 +249,7 @@
       <artifactId>js-scriptengine</artifactId>
       <version>22.2.0</version>
     </dependency>
-  <! END Java 17 GraalVM and JavaScript engine -->
+  <!-- END Java 17 GraalVM and JavaScript engine -->
 
     <dependency>
       <groupId>org.hamcrest</groupId>
