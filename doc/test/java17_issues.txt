@@ -1,5 +1,6 @@
-
 Java 17 build issues:
+
+https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/all-changes-in-Java-17-since-JDK-11-LTS-release
 
 javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated
 	at org.apache.qpid.server.transport.SNITest.performTest(SNITest.java:219)
@@ -48,5 +49,3 @@ Java run option for Nashorn support    <argument>-Dpolyglot.js.nashorn-compat=tr
     </dependency>
   <!-- END Java 17 GraalVM and JavaScript engine -->
 
-
-test push

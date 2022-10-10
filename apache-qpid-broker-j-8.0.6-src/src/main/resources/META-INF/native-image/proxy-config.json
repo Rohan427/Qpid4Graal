@@ -3,7 +3,22 @@
     "interfaces":["com.sun.management.HotSpotDiagnosticMXBean"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.exchange.DirectExchange"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.exchange.HeadersExchange"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.logging.logback.BrokerMemoryLogger"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.logging.logback.BrokerNameAndLevelLogInclusionRule"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.logging.logback.VirtualHostFileLogger"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.logging.logback.VirtualHostNameAndLevelLogInclusionRule"]}
   ,
   {
     "interfaces":["org.apache.qpid.server.logging.logback.VirtualHostSyslogLogger"]}
@@ -12,19 +27,49 @@
     "interfaces":["org.apache.qpid.server.model.AccessControlProvider"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.model.AlternateBinding"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.AttributeValueConverterTest$SimpleTestManagedAttributeValue"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.AttributeValueConverterTest$SimpleTestManagedAttributeValueWithFactory"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.AttributeValueConverterTest$TestManagedAttributeValue"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.model.AuthenticationProvider"]}
   ,
   {
     "interfaces":["org.apache.qpid.server.model.Binding"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.model.Broker"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.BrokerLogInclusionRule"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.model.BrokerLogger"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.ConfiguredObject"]}
   ,
   {
     "interfaces":["org.apache.qpid.server.model.DefaultVirtualHostAlias"]}
   ,
   {
     "interfaces":["org.apache.qpid.server.model.Exchange"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.ExternalFileBasedAuthenticationManager"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.Group"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.GroupMember"]}
   ,
   {
     "interfaces":["org.apache.qpid.server.model.GroupProvider"]}
@@ -63,10 +108,43 @@
     "interfaces":["org.apache.qpid.server.model.VirtualHostNode"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.model.adapter.FileBasedGroupProvider"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.model.port.AmqpPort"]}
   ,
   {
     "interfaces":["org.apache.qpid.server.model.port.HttpPort"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.testmodels.hierarchy.TestEngine"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.testmodels.hierarchy.TestGauge"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.testmodels.hierarchy.TestInstrumentPanel"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.testmodels.hierarchy.TestSensor"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.testmodels.hierarchy.TestStandardCar"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.model.testmodels.singleton.TestSingleton"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.protocol.v0_10.Session"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.queue.LastValueQueue"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.queue.PriorityQueue"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.queue.SortedQueue"]}
   ,
   {
     "interfaces":["org.apache.qpid.server.queue.StandardQueue"]}
@@ -81,6 +159,21 @@
     "interfaces":["org.apache.qpid.server.security.CaseAwareGroupProvider"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.security.FileKeyStore"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.security.FileTrustStore"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.security.NonJavaKeyStore"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.security.NonJavaTrustStore"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.security.SiteSpecificTrustStore"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.security.access.plugins.AclRule"]}
   ,
   {
@@ -90,9 +183,27 @@
     "interfaces":["org.apache.qpid.server.security.access.plugins.RuleBasedVirtualHostAccessControlProvider"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.security.auth.manager.SimpleLDAPAuthenticationManager"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.store.jdbc.JDBCSystemConfig"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.store.preferences.PreferenceStoreAttributes"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.virtualhost.QueueManagingVirtualHost"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.virtualhost.jdbc.JDBCVirtualHost"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.virtualhostnode.JsonVirtualHostNode"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.virtualhostnode.RedirectingVirtualHostNode"]}
+  ,
+  {
+    "interfaces":["org.apache.qpid.server.virtualhostnode.jdbc.JDBCVirtualHostNode"]}
   
 ]

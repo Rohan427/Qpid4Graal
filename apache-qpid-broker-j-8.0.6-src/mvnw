@@ -138,7 +138,11 @@ function runAgent()
     sdk use java $GRAALJAVA
     cd ${NATIVELIB}
 
-    java -agentlib:native-image-agent=config-merge-dir=${BUILDPATH}/src/main/resources/META-INF/native-image -server -classpath /usr/java/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/plugins/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/opt/* -Dpolyglot.js.nashorn-compat=true -DPNAME=QPBRKR -XX:+UseConcMarkSweepGC -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxDirectMemorySize=1536m -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork org.apache.qpid.server.Main -st BDB    #JDBC -prop "systemConfig.connectionUrl=jdbc:postgresql://10.0.0.183:5432/qpid?create=true" -prop "systemConfig.username=graalvm" -prop "systemConfig.password=graalvm"
+    java -agentlib:native-image-agent=config-merge-dir=${BUILDPATH}/src/main/resources/META-INF/native-image -server -classpath /usr/java/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/plugins/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/opt/* -Dpolyglot.js.nashorn-compat=true -DPNAME=QPBRKR -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxDirectMemorySize=1536m -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork org.apache.qpid.server.Main -st BDB
+
+#    java -agentlib:native-image-agent=config-merge-dir=${BUILDPATH}/src/main/resources/META-INF/native-image -server -classpath /usr/java/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/plugins/*:/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6/lib/opt/* -Dpolyglot.js.nashorn-compat=true -DPNAME=QPBRKR -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxDirectMemorySize=1536m -DQPID_HOME=/usr/local/src/qpid/Qpid4Graal/native/qpid-broker/8.0.6 -DQPID_WORK=/var/qpidwork org.apache.qpid.server.Main -st BDB
+
+#JDBC -prop "systemConfig.connectionUrl=jdbc:postgresql://10.0.0.183:5432/qpid?create=true" -prop "systemConfig.username=graalvm" -prop "systemConfig.password=graalvm"
 
     rm -Rf $QPIDWORK
 
@@ -181,7 +185,7 @@ function buildFullJVM()
     processHeader "Build full JVM JAR package..."
     sdk use java $JVMJAVA
     BEGINTIME=$(date +%s%N)
-    mvn install
+    mvn install -DnativeBase=${BUILDPATH}
     ENDTIME=$(date +%s%N)
     EXITNUM=$?
 
