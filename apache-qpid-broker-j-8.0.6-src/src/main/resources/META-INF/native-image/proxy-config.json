@@ -138,6 +138,9 @@
     "interfaces":["org.apache.qpid.server.protocol.v0_10.Session"]}
   ,
   {
+    "interfaces":["org.apache.qpid.server.protocol.v1_0.AMQPConnection_1_0"]}
+  ,
+  {
     "interfaces":["org.apache.qpid.server.queue.LastValueQueue"]}
   ,
   {

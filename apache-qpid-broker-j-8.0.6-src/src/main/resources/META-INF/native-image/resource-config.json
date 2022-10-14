@@ -5800,7 +5800,10 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Binding_logmessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Broker_logmessages",
@@ -5811,7 +5814,10 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Channel_logmessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.ConfigStore_logmessages",
@@ -5822,7 +5828,10 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Connection_logmessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Exchange_logmessages",
@@ -5858,15 +5867,24 @@
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Queue_logmessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Sender_logmessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.Subscription_logmessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.qpid.server.logging.messages.TransactionLog_logmessages",
