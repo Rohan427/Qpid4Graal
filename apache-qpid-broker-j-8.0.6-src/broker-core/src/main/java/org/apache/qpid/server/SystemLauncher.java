@@ -42,7 +42,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-// import javax.security.auth.Subject;
+import javax.security.auth.Subject;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.slf4j.Logger;
@@ -82,7 +82,7 @@ public class SystemLauncher
     private EventLogger _eventLogger;
     private final TaskExecutor _taskExecutor = new TaskExecutorImpl();
 
-    private volatile SystemConfig _systemConfig;
+    private volatile SystemConfig<?> _systemConfig;
 
     private SystemLauncherListener _listener;
 
@@ -95,12 +95,7 @@ public class SystemLauncher
         Set<?> pubCredentials = Collections.emptySet();
         Set<?> privCredentials = Collections.emptySet();
         TaskPrincipal broker = new TaskPrincipal ("Broker");
-        
-        System.out.println ("Broker:           " + broker.getName());
-        System.out.println ("pubCredentials:   " + pubCredentials.toString());
-        System.out.println ("privCredentials:  " + privCredentials.toString());
-        System.out.println ("_systemPrincipal: " + _systemPrincipal.getName());
-        
+                
         if (pubCredentials != null)
         {
             if (privCredentials != null)
@@ -108,9 +103,11 @@ public class SystemLauncher
                 _listener = listener;
                     
                 principals = new HashSet<> (Arrays.asList (_systemPrincipal, broker));
-                System.out.println ("principals:       " + principals.toString());
+//                System.out.println ("principals:       " + principals.toString());
                 
-                /* Test for locale resource for native image support.
+                /* PGA
+                 * 
+                 * Test for locale resource for native image support.
                  * This should throw an exception causing a resource request for
                  * a language bundle. The native image agent should pick this up
                  * and add a configuration option for the proper locale resource.
@@ -127,6 +124,8 @@ public class SystemLauncher
                     
                 }
                 
+                // PGA End
+                
                 _brokerTaskSubject = new Subject (true, principals, pubCredentials, privCredentials);
                 // new Subject(boolean readOnly, Set<? extends Principal> principals,
                 // Set<?> pubCredentials, Set<?> privCredentials);
@@ -140,11 +139,6 @@ public class SystemLauncher
         {
             throw new NullPointerException ("invalid pubCredentials");
         }
-        
-        System.out.println ("principals:      " + _brokerTaskSubject.getPrincipals().toString());
-        System.out.println ("pubCredentials:  " + _brokerTaskSubject.getPublicCredentials().toString());
-        System.out.println ("privCredentials: " + _brokerTaskSubject.getPrivateCredentials().toString());
-        
         
 /*          
         _brokerTaskSubject = new Subject (true,
@@ -189,7 +183,7 @@ public class SystemLauncher
         File propertiesFile = null;
         InputStream inStream = null;
         
-        System.out.println ("Loading Properties");
+//        System.out.println ("Loading Properties");
         
         // Test if classpath URL is supported
         try
@@ -198,7 +192,7 @@ public class SystemLauncher
         }
         catch (MalformedURLException e)
         {
-            System.out.println ("URL classpath not supported");
+//            System.out.println ("URL classpath not supported");
             useFile = true;
         }
         
@@ -209,9 +203,9 @@ public class SystemLauncher
             {
                 try
                 {
-                    System.out.println ("URL classpath supported, NULL path provided");
+//                    System.out.println ("URL classpath supported, NULL path provided");
                     initialPropertiesLocation = new URL (DEFAULT_INITIAL_PROPERTIES_LOCATION);
-                    System.out.println ("URL to load " + initialPropertiesLocation.getPath());
+//                    System.out.println ("URL to load " + initialPropertiesLocation.getPath());
                 }
                 // No support
                 catch (MalformedURLException e)
@@ -223,13 +217,13 @@ public class SystemLauncher
             {
                 try
                 {
-                    System.out.println ("URL classpath supported with " + initialProperties);
+//                    System.out.println ("URL classpath supported with " + initialProperties);
                     initialPropertiesLocation = new URL (initialProperties);
                 }
                 catch (MalformedURLException e)
                 {
                     propertiesFile = new File (initialProperties);
-                    System.out.println ("URL classpath supported from File" + propertiesFile.getPath());
+//                    System.out.println ("URL classpath supported from File" + propertiesFile.getPath());
                     initialPropertiesLocation = propertiesFile.toURI().toURL();
                 }
             }
@@ -249,20 +243,21 @@ public class SystemLauncher
                 // else do nothing
             }
         }
+        // Here when classpath protocol not supported
         else
         {
             // Use file path for all other images
             if (initialProperties == null)
             {
-                System.out.println ("File path in use, NULL path provided");
+//                System.out.println ("File path in use, NULL path provided");
                 propertiesFile = new File (DEFAULT_INITIAL_PROPERTIES_FILE_LOCATION);
-                System.out.println ("Defauilt File linitialized: " + propertiesFile.getPath());
+//                System.out.println ("Defauilt File linitialized: " + propertiesFile.getPath());
             }
             else
             {                
-                System.out.println ("File path supported with " + initialProperties);
+//                System.out.println ("File path supported with " + initialProperties);
                 propertiesFile = new File ((new File (initialProperties).getPath()));
-                System.out.println ("File initialized: " + propertiesFile.getPath());
+//                System.out.println ("File initialized: " + propertiesFile.getPath());
             }
             
             try
@@ -388,7 +383,7 @@ public class SystemLauncher
         _eventLogger.setMessageLogger (messageLogger);
 
         PluggableFactoryLoader<SystemConfigFactory> configFactoryLoader = new PluggableFactoryLoader<> (SystemConfigFactory.class);
-        SystemConfigFactory configFactory = configFactoryLoader.get (storeType);
+        SystemConfigFactory<?> configFactory = configFactoryLoader.get (storeType);
         
         if (configFactory == null)
         {

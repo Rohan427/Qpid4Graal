@@ -397,7 +397,7 @@ public class Main
             protocol.append (supportedProtocol.getProtocolVersion());
         }
 
-        System.out.println (CommonProperties.getVersionString() + " (" + protocol + ")");
+//        System.out.println (CommonProperties.getVersionString() + " (" + protocol + ")");
     }
 
     private void createInitialConfigCopy (String initialConfigLocation)
@@ -423,7 +423,7 @@ public class Main
         
         copyInitialConfigFile (initialConfigLocation, destinationFile);
 
-        System.out.println ("Initial config written to: " + destinationFile.getAbsolutePath());
+//        System.out.println ("Initial config written to: " + destinationFile.getAbsolutePath());
     }
 
     /**

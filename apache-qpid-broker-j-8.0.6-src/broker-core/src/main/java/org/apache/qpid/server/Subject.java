@@ -158,12 +158,9 @@ public final class Subject implements java.io.Serializable
      */
     public Subject() 
     {
-        this.principals = Collections.synchronizedSet
-                        (new SecureSet<Principal>(this, PRINCIPAL_SET));
-        this.pubCredentials = Collections.synchronizedSet
-                        (new SecureSet<Object>(this, PUB_CREDENTIAL_SET));
-        this.privCredentials = Collections.synchronizedSet
-                        (new SecureSet<Object>(this, PRIV_CREDENTIAL_SET));
+        this.principals = Collections.synchronizedSet (new SecureSet<Principal> (this, PRINCIPAL_SET));
+        this.pubCredentials = Collections.synchronizedSet (new SecureSet<Object> (this, PUB_CREDENTIAL_SET));
+        this.privCredentials = Collections.synchronizedSet (new SecureSet<Object> (this, PRIV_CREDENTIAL_SET));
     }
 
     /**
@@ -222,12 +219,9 @@ public final class Subject implements java.io.Serializable
         }
         // else do nothing
 
-        this.principals = Collections.synchronizedSet(new SecureSet<Principal>
-                                (this, PRINCIPAL_SET, principals));
-        this.pubCredentials = Collections.synchronizedSet(new SecureSet<Object>
-                                (this, PUB_CREDENTIAL_SET, pubCredentials));
-        this.privCredentials = Collections.synchronizedSet(new SecureSet<Object>
-                                (this, PRIV_CREDENTIAL_SET, privCredentials));
+        this.principals = Collections.synchronizedSet (new SecureSet<Principal> (this, PRINCIPAL_SET, principals));
+        this.pubCredentials = Collections.synchronizedSet (new SecureSet<Object> (this, PUB_CREDENTIAL_SET, pubCredentials));
+        this.privCredentials = Collections.synchronizedSet (new SecureSet<Object> (this, PRIV_CREDENTIAL_SET, privCredentials));
         this.readOnly = readOnly;
     }
 
@@ -251,11 +245,15 @@ public final class Subject implements java.io.Serializable
      * @exception SecurityException if the caller does not have permission
      *          to set this {@code Subject} to be read-only.
      */
-    public void setReadOnly() {
+    public void setReadOnly() 
+    {
         java.lang.SecurityManager sm = System.getSecurityManager();
-        if (sm != null) {
+        
+        if (sm != null) 
+        {
             sm.checkPermission(AuthPermissionHolder.SET_READ_ONLY_PERMISSION);
         }
+        // else do nothing
 
         this.readOnly = true;
     }
@@ -267,7 +265,8 @@ public final class Subject implements java.io.Serializable
      *
      * @return true if this {@code Subject} is read-only, false otherwise.
      */
-    public boolean isReadOnly() {
+    public boolean isReadOnly() 
+    {
         return this.readOnly;
     }
 

@@ -686,6 +686,9 @@
       "pattern":"\\Qdojo-1.16.3/dojo/dnd/Mover.js\\E"
     }, 
     {
+      "pattern":"\\Qdojo-1.16.3/dojo/dnd/Source.js\\E"
+    }, 
+    {
       "pattern":"\\Qdojo-1.16.3/dojo/dnd/TimedMoveable.js\\E"
     }, 
     {

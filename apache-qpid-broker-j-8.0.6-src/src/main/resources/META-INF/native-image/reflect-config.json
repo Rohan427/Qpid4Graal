@@ -740,6 +740,14 @@
   "fields":[{"name":"TYPE"}]
 },
 {
+  "name":"java.lang.constant.Constable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.constant.ConstantDesc",
+  "queryAllDeclaredMethods":true
+},
+{
   "name":"java.lang.instrument.Instrumentation",
   "queriedMethods":[
     {"name":"isModifiableModule","parameterTypes":["java.lang.Module"] }, 

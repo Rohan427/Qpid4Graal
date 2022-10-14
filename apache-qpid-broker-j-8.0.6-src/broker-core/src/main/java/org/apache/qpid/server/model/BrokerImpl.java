@@ -211,14 +211,14 @@ public class BrokerImpl extends AbstractContainer<BrokerImpl> implements Broker<
     {
         super.postResolveChildren();
 
-        final SystemConfig parent = (SystemConfig) getParent();
+        final SystemConfig<?> parent = (SystemConfig<?>) getParent();
         Runnable task =  parent.getOnContainerResolveTask();
         if(task != null)
         {
             task.run();
         }
         addChangeListener(_accessControlProviderListener);
-        for(AccessControlProvider aclProvider : getChildren(AccessControlProvider.class))
+        for(AccessControlProvider<?> aclProvider : getChildren(AccessControlProvider.class))
         {
             aclProvider.addChangeListener(_accessControlProviderListener);
         }
@@ -273,7 +273,7 @@ public class BrokerImpl extends AbstractContainer<BrokerImpl> implements Broker<
     protected void validateChange(final ConfiguredObject<?> proxyForValidation, final Set<String> changedAttributes)
     {
         super.validateChange(proxyForValidation, changedAttributes);
-        Broker updated = (Broker) proxyForValidation;
+        Broker<?> updated = (Broker<?>) proxyForValidation;
         if (changedAttributes.contains(MODEL_VERSION) && !BrokerModel.MODEL_VERSION.equals(updated.getModelVersion()))
         {
             throw new IllegalConfigurationException("Cannot change the model version");
@@ -625,7 +625,7 @@ public class BrokerImpl extends AbstractContainer<BrokerImpl> implements Broker<
         Runtime.getRuntime().addShutdownHook(_shutdownHook);
         LOGGER.debug("Added shutdown hook");
 
-        PreferencesRoot preferencesRoot = (SystemConfig) getParent();
+        PreferencesRoot preferencesRoot = (SystemConfig<?>) getParent();
         _preferenceStore = preferencesRoot.createPreferenceStore();
 
         getEventLogger().message(BrokerMessages.STARTUP(CommonProperties.getReleaseVersion(),

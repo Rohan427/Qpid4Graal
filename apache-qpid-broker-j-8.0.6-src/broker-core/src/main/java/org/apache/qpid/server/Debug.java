@@ -36,116 +36,129 @@ import java.util.Locale;
  *
  * @author Roland Schemers
  */
-public class Debug {
-
+public class Debug
+{
     private String prefix;
 
     private static String args;
 
-    static {
-        args = GetPropertyAction.privilegedGetProperty("java.security.debug");
+    static 
+    {
+        args = GetPropertyAction.privilegedGetProperty ("java.security.debug");
 
         String args2 = GetPropertyAction
-                .privilegedGetProperty("java.security.auth.debug");
+                       .privilegedGetProperty ("java.security.auth.debug");
 
-        if (args == null) {
+        if (args == null) 
+        {
             args = args2;
-        } else {
+        }
+        else
+        {
             if (args2 != null)
-               args = args + "," + args2;
+            {
+                args = args + "," + args2;
+            }
+            // else do nothing
         }
 
-        if (args != null) {
+        if (args != null) 
+        {
             args = marshal(args);
-            if (args.equals("help")) {
+            
+            if (args.equals ("help")) 
+            {
                 Help();
             }
+            // else do nothing
         }
     }
 
     public static void Help()
     {
         System.err.println();
-        System.err.println("all           turn on all debugging");
-        System.err.println("access        print all checkPermission results");
-        System.err.println("certpath      PKIX CertPathBuilder and");
-        System.err.println("              CertPathValidator debugging");
-        System.err.println("combiner      SubjectDomainCombiner debugging");
-        System.err.println("gssloginconfig");
-        System.err.println("              GSS LoginConfigImpl debugging");
-        System.err.println("configfile    JAAS ConfigFile loading");
-        System.err.println("configparser  JAAS ConfigFile parsing");
-        System.err.println("jar           jar verification");
-        System.err.println("logincontext  login context results");
-        System.err.println("jca           JCA engine class debugging");
-        System.err.println("keystore      KeyStore debugging");
-        System.err.println("policy        loading and granting");
-        System.err.println("provider      security provider debugging");
-        System.err.println("pkcs11        PKCS11 session manager debugging");
-        System.err.println("pkcs11keystore");
-        System.err.println("              PKCS11 KeyStore debugging");
-        System.err.println("pkcs12        PKCS12 KeyStore debugging");
-        System.err.println("sunpkcs11     SunPKCS11 provider debugging");
-        System.err.println("scl           permissions SecureClassLoader assigns");
-        System.err.println("securerandom  SecureRandom");
-        System.err.println("ts            timestamping");
+        System.err.println ("all           turn on all debugging");
+        System.err.println ("access        print all checkPermission results");
+        System.err.println ("certpath      PKIX CertPathBuilder and");
+        System.err.println ("              CertPathValidator debugging");
+        System.err.println ("combiner      SubjectDomainCombiner debugging");
+        System.err.println ("gssloginconfig");
+        System.err.println ("              GSS LoginConfigImpl debugging");
+        System.err.println ("configfile    JAAS ConfigFile loading");
+        System.err.println ("configparser  JAAS ConfigFile parsing");
+        System.err.println ("jar           jar verification");
+        System.err.println ("logincontext  login context results");
+        System.err.println ("jca           JCA engine class debugging");
+        System.err.println ("keystore      KeyStore debugging");
+        System.err.println ("policy        loading and granting");
+        System.err.println ("provider      security provider debugging");
+        System.err.println ("pkcs11        PKCS11 session manager debugging");
+        System.err.println ("pkcs11keystore");
+        System.err.println ("              PKCS11 KeyStore debugging");
+        System.err.println ("pkcs12        PKCS12 KeyStore debugging");
+        System.err.println ("sunpkcs11     SunPKCS11 provider debugging");
+        System.err.println ("scl           permissions SecureClassLoader assigns");
+        System.err.println ("securerandom  SecureRandom");
+        System.err.println ("ts            timestamping");
+        System.err.println ();
+        System.err.println ("The following can be used with access:");
+        System.err.println ();
+        System.err.println ("stack         include stack trace");
+        System.err.println ("domain        dump all domains in context");
+        System.err.println ("failure       before throwing exception, dump stack");
+        System.err.println ("              and domain that didn't have permission");
         System.err.println();
-        System.err.println("The following can be used with access:");
+        System.err.println ("The following can be used with stack and domain:");
         System.err.println();
-        System.err.println("stack         include stack trace");
-        System.err.println("domain        dump all domains in context");
-        System.err.println("failure       before throwing exception, dump stack");
-        System.err.println("              and domain that didn't have permission");
+        System.err.println ("permission=<classname>");
+        System.err.println ("              only dump output if specified permission");
+        System.err.println ("              is being checked");
+        System.err.println ("codebase=<URL>");
+        System.err.println ("              only dump output if specified codebase");
+        System.err.println ("              is being checked");
         System.err.println();
-        System.err.println("The following can be used with stack and domain:");
+        System.err.println ("The following can be used with provider:");
         System.err.println();
-        System.err.println("permission=<classname>");
-        System.err.println("              only dump output if specified permission");
-        System.err.println("              is being checked");
-        System.err.println("codebase=<URL>");
-        System.err.println("              only dump output if specified codebase");
-        System.err.println("              is being checked");
+        System.err.println ("engine=<engines>");
+        System.err.println ("              only dump output for the specified list");
+        System.err.println ("              of JCA engines. Supported values:");
+        System.err.println ("              Cipher, KeyAgreement, KeyGenerator,");
+        System.err.println ("              KeyPairGenerator, KeyStore, Mac,");
+        System.err.println ("              MessageDigest, SecureRandom, Signature.");
         System.err.println();
-        System.err.println("The following can be used with provider:");
+        System.err.println ("The following can be used with certpath:");
         System.err.println();
-        System.err.println("engine=<engines>");
-        System.err.println("              only dump output for the specified list");
-        System.err.println("              of JCA engines. Supported values:");
-        System.err.println("              Cipher, KeyAgreement, KeyGenerator,");
-        System.err.println("              KeyPairGenerator, KeyStore, Mac,");
-        System.err.println("              MessageDigest, SecureRandom, Signature.");
+        System.err.println ("ocsp          dump the OCSP protocol exchanges");
+        System.err.println ("verbose       verbose debugging");
         System.err.println();
-        System.err.println("The following can be used with certpath:");
-        System.err.println();
-        System.err.println("ocsp          dump the OCSP protocol exchanges");
-        System.err.println("verbose       verbose debugging");
-        System.err.println();
-        System.err.println("Note: Separate multiple options with a comma");
-        System.exit(0);
+        System.err.println ("Note: Separate multiple options with a comma");
+        System.exit (0);
     }
-
 
     /**
      * Get a Debug object corresponding to whether or not the given
      * option is set. Set the prefix to be the same as option.
      */
 
-    public static Debug getInstance(String option)
+    public static Debug getInstance (String option)
     {
-        return getInstance(option, option);
+        return getInstance (option, option);
     }
 
     /**
      * Get a Debug object corresponding to whether or not the given
      * option is set. Set the prefix to be prefix.
      */
-    public static Debug getInstance(String option, String prefix)
+    public static Debug getInstance (String option, String prefix)
     {
-        if (isOn(option)) {
+        if (isOn (option)) 
+        {
             Debug d = new Debug();
             d.prefix = prefix;
             return d;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -154,22 +167,30 @@ public class Debug {
      * True if the system property "security.debug" contains the
      * string "option".
      */
-    public static boolean isOn(String option)
+    public static boolean isOn (String option)
     {
         if (args == null)
+        {
             return false;
-        else {
-            if (args.indexOf("all") != -1)
+        }
+        else
+        {
+            if (args.indexOf ("all") != -1)
+            {
                 return true;
+            }
             else
-                return (args.indexOf(option) != -1);
+            {
+                return (args.indexOf (option) != -1);
+            }
         }
     }
 
     /**
      * Check if verbose messages is enabled for extra debugging.
      */
-    public static boolean isVerbose() {
+    public static boolean isVerbose() 
+    {
         return isOn("verbose");
     }
 
@@ -178,19 +199,19 @@ public class Debug {
      * created from the call to getInstance.
      */
 
-    public void println(String message)
+    public void println (String message)
     {
-        System.err.println(prefix + ": "+message);
+        System.err.println (prefix + ": "+message);
     }
 
     /**
      * print a message to stderr that is prefixed with the prefix
      * created from the call to getInstance and obj.
      */
-    public void println(Object obj, String message)
+    public void println (Object obj, String message)
     {
-        System.err.println(prefix + " [" + obj.getClass().getSimpleName() +
-                "@" + System.identityHashCode(obj) + "]: "+message);
+        System.err.println (prefix + " [" + obj.getClass().getSimpleName() +
+                "@" + System.identityHashCode (obj) + "]: "+message);
     }
 
     /**
@@ -199,22 +220,23 @@ public class Debug {
 
     public void println()
     {
-        System.err.println(prefix + ":");
+        System.err.println (prefix + ":");
     }
 
     /**
      * print a message to stderr that is prefixed with the prefix.
      */
 
-    public static void println(String prefix, String message)
+    public static void println (String prefix, String message)
     {
-        System.err.println(prefix + ": "+message);
+        System.err.println (prefix + ": "+message);
     }
 
     /**
      * PrintStream for debug methods. Currently only System.err is supported.
      */
-    public PrintStream getPrintStream() {
+    public PrintStream getPrintStream()
+    {
         return System.err;
     }
 
@@ -224,43 +246,61 @@ public class Debug {
      * at least 75 characters, with embedded newlines. Words are
      * separated for readability, with eight words (32 bytes) per line.
      */
-    public static String toHexString(BigInteger b) {
-        String hexValue = b.toString(16);
-        StringBuilder sb = new StringBuilder(hexValue.length()*2);
+    public static String toHexString (BigInteger b) 
+    {
+        String hexValue = b.toString (16);
+        StringBuilder sb = new StringBuilder (hexValue.length()*2);
 
-        if (hexValue.startsWith("-")) {
+        if (hexValue.startsWith ("-"))
+        {
             sb.append("   -");
-            hexValue = hexValue.substring(1);
-        } else {
-            sb.append("    ");     // four spaces
+            hexValue = hexValue.substring (1);
         }
-        if ((hexValue.length()%2) != 0) {
+        else
+        {
+            sb.append ("    ");     // four spaces
+        }
+        
+        if ((hexValue.length()%2) != 0) 
+        {
             // add back the leading 0
             hexValue = "0" + hexValue;
         }
+        // else do nothing
+        
         int i=0;
-        while (i < hexValue.length()) {
+        
+        while (i < hexValue.length())
+        {
             // one byte at a time
-            sb.append(hexValue.substring(i, i + 2));
+            sb.append (hexValue.substring (i, i + 2));
             i+=2;
-            if (i!= hexValue.length()) {
-                if ((i%64) == 0) {
-                    sb.append("\n    ");     // line after eight words
-                } else if (i%8 == 0) {
-                    sb.append(" ");     // space between words
+            
+            if (i!= hexValue.length()) 
+            {
+                if ((i%64) == 0) 
+                {
+                    sb.append ("\n    ");     // line after eight words
+                }
+                else if (i%8 == 0) 
+                {
+                    sb.append (" ");     // space between words
                 }
             }
         }
+        
         return sb.toString();
     }
 
     /**
      * change a string into lower case except permission classes and URLs.
      */
-    private static String marshal(String args) {
-        if (args != null) {
+    private static String marshal (String args)
+    {
+        if (args != null) 
+        {
             StringBuilder target = new StringBuilder();
-            StringBuffer source = new StringBuffer(args);
+            StringBuffer source = new StringBuffer (args);
 
             // obtain the "permission=<classname>" options
             // the syntax of classname: IDENTIFIER.IDENTIFIER
@@ -270,18 +310,21 @@ public class Debug {
             String keyStr = "permission=";
             String reg = keyReg +
                 "[a-zA-Z_$][a-zA-Z0-9_$]*([.][a-zA-Z_$][a-zA-Z0-9_$]*)*";
-            Pattern pattern = Pattern.compile(reg);
-            Matcher matcher = pattern.matcher(source);
+            Pattern pattern = Pattern.compile (reg);
+            Matcher matcher = pattern.matcher (source);
             StringBuffer left = new StringBuffer();
-            while (matcher.find()) {
+            
+            while (matcher.find())
+            {
                 String matched = matcher.group();
-                target.append(matched.replaceFirst(keyReg, keyStr));
-                target.append("  ");
+                target.append (matched.replaceFirst (keyReg, keyStr));
+                target.append ("  ");
 
                 // delete the matched sequence
-                matcher.appendReplacement(left, "");
+                matcher.appendReplacement (left, "");
             }
-            matcher.appendTail(left);
+            
+            matcher.appendTail (left);
             source = left;
 
             // obtain the "codebase=<URL>" options
@@ -294,22 +337,25 @@ public class Debug {
             keyReg = "[Cc][Oo][Dd][Ee][Bb][Aa][Ss][Ee]=";
             keyStr = "codebase=";
             reg = keyReg + "[^, ;]*";
-            pattern = Pattern.compile(reg);
-            matcher = pattern.matcher(source);
+            pattern = Pattern.compile (reg);
+            matcher = pattern.matcher (source);
             left = new StringBuffer();
-            while (matcher.find()) {
+            
+            while (matcher.find())
+            {
                 String matched = matcher.group();
-                target.append(matched.replaceFirst(keyReg, keyStr));
-                target.append("  ");
+                target.append (matched.replaceFirst (keyReg, keyStr));
+                target.append ("  ");
 
                 // delete the matched sequence
-                matcher.appendReplacement(left, "");
+                matcher.appendReplacement (left, "");
             }
-            matcher.appendTail(left);
+            
+            matcher.appendTail (left);
             source = left;
 
             // convert the rest to lower-case characters
-            target.append(source.toString().toLowerCase(Locale.ENGLISH));
+            target.append (source.toString().toLowerCase (Locale.ENGLISH));
 
             return target.toString();
         }
@@ -319,20 +365,30 @@ public class Debug {
 
     private static final char[] hexDigits = "0123456789abcdef".toCharArray();
 
-    public static String toString(byte[] b) {
-        if (b == null) {
+    public static String toString (byte[] b)
+    {
+        if (b == null)
+        {
             return "(null)";
         }
-        StringBuilder sb = new StringBuilder(b.length * 3);
-        for (int i = 0; i < b.length; i++) {
+        // else do nothing
+        
+        StringBuilder sb = new StringBuilder (b.length * 3);
+        
+        for (int i = 0; i < b.length; i++)
+        {
             int k = b[i] & 0xff;
-            if (i != 0) {
+            
+            if (i != 0)
+            {
                 sb.append(':');
             }
-            sb.append(hexDigits[k >>> 4]);
-            sb.append(hexDigits[k & 0xf]);
+            // else do nothing
+            
+            sb.append (hexDigits[k >>> 4]);
+            sb.append (hexDigits[k & 0xf]);
         }
+        
         return sb.toString();
     }
-
 }

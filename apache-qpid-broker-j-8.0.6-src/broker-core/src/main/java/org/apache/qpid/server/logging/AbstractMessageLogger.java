@@ -55,7 +55,7 @@ public abstract class AbstractMessageLogger implements MessageLogger
 
     }
     
-    public AbstractMessageLogger(boolean statusUpdatesEnabled)
+    public AbstractMessageLogger (boolean statusUpdatesEnabled)
     {
         _enabled = statusUpdatesEnabled;
     }
@@ -67,32 +67,33 @@ public abstract class AbstractMessageLogger implements MessageLogger
     }
 
     @Override
-    public boolean isMessageEnabled(String logHierarchy)
+    public boolean isMessageEnabled (String logHierarchy)
     {
         return _enabled;
     }
 
     @Override
-    public void message(LogMessage message)
+    public void message (LogMessage message)
     {
-        if (isMessageEnabled(message.getLogHierarchy()))
+        if (isMessageEnabled (message.getLogHierarchy()))
         {
             rawMessage(_msgPrefix + getActor() + message, message.getLogHierarchy());
         }
     }
 
     @Override
-    public void message(LogSubject subject, LogMessage message)
+    public void message (LogSubject subject, LogMessage message)
     {
-        if (isMessageEnabled(message.getLogHierarchy()))
+        if (isMessageEnabled (message.getLogHierarchy()))
         {
-            rawMessage(_msgPrefix + getActor() + subject.toLogString() + message,
+            rawMessage (_msgPrefix + getActor() + subject.toLogString() + message,
                        message.getLogHierarchy());
         }
     }
-    abstract void rawMessage(String message, String logHierarchy);
+    
+    abstract void rawMessage (String message, String logHierarchy);
 
-    abstract void rawMessage(String message, Throwable throwable, String logHierarchy);
+    abstract void rawMessage (String message, Throwable throwable, String logHierarchy);
 
 
     protected String getActor()
@@ -102,35 +103,38 @@ public abstract class AbstractMessageLogger implements MessageLogger
 
     static String getLogActor()
     {
-        Subject subject = Subject.getSubject(AccessController.getContext());
+        Subject subject = Subject.getSubject (AccessController.getContext());
 
-        SessionPrincipal sessionPrincipal = getPrincipal(subject, SessionPrincipal.class);
+        SessionPrincipal sessionPrincipal = getPrincipal (subject, SessionPrincipal.class);
         String message;
-        if(sessionPrincipal != null)
+        
+        if (sessionPrincipal != null)
         {
-            message =  generateSessionActor(sessionPrincipal.getSession());
+            message =  generateSessionActor (sessionPrincipal.getSession());
         }
         else
         {
-            ConnectionPrincipal connPrincipal = getPrincipal(subject, ConnectionPrincipal.class);
+            ConnectionPrincipal connPrincipal = getPrincipal (subject, ConnectionPrincipal.class);
 
-            if(connPrincipal != null)
+            if (connPrincipal != null)
             {
-                message = generateConnectionActor(connPrincipal.getConnection());
+                message = generateConnectionActor (connPrincipal.getConnection());
             }
             else
             {
-                TaskPrincipal taskPrincipal = getPrincipal(subject, TaskPrincipal.class);
-                if(taskPrincipal != null)
+                TaskPrincipal taskPrincipal = getPrincipal (subject, TaskPrincipal.class);
+                
+                if (taskPrincipal != null)
                 {
-                    message = generateTaskMessage(taskPrincipal);
+                    message = generateTaskMessage (taskPrincipal);
                 }
                 else
                 {
-                    ManagementConnectionPrincipal managementConnection = getPrincipal(subject,ManagementConnectionPrincipal.class);
-                    if(managementConnection != null)
+                    ManagementConnectionPrincipal managementConnection = getPrincipal (subject, ManagementConnectionPrincipal.class);
+                    
+                    if (managementConnection != null)
                     {
-                        message = generateManagementConnectionMessage(managementConnection, getPrincipal(subject, AuthenticatedPrincipal.class));
+                        message = generateManagementConnectionMessage (managementConnection, getPrincipal (subject, AuthenticatedPrincipal.class));
                     }
                     else
                     {
@@ -139,11 +143,13 @@ public abstract class AbstractMessageLogger implements MessageLogger
                 }
             }
         }
+        
         return message;
     }
 
-    private static String generateManagementConnectionMessage(final ManagementConnectionPrincipal managementConnection,
-                                                       final AuthenticatedPrincipal userPrincipal)
+    private static String generateManagementConnectionMessage (final ManagementConnectionPrincipal managementConnection,
+                                                               final AuthenticatedPrincipal userPrincipal
+                                                              )
     {
         String remoteAddress = managementConnection.getRemoteAddress().toString();
         String user = userPrincipal == null ? "N/A" : userPrincipal.getName();
@@ -152,23 +158,24 @@ public abstract class AbstractMessageLogger implements MessageLogger
         {
             sessionId = "N/A";
         }
-        return "[" + MessageFormat.format(LogSubjectFormat.MANAGEMENT_FORMAT,
-                                          sessionId,
-                                          user,
-                                          remoteAddress) + "] ";
+        return "[" + MessageFormat.format (LogSubjectFormat.MANAGEMENT_FORMAT,
+                                           sessionId,
+                                           user,
+                                           remoteAddress
+                                          ) + "] ";
     }
 
-    private static String generateTaskMessage(final TaskPrincipal taskPrincipal)
+    private static String generateTaskMessage (final TaskPrincipal taskPrincipal)
     {
         return "["+taskPrincipal.getName()+"] ";
     }
 
-    protected String generateConnectionMessage(final AMQPConnection<?> connection)
+    protected String generateConnectionMessage (final AMQPConnection<?> connection)
     {
-        return generateConnectionActor(connection);
+        return generateConnectionActor (connection);
     }
 
-    private static String generateConnectionActor(final AMQPConnection<?> connection)
+    private static String generateConnectionActor (final AMQPConnection<?> connection)
     {
         if (connection.getAuthorizedPrincipal() != null)
         {
@@ -184,53 +191,58 @@ public abstract class AbstractMessageLogger implements MessageLogger
                  *
                  * 0 - Connection ID 1 - User ID 2 - IP 3 - Virtualhost
                  */
-                return "[" + MessageFormat.format(CONNECTION_FORMAT,
-                                                  connection.getConnectionId(),
-                                                  connection.getAuthorizedPrincipal().getName(),
-                                                  connection.getRemoteAddressString(),
-                                                  connection.getAddressSpaceName())
+                return "[" + MessageFormat.format (CONNECTION_FORMAT,
+                                                   connection.getConnectionId(),
+                                                   connection.getAuthorizedPrincipal().getName(),
+                                                   connection.getRemoteAddressString(),
+                                                   connection.getAddressSpaceName()
+                                                  )
                        + "] ";
 
             }
             else
             {
-                return"[" + MessageFormat.format(USER_FORMAT,
-                                                 connection.getConnectionId(),
-                                                 connection.getAuthorizedPrincipal().getName(),
-                                                 connection.getRemoteAddressString())
+                return"[" + MessageFormat.format (USER_FORMAT,
+                                                  connection.getConnectionId(),
+                                                  connection.getAuthorizedPrincipal().getName(),
+                                                  connection.getRemoteAddressString()
+                                                 )
                       + "] ";
 
             }
         }
         else
         {
-            return "[" + MessageFormat.format(SOCKET_FORMAT,
-                                              connection.getConnectionId(),
-                                              connection.getRemoteAddressString())
+            return "[" + MessageFormat.format (SOCKET_FORMAT,
+                                               connection.getConnectionId(),
+                                               connection.getRemoteAddressString()
+                                              )
                    + "] ";
         }
     }
 
-    protected String generateSessionMessage(final AMQPSession session)
+    protected String generateSessionMessage (final AMQPSession session)
     {
-        return generateSessionActor(session);
+        return generateSessionActor (session);
     }
 
-    private static String generateSessionActor(final AMQPSession session)
+    private static String generateSessionActor (final AMQPSession session)
     {
         return session.getLogSubject().toLogString();
     }
 
-    private static <P extends Principal> P getPrincipal(Subject subject, Class<P> clazz)
+    private static <P extends Principal> P getPrincipal (Subject subject, Class<P> clazz)
     {
-        if(subject != null)
+        if (subject != null)
         {
-            Set<P> principals = subject.getPrincipals(clazz);
-            if(principals != null && !principals.isEmpty())
+            Set<P> principals = subject.getPrincipals (clazz);
+            
+            if (principals != null && !principals.isEmpty())
             {
                 return principals.iterator().next();
             }
         }
+        
         return null;
     }
 
