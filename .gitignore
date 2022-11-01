@@ -155,3 +155,9 @@ native/apache*
 apache-qpid-broker-j-8.0.6-src/src/main/resources/META-INF/native-image/.lock
 
 native/images/graalfull/build/lib/qpid
+
+doc/reference/~$GraalVm _Upgrade.pptx
+
+bin/
+
+doc/reference/~$Java_17 _Upgrade.pptx

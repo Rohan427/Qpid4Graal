@@ -1,0 +1,140 @@
+GraalVM/Java 17 upgrade presentation
+
+-Introduction-
+
+Author:
+Java Engineer for more than 15 years
+SW Engineer for more than 30 years
+HW engineer for 10 years
+Cybersecurity since before it was a term (Akamai, government, contractor)
+Working with Oracle Technologies for 5 years
+Working with cloud for 2 years
+Working with containers for 1 year
+Oracle 17 webinar including focus on GraalVM
+
+Technology:
+Cloud has become a thing
+With the cloud came microservices
+With those came containers
+Miscroservices caused resource usage to explode
+Security is more of an issue
+A solution was needed
+Java 17 tightens security
+GraalVM tightens security and improves performance
+
+-GraalVM overview-
+
+Creation:
+Oracle Labs team Switzerland and Austria
+Lead by Thomas Wuerthinger
+Seven (10) years
+Writen in Java an suporting any program in any langauge
+Community Edition and Enterprise Edition
+Enhanced security and performance
+
+Technology:
+Written in Java
+  Easier for developers to modify
+  Memory-safe
+  benefits from Java profiling and debug tools
+Polyglot
+  Java
+  JavaScript (Node.js)
+  LLVM (C and C++)
+  Python
+  R
+  Ruby
+  WASM
+  Specific language or polyglot (JS, Ruby, R)
+  Truffle
+Native Image
+  No JVM
+  Native machine language
+  Fast startup, fast execution, smaller footprint
+Compiler
+  AOT compiler
+  JIT compiler
+
+Enhancements:
+Up to 100 times faster startup
+  Eliminates the virtual machine (JVM)
+  Applications need not be in an idle state
+Less memory
+  No JVM == smaller footprint
+  No JVM == fewer computational resources used
+  Native image
+
+Use a fraction of the resources required by the JVM, so cheaper to run
+Starts in milliseconds
+Deliver peak performance immediately, no warmup
+Can be packaged into lightweight container images for faster and more efficient deployments
+Reduced attack surface
+
+-Java 17 Overview-
+Relevant JEPs:
+  JEP 353: Reimplement the Legacy Socket API
+  JEP 372: Remove the Nashorn JavaScript Engine
+  JEP 396: Strongly Encapsulate JDK Internals by Default
+  JEP 403: Strongly Encapsulate JDK Internals
+  JEP 411: Deprecate the Security Manager for Removal
+
+A comparison between versions 8 and 17. What has changed over the years?
+
+Future Java:
+
+-Process Overview-
+
+Baseline
+  Build and test stable release
+    Unit tests
+    Full regression test if needed
+Update to Java 17
+  Update JDK
+  Compile
+  Address failures
+  Repeat compile
+  Test
+    Unit test
+    Regression test
+Stable Java 17 complete
+Full test with tracing agent
+  Unit test if possible
+  Regression test
+  Manual test
+Build native image
+  Build non-container image
+  Address failures
+  Repeat Java 17 build
+Test native image
+  Unit test if possible
+  Regression test
+  Manual test
+Complete stable native image
+Create Docker image
+
+
+-Native Image Conversion-
+"Closed-world assumption":
+  all code is known at build time
+  No new code is loaded at run time
+JVM handles the dynamic features of Java
+No JVM for a native image
+NI needs to know all reachable code at compile time
+Compiles all classes and resources into a binary image
+JVM intialized classes when first used, NI does not
+
+NI initializes classes at build time
+  frequently used such as primative classes like String
+  using command line option --initialize-at-build-time=<class>
+  from a configuration file
+  all static state is is compiled and stored at build time
+Static Analysis
+  class byte code scanned for reachable code
+  methode bytecode scanned for reachable elements
+  discovered elements scanned iteratively
+  Only reachable elements are included in the final image
+
+Reflection:
+Proxies:
+
+References
