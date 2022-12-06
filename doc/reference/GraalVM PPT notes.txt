@@ -138,3 +138,33 @@ Reflection:
 Proxies:
 
 References
+
+
+
+<!-- TODO: Remove when GraalVM engine support is working. -->
+    <dependency>
+	  <groupId>org.openjdk.nashorn</groupId>
+	  <artifactId>nashorn-core</artifactId>
+	  <version>15.4</version>
+	</dependency>
+  <!-- TODO END -->
+  
+  <!-- Java 17 GraalVM compiler and JavaScript engine -->
+    <dependency>
+	    <groupId>org.graalvm.compiler</groupId>
+	    <artifactId>compiler</artifactId>
+	    <version>22.2.0</version>
+	</dependency>
+	
+	<dependency>
+      <groupId>org.graalvm.js</groupId>
+      <artifactId>js</artifactId>
+      <version>22.2.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.graalvm.js</groupId>
+      <artifactId>js-scriptengine</artifactId>
+      <version>22.2.0</version>
+    </dependency>
+  <!-- END Java 17 GraalVM and JavaScript engine -->
